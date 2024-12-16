@@ -1,68 +1,61 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* base公用样式 */
+/* 初始化样式，通用样式 */
+/* start */
+/* 去掉页面所有标签的内填充外边距 */
+* {
+  /* 定义元素边框与元素内容之间的空间，即上下左右的内边距 */
+  padding: 0;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  /* css3新增样式 */
+  box-sizing: border-box;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* 去掉列表符号 */
+li {
+  list-style: none;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* 去掉img底部的缝隙 */
+img {
+  vertical-align: bottom;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* 类是可以被定义的，比如，我们可以定义一个浮动类，这样，我们就可以在任意位置使用这个类了。 */
+.fl {
+  float: left;
 }
+
+.fr {
+  float: right;
+}
+
+/* ::after (:after) CSS伪元素 ::after 用来创建一个伪元素，作为已选中元素的最后一个子元素。 
+通常会配合 content 属性来为该元素添加装饰内容。 这个虚拟元素默认是行内元素 */
+.clear::after {
+  clear: both;
+  display: block;
+  content: "";
+}
+
+/* 设置整个页面整个字体相关样式 */
+body {
+  font-family: "PingFang SC","Microsoft YaHei", "Arial", "Helvetica", "sans-serif";
+  /* 设置行高为1.5倍 */
+  line-height: 1.5;
+}
+
+/* 超链接的美化 */
+a {
+  /* 去掉超链接下划线 */
+  text-decoration: none;
+  /* 设置a标签的字体颜色继承父类元素 */
+  /* inherit就是继承父类 */
+  color: inherit;
+}
+
+html {
+  /* 平滑滚动 */
+  scroll-behavior: smooth;
+  font-size: 0.8dvw;
+}
+/* end */
