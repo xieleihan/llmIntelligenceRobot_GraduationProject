@@ -1,0 +1,2 @@
+# llmIntelligenceRobot_GraduationProject
+一个基于React搭建前端,Nodejs搭建后端,使用langchain的毕业设计
