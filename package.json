@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 8081",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -12,16 +12,19 @@
   "dependencies": {
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.7.9",
     "postcss-loader": "^8.1.1",
     "postcss-px-to-viewport": "^1.1.1",
     "postcss-pxtorem": "^6.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.2",
     "sass-loader": "^16.0.4",
     "scss-loader": "^0.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@types/node": "^22.10.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",

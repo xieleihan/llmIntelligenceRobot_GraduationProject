@@ -56,6 +56,6 @@ a {
 html {
   /* 平滑滚动 */
   scroll-behavior: smooth;
-  font-size: 0.8dvw;
+  font-size: 0.3rem;
 }
 /* end */

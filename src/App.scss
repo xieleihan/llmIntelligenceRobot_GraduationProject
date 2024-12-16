@@ -1,0 +1,191 @@
+.App {
+    width: 100dvw;
+    height: 100dvh;
+    background: url('./assets/images/banner_background.jpeg') no-repeat center center/cover;
+    position: relative;
+
+    .startPage {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .title {
+            font-size: .5rem;
+            /* font-weight: 700; */
+            margin-Top: .5rem;
+        }
+
+        .itemBox {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            border-radius: 50%;
+
+            .item {
+                width: 30px;
+                height: 30px;
+
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+
+                &:nth-child(1) {
+                    top: 0;
+                    left: 50%;
+                    background-color: #ea4335;
+                    animation: spiralToCenter 3s forwards;
+                    animation-delay: 0.2s;
+                }
+
+                &:nth-child(2) {
+                    top: 15%;
+                    left: 50%;
+                    background-color: #fbbc05;
+                    animation: spiralToCenter1 3s forwards;
+                    animation-delay: 0.4s;
+                }
+
+                &:nth-child(3) {
+                    top: 30%;
+                    left: 50%;
+                    background-color: #34a853;
+                    animation: spiralToCenter2 3s forwards;
+                    animation-delay: 0.6s;
+                }
+
+                &:nth-child(4) {
+                    top: 45%;
+                    left: 50%;
+                    background-color: #4285f4;
+                    animation-delay: 2s;
+                    animation: spiralToCenter3 4s forwards;
+                }
+            }
+        }
+    }
+
+    header {
+        width: 50%;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+        }
+
+        span {
+            font-size: .5rem;
+            font-weight: 700;
+            text-wrap: nowrap;
+        }
+
+        .info {
+            letter-spacing: .2rem;
+            color: #ccc;
+            margin-top: .2rem;
+            font-size: 0.3rem;
+        }
+    }
+
+    main {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .btn {
+            width: 80%;
+            height: 1rem;
+            margin-bottom: .5rem;
+            background-color: #307def;
+            color: white;
+            border: none;
+            outline: none;
+            border: 1px solid #307def;
+            border-radius: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+                background-color: white;
+                color: #307def;
+            }
+        }
+    }
+
+    footer {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        color: #ccc;
+        font-size: 0.3rem;
+    }
+}
+
+@keyframes spiralToCenter {
+    0% {
+        transform: rotate(0deg) translate(0px, -15px) scale(1);
+        transform-origin: 0 150px;
+    }
+
+    100% {
+        transform: rotate(720deg) translate(-15px, 135px) scale(1);
+        transform-origin: 0 135px;
+    }
+}
+
+@keyframes spiralToCenter1 {
+    0% {
+        transform: rotate(0deg) translate(0px, -15px) scale(1);
+        transform-origin: 0 90px;
+    }
+
+    100% {
+        transform: rotate(720deg) translate(-15px, 90px) scale(1);
+        transform-origin: 0 135px;
+    }
+}
+
+@keyframes spiralToCenter2 {
+    0% {
+        transform: rotate(0deg) translate(0px, -15px) scale(1);
+        transform-origin: 0 45px;
+    }
+
+    100% {
+        transform: rotate(720deg) translate(-15px, 45px) scale(1);
+        transform-origin: 0 100px;
+    }
+}
+
+@keyframes spiralToCenter3 {
+    0% {
+        transform: rotate(0deg) translate(0px, -15px) scale(1);
+        transform-origin: 0 0px;
+    }
+
+    100% {
+        transform: rotate(720deg) translate(-15px, 0px) scale(1);
+        transform-origin: 0 75px;
+    }
+}
