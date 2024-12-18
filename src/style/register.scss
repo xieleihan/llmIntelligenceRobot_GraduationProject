@@ -1,0 +1,60 @@
+@import '../style/base.scss';
+
+.register{
+    width: 100dvw;
+    height: 100dvh;
+    position: relative;
+
+    .returnBtn{
+        position: absolute;
+        top: 1rem;
+        left: .5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $googleBlue;
+        img{
+            width: 50%;
+            height: 50%;
+        }
+    }
+
+    .container{
+        width: 80%;
+        height: 75%;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .title{
+            font-size: .8rem;
+            font-weight: bold;
+        }
+        .info{
+            font-size: .8rem;
+        }
+        .desc{
+            color: #ccc;
+            font-size: .3rem;
+            margin-top: .3rem;
+            letter-spacing: .3rem;
+        }
+        .inputVal{
+            width: 90%;
+            height: 1.5rem;
+            padding: 0 .3rem;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #ccc;
+        }
+        .registerBtn{
+            display: block;
+            width: 90%;
+            height: 1.5rem;
+            margin-top: 2rem;
+        }
+    }
+}
