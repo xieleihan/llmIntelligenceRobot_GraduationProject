@@ -24,7 +24,9 @@
     "koa-compress": "^5.1.1",
     "koa-static": "^5.0.0",
     "mysql2": "^3.11.5",
+    "nodemailer": "^6.9.16",
     "path": "^0.12.7",
-    "svg-captcha": "^1.4.0"
+    "svg-captcha": "^1.4.0",
+    "uuid": "^11.0.3"
   }
 }

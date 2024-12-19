@@ -5,11 +5,15 @@ const { pool } = require('../../db/index'); // 引入连接池模块
 // 引入用户的sql语句
 const user = require('../../model/index').user;
 
-const router = new Router();
+const router = new Router(
+    {
+        prefix: '/public',
+    }
+);
 const saltRounds = 10; // 定义密码加密的 salt 轮数
 
 // 注册接口
-router.post('/public/register', async (ctx) => {
+router.post('/register', async (ctx) => {
     const { username, useremail, userpassword } = ctx.request.body;
 
     // 参数校验
