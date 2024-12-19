@@ -29,6 +29,10 @@ router.get('/', async (ctx) => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+// 静态资源分发
+app.use(require('koa-static')(__dirname + '/public'));
+
+// 监听端口
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server is running at http://localhost:${process.env.SERVER_PORT}`);
 });

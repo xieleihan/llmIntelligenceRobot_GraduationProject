@@ -2,10 +2,13 @@
   "name": "llm-intelligence-robot",
   "version": "1.0.0",
   "description": "backend",
-  "keywords": [ "Node", "Koa" ],
-  "main": "main.js",
+  "keywords": [
+    "Node",
+    "Koa"
+  ],
+  "main": "app.js",
   "scripts": {
-    "dev": "node main.js"
+    "dev": "node app.js"
   },
   "author": "SouthAki",
   "license": "GPL-3.0",
@@ -13,6 +16,8 @@
     "@koa/router": "^13.1.0",
     "dotenv": "^16.4.7",
     "koa": "^2.15.3",
-    "koa-bodyparser": "^4.4.1"
+    "koa-bodyparser": "^4.4.1",
+    "koa-static": "^5.0.0",
+    "mysql2": "^3.11.5"
   }
 }
