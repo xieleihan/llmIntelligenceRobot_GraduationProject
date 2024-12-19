@@ -3,9 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SouthAki的LLM情报机器人后台</title>
+    <link rel="icon" type="image/x-icon" href="./icon/peacock_flat.ico">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html{
+            font-size: 0.8dvw;
+        }
+
+        .main{
+            width: 100dvw;
+            height: 100dvh;
+            background: url(./images/Catalina.jpg) no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        .main .top{
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .8);
+            color: white;
+        }
+
+        .main .top .nav{
+            width: 100%;
+            height: 100%;
+            padding: 0 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .main .top .nav .left{
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .main .top .nav .left .logo{
+            width: 2rem;
+            height: 2rem;
+            margin-right: 1rem;
+        }
+
+        .main .top .nav .right{
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        .main .top .nav .right li{
+            margin-right: 1rem;
+            cursor: pointer;
+            transition: all .5s;
+        }
+
+        .main .top .nav .right li:hover{
+            color: #f00;
+        }
+
+        .main .top .nav .right li:last-child{
+            margin-right: 0;
+        }
+
+        .main .footer{
+            color: #ccc;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: default;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="main">
+        <header class="top">
+            <nav class="nav">
+                <div class="left">
+                    <img class="logo" src="./images/peacock_flat.png" alt="">
+                    <h1 class="left">南秋SouthAki的LLM情报机器人后台</h1>
+                </div>
+                <ul class="right">
+                    <li>首页</li>
+                    <li>关于</li>
+                    <li>联系</li>
+                </ul>
+            </nav>
+        </header>
+        <footer class="footer">
+            <p>Copyright© 2024 SouthAki,All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>

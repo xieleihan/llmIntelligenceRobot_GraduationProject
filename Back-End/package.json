@@ -24,6 +24,7 @@
     "koa-compress": "^5.1.1",
     "koa-static": "^5.0.0",
     "mysql2": "^3.11.5",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "svg-captcha": "^1.4.0"
   }
 }

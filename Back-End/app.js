@@ -4,6 +4,10 @@ const Koa = require('koa');
 const Router = require('@koa/router');
 // 导入跨域cors
 const cors = require('@koa/cors');
+// 导入解析请求体
+const bodyParser = require('koa-bodyparser');
+// 引入连接池关闭方法
+const { closePool } = require('./db/index');
 
 // 插件
 // 获取环境变量插件
@@ -32,15 +36,36 @@ dotenv.config();
 //     ctx.body = 'Hello World!';
 // });
 
+// 导入功能路由模块
+const { userRouter, createSvgCodeRouter } = require('./router/index');
+
 // 使用路由
 app.use(router.routes());
 app.use(router.allowedMethods());
+// 使用中间件解析请求体
+app.use(bodyParser());
+
+// 插件
+app.use(userRouter.routes());
+app.use(createSvgCodeRouter.routes());
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));
 
 // 使用跨域
 app.use(cors());
+
+// 捕获全局异常
+app.on('error', (err, ctx) => {
+    console.error('后端项目有错误,已经抛出:', err, ctx);
+});
+
+// 关闭连接池
+process.on('SIGINT', async () => {
+    console.log('收到 SIGINT 信号，开始关闭数据库连接池');
+    await closePool();
+    process.exit(0);
+});
 
 // 监听端口
 app.listen(process.env.SERVER_PORT, () => {

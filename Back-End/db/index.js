@@ -1,26 +1,35 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const dbconfig = require('./database.js');
 
 // 使用连接池
 var pool = mysql.createPool(dbconfig.mysql);
 
-module.exports = {
-    query: function (sql) {
-        return new Promise((resolve, reject) => {
-            pool.getConnection(function (err, connection) {
-                if (err) {
-                    reject(err); // 处理获取连接错误
-                } else {
-                    connection.query(sql, function (err, rows) {
-                        if (err) {
-                            reject(err); // 查询执行错误
-                        } else {
-                            resolve(rows); // 查询成功
-                        }
-                        connection.release(); // 释放连接
-                    });
-                }
-            });
-        });
+// 获取连接
+async function getConnection() {
+    try {
+        const connection = await pool.getConnection();
+        console.log('数据库连接成功');
+        return connection;
+    } catch (error) {
+        console.error('获取数据库连接失败：', error);
+        throw error;
     }
+}
+
+// 关闭连接池（通常在应用关闭时调用）
+async function closePool() {
+    try {
+        await pool.end();
+        console.log('数据库连接池已关闭');
+    } catch (error) {
+        console.error('关闭连接池失败：', error);
+        throw error;
+    }
+}
+
+// 导出模块
+module.exports = {
+    pool,
+    getConnection,
+    closePool,
 };
