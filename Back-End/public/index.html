@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SouthAki的LLM情报机器人后台</title>
     <link rel="icon" type="image/x-icon" href="./icon/peacock_flat.ico">
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
 
-        html{
+        html {
             font-size: 0.8dvw;
         }
 
-        .main{
+        .main {
             width: 100dvw;
             height: 100dvh;
             background: url(./images/Catalina.jpg) no-repeat center center;
@@ -24,14 +25,14 @@
             position: relative;
         }
 
-        .main .top{
+        .main .top {
             width: 100%;
             height: 3rem;
             background-color: rgba(0, 0, 0, .8);
             color: white;
         }
 
-        .main .top .nav{
+        .main .top .nav {
             width: 100%;
             height: 100%;
             padding: 0 4rem;
@@ -40,39 +41,84 @@
             justify-content: space-between;
         }
 
-        .main .top .nav .left{
+        .main .top .nav .left {
             font-size: 1.2rem;
             display: flex;
             align-items: center;
         }
 
-        .main .top .nav .left .logo{
+        .main .top .nav .left .logo {
             width: 2rem;
             height: 2rem;
             margin-right: 1rem;
         }
 
-        .main .top .nav .right{
+        .main .top .nav .right {
             display: flex;
             align-items: center;
             list-style: none;
         }
 
-        .main .top .nav .right li{
+        .main .top .nav .right li {
             margin-right: 1rem;
             cursor: pointer;
             transition: all .5s;
         }
 
-        .main .top .nav .right li:hover{
+        .main .top .nav .right li:hover {
             color: #f00;
         }
 
-        .main .top .nav .right li:last-child{
+        .main .top .nav .right li:last-child {
             margin-right: 0;
         }
 
-        .main .footer{
+        .main .container {
+            width: 60%;
+            height: 70%;
+            background-color: rgba(255, 255, 255, .8);
+            border-radius: 2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .main .container .license {
+            width: 100%;
+            height: 100%;
+            padding: 2rem;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main .container .license .title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .main .container .license .gplv3 {
+            width: 4.5rem;
+            height: 2rem;
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            transform: translate(-50%, -50%);
+        }
+
+        .main .container .license .license-text {
+            width: 100%;
+            height: calc(100% - 5rem);
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: justify;
+            overflow-y: scroll;
+        }
+
+        .main .footer {
             color: #ccc;
             position: absolute;
             bottom: 0;
@@ -82,6 +128,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="main">
         <header class="top">
@@ -97,9 +144,22 @@
                 </ul>
             </nav>
         </header>
+        <main class="container">
+            <div class="license">
+                <p class="title">授权许可</p>
+                <img class="gplv3" src="./icon/gplv3.png" alt="">
+                <img class="closeLicense" src="" alt="">
+                <iframe class="license-text" src="./upload/gpl-3.0-standalone.html" frameborder="0"></iframe>
+            </div>
+        </main>
         <footer class="footer">
             <p>Copyright© 2024 SouthAki,All rights reserved.</p>
         </footer>
     </div>
 </body>
+<script src="./js/jquery-3.7.1.js"></script>
+<script>
+
+</script>
+
 </html>
