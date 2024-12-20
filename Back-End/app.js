@@ -37,7 +37,7 @@ dotenv.config();
 // });
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet } = require('./router/index');
 
 // 使用路由
 app.use(router.routes());
@@ -49,6 +49,7 @@ app.use(bodyParser());
 app.use(userRouter.routes()); // 使用用户路由
 app.use(createSvgCodeRouter.routes()); // 图片验证码路由
 app.use(emailApiRouter.routes()); // 邮箱验证码路由
+app.use(testGet.routes()); // 代理请求路由
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));
@@ -70,6 +71,8 @@ process.on('SIGINT', async () => {
 
 // 监听端口
 app.listen(process.env.SERVER_PORT, () => {
+    console.log('---------------Start info---------------');
     console.log(`Server is running at http://localhost:${process.env.SERVER_PORT}`); // 运行提示
+    console.log('----------------------------------------');
     console.log("发件邮箱信息:", process.env.EMAIL," 授权码:", process.env.EMAIL_PASSWORD); // 邮箱信息
 });

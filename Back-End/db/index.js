@@ -3,6 +3,7 @@ const dbconfig = require('./database.js');
 
 // 使用连接池
 var pool = mysql.createPool(dbconfig.mysql);
+console.log("开启连接池连接数据库:导出了pool(使用连接池),getConnection(获取连接),closePool(关闭连接)");
 
 // 获取连接
 async function getConnection() {
