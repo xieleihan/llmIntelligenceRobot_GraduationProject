@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import './App.scss'
 import logo from "./assets/icon/peacock_flat.png"
 
@@ -8,9 +8,17 @@ import { Outlet,useNavigate } from "react-router-dom"
 function App() {
   const [isStartPage, setIsStartPage] = useState(false); // 控制启动页显示与隐藏
   const [isFunctionPage, setIsFunctionPage] = useState(true); // 控制功能页显示与隐藏
+  const [userData, setUserData] = useState(false); // 存储子组件传递的用户数据
 
   // 初始化导航
   const navigate = useNavigate()
+
+  // 回调函数，用于接收子组件传递的数据
+  const handleDataFromChild = (data:boolean) => {
+    console.log("从子组件接收到的数据:", data);
+    setUserData(data); // 更新父组件的状态
+    setIsFunctionPage(userData); // 控制功能页显示与隐藏
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -51,7 +59,8 @@ function App() {
                 </footer>
               </>
             ) : (
-                <Outlet />
+                // 从子组件获取数据
+                <Outlet context={{ handleDataFromChild }} />
             )
           ) : (
             <>
