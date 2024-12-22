@@ -24,5 +24,9 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
     },
+    "compilerOptions": {
+      "noImplicitAny": false
+    }
+
   },
 )

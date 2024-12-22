@@ -36,6 +36,15 @@ dotenv.config();
 //     ctx.body = 'Hello World!';
 // });
 
+// 使用跨域
+app.use(cors({
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    // 允许所有域名访问
+    origin: function (ctx) {
+        return ctx.header.origin;
+    }
+}));
+
 // 导入功能路由模块
 const { userRouter, createSvgCodeRouter, emailApiRouter, testGet } = require('./router/index');
 
@@ -53,9 +62,6 @@ app.use(testGet.routes()); // 代理请求路由
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));
-
-// 使用跨域
-app.use(cors());
 
 // 捕获全局异常
 app.on('error', (err, ctx) => {
