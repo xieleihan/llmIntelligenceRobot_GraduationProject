@@ -6,7 +6,7 @@ function svgCaptcha() {
         ignoreChars: "0o1iIl",
         noise: 3,
         color: true,
-        background: "#000",
+        background: "#fff",
         fontSize: 60
     });
 }

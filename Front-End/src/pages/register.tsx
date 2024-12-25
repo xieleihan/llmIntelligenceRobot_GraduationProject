@@ -46,6 +46,11 @@ function Register() {
 
     // 生命周期
     useEffect(() => {
+        getSvgCode();
+    }, []);
+
+    // 定义切换验证码函数
+    function getSvgCode() {
         get('/createSvgCode', {})
             .then((response) => {
                 setSvgContent(response.data)
@@ -53,7 +58,26 @@ function Register() {
             .catch((error) => {
                 console.error('获取数据失败:', error);
             });
-    }, []);
+    }
+
+    // 定义发送验证码函数
+    function sendEmailCode() {
+        get('/api/email/send', { email: email })
+            .then(() => {
+                Toast.show({
+                    content: '验证码已发送',
+                    duration: 2000
+                })
+            })
+            .catch((error) => {
+                console.error('发送验证码失败:', error);
+            });
+    }
+
+    // 定义发送到后端的函数
+    function register() {
+        
+    }
 
     return (
         <>
@@ -245,6 +269,7 @@ function Register() {
                                             className='sendCode'
                                             style={isContinueSend ? { color: '#307def' } : { color: '#ccc' }}
                                             onClick={() => {
+                                                sendEmailCode()
                                                 setIsContinueSend(false)
                                                 if (isContinueSend) {
                                                     Toast.show({
@@ -286,6 +311,11 @@ function Register() {
                                             dangerouslySetInnerHTML={{
                                                 __html: svgContent
                                             }}
+                                            onClick={
+                                                () => {
+                                                    getSvgCode()
+                                                }
+                                            }
                                         >
                                             
                                         </div>
