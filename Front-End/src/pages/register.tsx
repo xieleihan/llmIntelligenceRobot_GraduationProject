@@ -11,7 +11,7 @@ import ReturnBtn from '../assets/icon/left-heightlight.svg';
 import { useNavigate, useOutletContext } from "react-router-dom"
 
 // 导入API
-import { get } from '../api/index'
+import { get,post } from '../api/index'
 
 // Define the type for the context
 interface OutletContextType {
@@ -26,12 +26,14 @@ function Register() {
     const [password, setPassword] = useState(''); // 密码
     const [confirmPassword, setConfirmPassword] = useState(''); // 确认密码
     const [confirmProtocol, setConfirmProtocol] = useState(false); // 确认用户协议
-    const [isVerifyPagesOpen, setIfVerifyPagesOpen] = useState(false); // 是否打开验证页面
+    const [isVerifyPagesOpen, setIfVerifyPagesOpen] = useState(true); // 是否打开验证页面
     const [visible, setVisible] = useState(false); // 是否显示密码
     const [confirmVisible, setConfirmVisible] = useState(false); // 是否显示确认密码
     const [isContinueSend, setIsContinueSend] = useState(true); // 是否继续发送验证码
     const [sendText, setSendText] = useState('发送验证码'); // 发送验证码文本
     const [svgContent, setSvgContent] = useState(""); // 存储后端传递的 SVG 字符串
+    const [verifyEmailCode, setVerifyEmailCode] = useState(''); // 邮箱验证码
+    const [verifySvgCode, setVerifySvgCode] = useState(''); // 图片验证码
 
     // 定义正则表达式
     const usernameReg = /[^\w_]/g; // 用户名正则
@@ -76,7 +78,28 @@ function Register() {
 
     // 定义发送到后端的函数
     function register() {
-        
+        post('/register', {
+            username: username,
+            useremail: email,
+            userpassword: password,
+            email_code: verifyEmailCode,
+            svgCode: verifySvgCode
+        })
+            .then(() => {
+                Toast.show({
+                    content: '注册成功',
+                    duration: 2000
+                })
+                setTimeout(() => {
+                    navigate('/login')
+                },2000)
+            })
+            .catch((error) => {
+                Toast.show({
+                    content: "出错了"+error.response.data,
+                    duration: 2000
+                })
+        })
     }
 
     return (
@@ -264,6 +287,11 @@ function Register() {
                                             clearable
                                             maxLength={6}
                                             className='inputVal secondInput'
+                                            onChange={
+                                                (value) => {
+                                                    setVerifyEmailCode(value)
+                                                }
+                                            }
                                         />
                                         <span
                                             className='sendCode'
@@ -304,7 +332,11 @@ function Register() {
                                             clearable
                                             maxLength={4}
                                             className='inputVal secondInput'
-                                            
+                                            onChange={
+                                                (value) => {
+                                                    setVerifySvgCode(value)
+                                                }
+                                            }
                                         />
                                         <div
                                             className="svgImg"
@@ -324,8 +356,14 @@ function Register() {
 
 
                                 <Button block color='primary' size='large'
-                                    className='registerBtn'>
-                                    下一步
+                                    className='registerBtn'
+                                    onClick={
+                                        () => {
+                                            register()
+                                        }
+                                    }
+                                >
+                                    注册
                                 </Button>
                                 <p className='goToLoginPages'>已有账户,点击跳转登录</p>
                             </div>

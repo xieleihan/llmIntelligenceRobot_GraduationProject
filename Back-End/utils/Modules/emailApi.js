@@ -98,7 +98,7 @@ class Email {
     static async verifyEmailCode(ctx) {
         const { client_email, email_code } = ctx.query; // 从请求中获取邮箱和验证码
         
-        // console.log('client_email:', client_email, 'email_code:', email_code);
+        console.log('client_email:', client_email, 'email_code:', email_code);
 
         if (!client_email || !email_code) {
             ctx.status = 400;

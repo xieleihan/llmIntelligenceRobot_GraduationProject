@@ -1,6 +1,7 @@
 const Router = require('@koa/router');
 const bcrypt = require('bcrypt'); // 引入密码加密模块
 const { pool } = require('../../db/index'); // 引入连接池模块
+const { axiosGet } = require('../../api/index');
 
 // 引入用户的sql语句
 const user = require('../../model/index').user;
@@ -14,7 +15,7 @@ const saltRounds = 10; // 定义密码加密的 salt 轮数
 
 // 注册接口
 router.post('/register', async (ctx) => {
-    const { username, useremail, userpassword } = ctx.request.body;
+    const { username, useremail, userpassword, email_code, svgCode } = ctx.request.body;
 
     // 参数校验
     if (!username || !useremail || !userpassword) {
@@ -29,6 +30,31 @@ router.post('/register', async (ctx) => {
         if (existingUser.length > 0) {
             ctx.status = 409;
             ctx.body = { code: 409, error: '该邮箱已被注册' };
+            return;
+        }
+
+        // 发起请求检测验证码是否正确api:/api/email/verify
+        const res = await axiosGet('/api/email/verify', {
+            params: {
+                client_email: useremail,
+                email_code:email_code,
+            },
+        });
+        if (res.data.code !== 200) {
+            ctx.status = 400;
+            ctx.body = { code: 400, error: '邮件验证码错误' };
+            return;
+        }
+
+        // 检查图形验证码是否正确/verifySvgCode
+        const resSvg = await axiosGet('/verifySvgCode', {
+            params: {
+                svgCode,
+            },
+        });
+        if (resSvg.data.code !== 200) {
+            ctx.status = 400;
+            ctx.body = { code: 400, error: '图形验证码错误' };
             return;
         }
 
