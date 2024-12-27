@@ -33,6 +33,14 @@ router.post('/register', async (ctx) => {
             return;
         }
 
+        // 检查用户名是否已被注册
+        const [existingUsername] = await pool.query(user.selectUsernameRegistered, [username]);
+        if (existingUsername.length > 0) {
+            ctx.status = 409;
+            ctx.body = { code: 409, error: '该用户名已被注册' };
+            return;
+        }
+
         // 发起请求检测验证码是否正确api:/api/email/verify
         const res = await axiosGet('/api/email/verify', {
             params: {

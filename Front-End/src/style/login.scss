@@ -1,0 +1,76 @@
+@import './base.scss';
+
+.login {
+    width: 100dvw;
+    height: 100dvh;
+    position: relative;
+
+    .container {
+        width: 80%;
+        height: 75%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .title {
+            font-size: .8rem;
+            font-weight: bold;
+        }
+
+        .info {
+            font-size: .8rem;
+        }
+
+        .desc {
+            color: #ccc;
+            font-size: .3rem;
+            margin-top: .3rem;
+            letter-spacing: .3rem;
+            margin-bottom: .3rem;
+        }
+
+        .inputVal {
+            width: 100%;
+            height: 1.5rem;
+            padding: 0 .3rem;
+            border: none;
+            outline: none;
+            border: 1px solid #ccc;
+            margin-bottom: .3rem;
+            border-radius: $radius;
+            font-size: .4rem;
+            background-color: white;
+        }
+
+        .passwordInput {
+            position: relative;
+
+            .img {
+                position: absolute;
+                top: 50%;
+                right: .5rem;
+                transform: translateY(-50%);
+
+            }
+        }
+
+        .radioBox {
+            display: flex;
+            font-size: .4rem;
+
+            input {
+                margin-right: .1rem;
+            }
+
+            .link {
+                color: $googleBlue;
+
+                &:hover {
+                    text-decoration: underline;
+                    color: $googleRed;
+                }
+            }
+        }
+    }
+}

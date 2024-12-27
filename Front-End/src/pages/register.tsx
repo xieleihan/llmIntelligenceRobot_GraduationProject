@@ -1,4 +1,5 @@
 import '../style/register.scss';
+import '../style/returnBtn.scss';
 
 import { useEffect, useState } from 'react';
 import { Button, Toast, Input } from 'antd-mobile'
@@ -78,7 +79,7 @@ function Register() {
 
     // 定义发送到后端的函数
     function register() {
-        post('/register', {
+        post('/public/register', {
             username: username,
             useremail: email,
             userpassword: password,
@@ -259,7 +260,11 @@ function Register() {
                                     className='registerBtn'>
                                     下一步
                                 </Button>
-                                <p className='goToLoginPages'>已有账户,点击跳转登录</p>
+                                <p className='goToLoginPages' onClick={
+                                    () => {
+                                        navigate('/login')
+                                    }
+                                }>已有账户,点击跳转登录</p>
                             </div>
                         </div>
                     ) :
@@ -365,7 +370,15 @@ function Register() {
                                 >
                                     注册
                                 </Button>
-                                <p className='goToLoginPages'>已有账户,点击跳转登录</p>
+                                <p className='goToLoginPages'
+                                    onClick={
+                                        () => {
+                                            navigate('/login')
+                                        }
+                                    }
+                                >
+                                    已有账户,点击跳转登录
+                                </p>
                             </div>
                         </div>
                     )

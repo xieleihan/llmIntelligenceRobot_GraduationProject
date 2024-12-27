@@ -1,0 +1,19 @@
+@import './base.scss';
+
+.returnBtn {
+    position: absolute;
+    top: 1rem;
+    left: .5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $googleBlue;
+
+    img {
+        width: 50%;
+        height: 50%;
+    }
+}
