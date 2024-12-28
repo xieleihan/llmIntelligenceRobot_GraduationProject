@@ -2,17 +2,17 @@ import '../style/register.scss';
 import '../style/returnBtn.scss';
 
 import { useEffect, useState } from 'react';
-import { Button, Toast, Input } from 'antd-mobile'
+import { Button, Toast, Input, Mask } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
 
 // 导入图标信息
 import ReturnBtn from '../assets/icon/left-heightlight.svg';
 
 // 路由跳转
-import { useNavigate, useOutletContext } from "react-router-dom"
+import { useNavigate, useOutletContext, Outlet } from "react-router-dom"
 
 // 导入API
-import { get,post } from '../api/index'
+import { get, post } from '../api/index'
 
 // Define the type for the context
 interface OutletContextType {
@@ -35,6 +35,7 @@ function Register() {
     const [svgContent, setSvgContent] = useState(""); // 存储后端传递的 SVG 字符串
     const [verifyEmailCode, setVerifyEmailCode] = useState(''); // 邮箱验证码
     const [verifySvgCode, setVerifySvgCode] = useState(''); // 图片验证码
+    const [visibleMask, setVisibleMask] = useState(false); // 定义mask
 
     // 定义正则表达式
     const usernameReg = /[^\w_]/g; // 用户名正则
@@ -93,14 +94,14 @@ function Register() {
                 })
                 setTimeout(() => {
                     navigate('/login')
-                },2000)
+                }, 2000)
             })
             .catch((error) => {
                 Toast.show({
-                    content: "出错了"+error.response.data,
+                    content: "出错了" + error.response.data,
                     duration: 2000
                 })
-        })
+            })
     }
 
     return (
@@ -169,7 +170,7 @@ function Register() {
                                                         setVisible(false)
                                                         clearTimeout(closeLook)
                                                     }, 2000)
-                                                    
+
                                                 }
                                             } />
                                         ) : (
@@ -216,7 +217,13 @@ function Register() {
                                             }
                                         }
                                     />
-                                    <span>我已阅读<a className='link' href='#'>《用户协议》</a>和<a className='link' href='#'>《隐私政策》</a></span>
+                                    <span>我已阅读<a className='link' onClick={() => {
+                                        setVisibleMask(true)
+                                        navigate('useragreement')
+                                    }}>《用户协议》</a>和<a className='link' onClick={() => {
+                                        setVisibleMask(true)
+                                        navigate('privacyPolicy')
+                                    }}>《隐私政策》</a></span>
                                 </div>
                                 <Button block color='primary' size='large'
                                     onClick={
@@ -266,6 +273,14 @@ function Register() {
                                     }
                                 }>已有账户,点击跳转登录</p>
                             </div>
+                            <Mask visible={visibleMask} onMaskClick={() => {
+                                setVisibleMask(false)
+                                navigate('/register')
+                            }}>
+                                <div className='maskContent'>
+                                    <Outlet />
+                                </div>
+                            </Mask>
                         </div>
                     ) :
                     (
@@ -283,7 +298,7 @@ function Register() {
                                 <div className='title'>注册</div>
                                 <p className='info'>Register</p>
                                 <p className='desc'>探索未知之境</p>
-                                
+
                                 <div className='secoundPagesInput'>
                                     <p className='emailCodeTitle'>邮箱验证码:</p>
                                     <div className="secoundPagesInputBox">
@@ -331,7 +346,7 @@ function Register() {
 
                                 <div className='secoundPagesInput'>
                                     <p className='emailCodeTitle'>图片验证码:</p>
-                                    <div className="secoundPagesInputBox" style={{padding:0}}>
+                                    <div className="secoundPagesInputBox" style={{ padding: 0 }}>
                                         <Input
                                             type="text"
                                             clearable
@@ -354,7 +369,7 @@ function Register() {
                                                 }
                                             }
                                         >
-                                            
+
                                         </div>
                                     </div>
                                 </div>

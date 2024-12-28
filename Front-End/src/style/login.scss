@@ -58,6 +58,7 @@
         .radioBox {
             display: flex;
             font-size: .4rem;
+            margin-bottom: .3rem;
 
             input {
                 margin-right: .1rem;
@@ -72,5 +73,20 @@
                 }
             }
         }
+
+        .svgCode{
+            display: flex;
+            overflow: hidden;
+            font-size: .3rem;
+        }
+    }
+
+    .maskContent{
+        width: 80%;
+        height: 80dvh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
