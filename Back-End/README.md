@@ -79,3 +79,28 @@
 > 方法:`POST`
 >
 > 参数:`username`,`useremail`,`userpassword`,`email_code`,`svgCode`
+>
+> **登录**
+>
+> 接口:`/login`
+>
+> 方法:`POST`
+>
+> 参数:`useremail`,`userpassword`,`verifySvgCode`
+>
+> 返回有一个`token`,请存进`cookie`或者`sessionStrong`,有效期是1h,没有做token无感刷新
+>
+> 示例
+>
+> ```json
+> {
+>     "code": 200,
+>     "message": "登录成功",
+>     "user": {
+>         "username": "xieleihan",
+>     },
+>     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhpZWxlaWhhbiIsInVzZXJlbWFpbCI6InhpZWxlaWhhbkBnbWFpbC5jb20iLCJpYXQiOjE3MzU0Nzg2NTUsImV4cCI6MTczNTQ4MjI1NX0.cKqGqOUr1pods4Gkb4BxY2-l9g8MaCFFOtxjgvddig8"
+> }
+> ```
+>
+> 

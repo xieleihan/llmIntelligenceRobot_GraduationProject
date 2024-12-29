@@ -33,6 +33,10 @@ function Login() {
     const [confirmProtocol, setConfirmProtocol] = useState(false); // 确认用户协议
     const [visibleMask, setVisibleMask] = useState(false); // 定义mask
 
+    // 定义变量
+    const emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; // 邮箱正则
+    const passwordReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/; // 密码正则
+
     // 从父组件获取回调函数
     const { handleDataFromChild }= useOutletContext<OutletContextType>();
 
@@ -57,36 +61,65 @@ function Login() {
 
     // 登录函数
     function login() {
+        if (!confirmProtocol) {
+            Toast.show({
+                content: '请阅读并同意《用户协议》和《隐私政策》',
+                duration: 2000
+            })
+            return
+        }
+
         if (email === '' || password === '' || verifySvgCode === '') {
             Toast.show({
                 content: '请填写完整信息',
                 duration: 2000
             })
             return
+        } else if (emailReg.test(email) === false) {
+            Toast.show({
+                content: '邮箱格式不正确',
+                duration: 2000
+            })
+            return
+        } else if (passwordReg.test(password) === true) {
+            Toast.show({
+                content: '密码格式不正确',
+                duration: 2000
+            })
+            return
         } else {
-            post('/login', {
-                email: email,
-                password: password,
+            post('/public/login', {
+                useremail: email,
+                userpassword: password,
                 verifySvgCode: verifySvgCode
             })
                 .then((response) => {
-                    if (response.data === '登录成功') {
+                    const str = JSON.stringify(response)
+                    const obj = JSON.parse(str)
+                    if (obj.code === 200) {
                         Toast.show({
                             content: '登录成功',
                             duration: 2000
                         })
+
+                        // 把obj.token存进cookies 设置过期时间为1h
+                        document.cookie = `AUTO_TOKEN=${obj.token};max-age=3600`
+
                         setTimeout(() => {
                             navigate('/home')
                         }, 2500);
                     } else {
                         Toast.show({
-                            content: response.data,
+                            content: response.data.message,
                             duration: 2000
                         });
                     }
                 })
                 .catch((error) => {
-                    console.error('获取数据失败:', error);
+                    Toast.show({
+                        content: error.response.data.error,
+                        duration: 2000
+                    })
                 });
         }
     }
@@ -160,6 +193,7 @@ function Login() {
                                 }
                             }
                             value={verifySvgCode}
+                            maxLength={4}
                         />
                         <div
                             className="svgImg"

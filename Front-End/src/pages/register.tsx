@@ -87,18 +87,27 @@ function Register() {
             email_code: verifyEmailCode,
             svgCode: verifySvgCode
         })
-            .then(() => {
-                Toast.show({
-                    content: '注册成功',
-                    duration: 2000
-                })
-                setTimeout(() => {
-                    navigate('/login')
-                }, 2000)
+            .then((response) => {
+                const str = JSON.stringify(response)
+                const obj = JSON.parse(str)
+                if (obj.code === 200) {
+                    Toast.show({
+                        content: '注册成功',
+                        duration: 2000
+                    })
+                    setTimeout(() => {
+                        navigate('/login')
+                    }, 2000)
+                } else {
+                    Toast.show({
+                        content: obj.message,
+                        duration: 2000
+                    })
+                }
             })
             .catch((error) => {
                 Toast.show({
-                    content: "出错了" + error.response.data,
+                    content: error.response.data.error,
                     duration: 2000
                 })
             })

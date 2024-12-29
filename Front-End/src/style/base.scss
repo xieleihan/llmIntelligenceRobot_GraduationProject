@@ -23,3 +23,8 @@ input{
 a{
     text-decoration: none;
 }
+
+@font-face {
+    font-family: 'signature';
+    src: url(../assets/font/signature.otf) format('opentype');
+}
