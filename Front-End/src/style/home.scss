@@ -37,6 +37,46 @@
     .bottom{
         width: 100%;
         height: 1.5rem;
+        padding: 0 .5rem;
+        .content{
+            background-color: white;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: $radius;
+            height: 100%;
+            .inputBox{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 .3rem;
+                .icon{
+                    height: 50%;
+                    aspect-ratio: 1/1;
+                }
+                .input{
+                    height: 100%;
+                    padding: 0 .2rem;
+                }
+                .send{
+                    height: 80%;
+                    aspect-ratio: 1/1;
+                    border-radius: $radius;
+                    background-color: $noSendInput;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img{
+                        width: 50%;
+                        height: 50%;
+                    }
+                    &:hover{
+                        background-color: $hoverInput;
+                    }
+                }
+            }
+        }
     }
     .footer{
         width: 100%;
