@@ -7,13 +7,21 @@ import { useState } from 'react';
 
 interface HometopComProps {
     onToggleClick: (clickBool: boolean) => void;
+    isTopOpen: boolean;
 }
 
-function HometopCom({ onToggleClick }: HometopComProps) {
+function HometopCom({ onToggleClick,isTopOpen }: HometopComProps) {
     // 定义React变量
-    const [clickBool, setClickBool] = useState(false); // 点击状态
+    const [clickBool, setClickBool] = useState(isTopOpen); // 点击状态
 
-    
+    const handleClick = () => {
+        let newState = !clickBool;// 计算最新状态
+        if (!newState) { 
+            newState = true;
+        }
+        setClickBool(newState); // 更新本地状态
+        onToggleClick(newState); // 调用父组件的回调，传递最新状态
+    };
     
     return (
         <>
@@ -21,14 +29,8 @@ function HometopCom({ onToggleClick }: HometopComProps) {
                 <div
                     className="multifunctional"
                     onClick={
-                        () => {
-                            if (clickBool) {
-                                setClickBool(false);
-                            } else {
-                                setClickBool(true);
-                            }
-                            onToggleClick(clickBool);
-                        }}
+                        handleClick
+                    }
                 >
                     <img src={TopLeftIcon} alt="" />
                 </div>
