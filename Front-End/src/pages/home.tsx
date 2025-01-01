@@ -12,15 +12,17 @@ function HomeView() {
     const [isOpenMultifunctional, setIsOpenMultifunctional] = useState(false); // 是否打开多功能按钮
 
     const handleToggleClick = (newState: boolean) => {
-        console.log("点击顶部newState", newState);
-        console.log("现在的isOpenMultifunctional", isOpenMultifunctional);
+        // console.log("点击顶部newState", newState);
+        // console.log("现在的isOpenMultifunctional", isOpenMultifunctional);
         setIsOpenMultifunctional(newState);
     };
 
     const handleToggleClickTwo = (newState: boolean) => {
-        console.log("点击侧边newState", newState);
-        console.log("现在的isOpenMultifunctional", isOpenMultifunctional);
-        setIsOpenMultifunctional(newState);
+        // console.log("点击侧边newState", newState);
+        // console.log("现在的isOpenMultifunctional", isOpenMultifunctional);
+        setTimeout(() => {
+            setIsOpenMultifunctional(newState);
+        },500)
     };
 
 

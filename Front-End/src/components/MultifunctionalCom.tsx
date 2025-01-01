@@ -5,7 +5,10 @@ import Avater from '../assets/images/avater.png';
 // 导入React
 import { useState } from 'react';
 
-function MultifunctionalCom({ isOpen,handleToggleClickTwo }: { isOpen: boolean, handleToggleClickTwo: (clickBool: boolean) => void }) {
+// 导入组件
+import FunctionboxCom from './Modules/FunctionboxCom';
+
+function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean, handleToggleClickTwo: (clickBool: boolean) => void }) {
     // 定义React变量
     const [isComOpen, setIsComOpen] = useState(isOpen); // 点击状态
 
@@ -17,14 +20,20 @@ function MultifunctionalCom({ isOpen,handleToggleClickTwo }: { isOpen: boolean, 
 
     return (
         <>
-            <section className="sideBar">
+            <section
+                className="sideBar"
+                style={{
+                    width: isComOpen ? '60%' : '0%',
+                    overflow: isComOpen ? 'visible' : 'hidden',
+                    transition: 'width 0.5s ease, overflow 0.5s ease'
+                }}>
                 <div className="top">
                     <span className='title'>SouthAki</span>
                     <img onClick={
                         handleClick
                     } src={TopLeftIcon} alt="" />
                 </div>
-                <div className="container">
+                <div className="container-side">
                     <div className="avaterBox">
                         <img className='avater' src={Avater} alt="" />
                         <div className="rightBox">
@@ -32,6 +41,12 @@ function MultifunctionalCom({ isOpen,handleToggleClickTwo }: { isOpen: boolean, 
                             <div className="desc">一个人一生只会经历一次夏天剩下都是和它作比较.</div>
                         </div>
                     </div>
+                    <div className="functionBox">
+                        <FunctionboxCom />
+                    </div>
+                </div>
+                <div className="copyright">
+                    <span>Copyright© 2024 SouthAki</span>
                 </div>
             </section>
         </>

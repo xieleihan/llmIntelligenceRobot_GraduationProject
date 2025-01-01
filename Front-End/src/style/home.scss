@@ -16,6 +16,7 @@
         align-items: center;
         .signature{
             font-family: 'signature';
+            font-size: .75rem;
         }
         .multifunctional,
         .newChat{
@@ -81,8 +82,8 @@
     }
 
     .sideBar{
-        width: 60%;
-        height: 100%;
+        // width: 60%;
+        height: 100dvh;
         position: absolute;
         top: 0;
         left: 0;
@@ -91,6 +92,7 @@
         border-top: 1px solid #ccc;
         border-bottom: 1px solid #ccc;
         border-right: 1px solid #ccc;
+        transition: all .5s;
         .top{
             width: 100%;
             height: 1.5rem;
@@ -102,9 +104,10 @@
                 margin: 0 auto;
             }
         }
-        .container{
+        .container-side{
             width: 100%;
-            height: calc(100% - 3rem);
+            height: calc(100% - 2rem);
+            padding: 0.3rem 0.5rem;
             .avaterBox{
                 width: 100%;
                 height: 2rem;
@@ -128,6 +131,10 @@
                     justify-content: space-evenly;
                     .name{
                         font-family: 'signature';
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        width: 100%;
                     }
                     .desc{
                         color: #ccc;
@@ -139,6 +146,42 @@
                     }
                 }
             }
+            .functionBox{
+                width: 100%;
+                height: calc(100% - 2rem);
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #ccc;
+                .item{
+                    height: 1.5rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: .5rem;
+                    border-bottom: 1px dotted #ccc;
+                    transition: all .5s;
+                    padding: 0 .2rem;
+                    &:hover{
+                        background-color: $hoverInput;
+                        color: white;
+                    }
+                    .item-left{
+                        display: flex;
+                        align-items: center;
+                        span{
+                            margin-left: .3rem;
+                            text-wrap: nowrap;
+                        }
+                    }
+                }
+            }
+        }
+        .copyright{
+            width: 100%;
+            height: .5rem;
+            font-size: .3rem;
+            text-align: center;
+            line-height: .5rem;
         }
     }
 
