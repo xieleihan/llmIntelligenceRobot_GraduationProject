@@ -2,9 +2,10 @@ import '../style/home.scss';
 import { useState } from 'react';
 
 // 导入组件
-import HometopCom from '../components/HomeTopcom';
-import HomebottomCom from '../components/HomeBottomCom';
-import MultifunctionalCom from '../components/MultifunctionalCom';
+import HometopCom from '../components/HomeTopcom'; // 顶部组件
+import HomebottomCom from '../components/HomeBottomCom'; // 底部组件
+import MultifunctionalCom from '../components/MultifunctionalCom'; // 侧边栏组件
+import HomeNoinput from '../components/Modules/HomeNoinput'; // 当我输入框从未输入的时候展示的提示组件
 
 function HomeView() {
     // 定义React变量
@@ -35,7 +36,7 @@ function HomeView() {
                     onToggleClick={handleToggleClick}
                 />
                 <main className="container">
-                    
+                    <HomeNoinput />
                 </main>
                 <section className="bottom">
                     <div className="content">
