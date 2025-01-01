@@ -11,6 +11,7 @@ function HomeView() {
     const [inputSendMessage, setInputSendMessage] = useState(''); // 输入框内容
     const [isOpenMultifunctional, setIsOpenMultifunctional] = useState(false); // 是否打开多功能按钮
 
+    // 定义回调函数
     const handleToggleClick = (newState: boolean) => {
         // console.log("点击顶部newState", newState);
         // console.log("现在的isOpenMultifunctional", isOpenMultifunctional);
@@ -25,7 +26,7 @@ function HomeView() {
         },500)
     };
 
-
+    // 返回的tsx
     return (
         <>
             <div className="home">
@@ -33,7 +34,9 @@ function HomeView() {
                     isTopOpen={isOpenMultifunctional}
                     onToggleClick={handleToggleClick}
                 />
-                <main className="container"></main>
+                <main className="container">
+                    
+                </main>
                 <section className="bottom">
                     <div className="content">
                         <HomebottomCom />

@@ -41,7 +41,7 @@ function Login() {
     const { handleDataFromChild }= useOutletContext<OutletContextType>();
 
     // 初始化导航
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     // 生命周期
     useEffect(() => {

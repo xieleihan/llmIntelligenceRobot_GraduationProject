@@ -1,0 +1,41 @@
+@import '../base.scss';
+
+.errorPages{
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: .4rem;
+    position: relative;
+    .img{
+        width: 70%;
+        aspect-ratio: 1/1;
+    }
+    .desc{
+        margin-top: .5rem;
+        font-size: .3rem;
+        color: #ccc;
+        letter-spacing: .1rem;
+    }
+    .returnBtn-error{
+        width: 70%;
+        height: 1.5rem;
+        background-color: $googleBlue;
+        color: white;
+        text-align: center;
+        margin-top: 1.5rem;
+        border-radius: $radius;
+        font-weight: bold;
+    }
+    .nowTime{
+        position: absolute;
+        bottom: .1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: .3rem;
+        color: #ccc;
+        text-wrap: nowrap;
+    }
+}

@@ -5,6 +5,7 @@ import Login from '../pages/login'; // 登录视图
 import UserAgreement from '../components/UserAgreement'; // 用户协议视图
 import PrivacyPolicy from '../components/PrivacyPolicy'; // 隐私政策视图
 import HomeView from '../pages/home'; // 首页视图
+import ErrorView from '../pages/ErrorPages'; // 错误视图
 
 // 蒙版路径
 const maskArray = [
@@ -39,6 +40,10 @@ const routes = [
     {
         path: '/home',
         element: <HomeView />
+    },
+    {
+        path: '*',
+        element: <ErrorView />,
     }
 ]
 
