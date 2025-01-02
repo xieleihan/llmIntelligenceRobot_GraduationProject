@@ -1,7 +1,11 @@
+import '../../../style/Modules/Multifunctional/UserInfo.scss';
+
 function UserInfo() {
     return (
         <>
-            <h1>User Info</h1>
+            <div className='userInfo'>
+                
+            </div>
         </>
     );
 }

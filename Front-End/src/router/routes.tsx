@@ -6,6 +6,9 @@ import UserAgreement from '../components/UserAgreement'; // 用户协议视图
 import PrivacyPolicy from '../components/PrivacyPolicy'; // 隐私政策视图
 import HomeView from '../pages/home'; // 首页视图
 import ErrorView from '../pages/ErrorPages'; // 错误视图
+import ContactUs from '../pages/Modules/home/ContactUs'; // 联系我们视图
+import UserInfo from '../pages/Modules/home/UserInfo'; // 用户信息视图
+import SettingPage from '../pages/Modules/home/SettingPage'; // 设置视图
 
 // 蒙版路径
 const maskArray = [
@@ -42,9 +45,21 @@ const routes = [
         element: <HomeView />
     },
     {
+        path: '/contact',
+        element: <ContactUs />
+    },
+    {
+        path: '/userinfo',
+        element: <UserInfo />
+    },
+    {
+        path: '/setting',
+        element: <SettingPage />
+    },
+    {
         path: '*',
         element: <ErrorView />,
-    }
+    },
 ]
 
 // 导出路由表

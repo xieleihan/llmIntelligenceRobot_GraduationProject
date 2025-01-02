@@ -8,6 +8,9 @@ import { useState } from 'react';
 // 导入组件
 import FunctionboxCom from './Modules/FunctionboxCom';
 
+// 路由跳转
+import { useNavigate } from "react-router-dom"
+
 function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean, handleToggleClickTwo: (clickBool: boolean) => void }) {
     // 定义React变量
     const [isComOpen, setIsComOpen] = useState(isOpen); // 点击状态
@@ -17,6 +20,9 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
         setIsComOpen(newState); // 更新本地状态
         handleToggleClickTwo(newState); // 调用父组件的回调，传递最新状态
     };
+
+    // 初始化导航
+    const navigate = useNavigate();
 
     return (
         <>
@@ -34,7 +40,14 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
                     } src={TopLeftIcon} alt="" />
                 </div>
                 <div className="container-side">
-                    <div className="avaterBox">
+                    <div
+                        className="avaterBox"
+                        onClick={
+                            () => {
+                                navigate('/userinfo');
+                            }
+                        }
+                    >
                         <img className='avater' src={Avater} alt="" />
                         <div className="rightBox">
                             <div className="name">南秋SouthAki</div>
