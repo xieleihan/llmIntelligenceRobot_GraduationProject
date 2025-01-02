@@ -13,7 +13,6 @@ import { CloseOutline } from 'antd-mobile-icons'
 import { useState } from "react";
 
 function HomeNoinput() {
-
     // 定义React变量
     const [isOpenPopver, setIsOpenPopver] = useState(false); // 是否打开气泡框
 
