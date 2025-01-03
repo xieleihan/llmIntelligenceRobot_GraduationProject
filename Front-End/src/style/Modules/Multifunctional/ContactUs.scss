@@ -1,0 +1,11 @@
+@import '../../base.scss';
+
+.contactUs{
+    width: 100dvw;
+    height: 100dvh;
+    font-size: .4rem;
+    .content{
+        width: 100%;
+        height: calc(100% - 2.25rem);
+    }
+}

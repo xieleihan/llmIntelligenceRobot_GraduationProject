@@ -9,6 +9,7 @@ import ErrorView from '../pages/ErrorPages'; // 错误视图
 import ContactUs from '../pages/Modules/home/ContactUs'; // 联系我们视图
 import UserInfo from '../pages/Modules/home/UserInfo'; // 用户信息视图
 import SettingPage from '../pages/Modules/home/SettingPage'; // 设置视图
+import AuthorizationPages from '../pages/Modules/home/AuthorizationPages'; // 授权视图
 
 // 蒙版路径
 const maskArray = [
@@ -55,6 +56,10 @@ const routes = [
     {
         path: '/setting',
         element: <SettingPage />
+    },
+    {
+        path: '/authorization',
+        element: <AuthorizationPages />
     },
     {
         path: '*',
