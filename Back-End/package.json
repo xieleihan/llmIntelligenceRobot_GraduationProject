@@ -25,10 +25,13 @@
     "koa-bodyparser": "^4.4.1",
     "koa-compress": "^5.1.1",
     "koa-static": "^5.0.0",
+    "langchain": "^0.3.9",
     "mysql2": "^3.11.5",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.16",
+    "openai": "^4.77.0",
     "path": "^0.12.7",
+    "serpapi": "^2.1.0",
     "svg-captcha": "^1.4.0",
     "uuid": "^11.0.3"
   }
