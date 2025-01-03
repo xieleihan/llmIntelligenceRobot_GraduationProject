@@ -19,6 +19,14 @@ interface ReturnBasebtnProps {
     }
 }
 
+/**
+ * 一个公用的返回按钮组件
+ * @param buttonConfig {Object} 按钮配置
+ * @param buttonConfig.backgroundColor {String} 按钮背景颜色
+ * @param buttonConfig.goToUrlStr {String} 跳转的URL
+ * @param buttonConfig.iconColor {Boolean} 图标颜色(true:高亮,false:不高亮)
+ * @returns {TSX.Element} 返回一个React元素
+ */
 function ReturnBasebtn({ buttonConfig }: ReturnBasebtnProps) {
     // 初始化导航
     const navigate = useNavigate();

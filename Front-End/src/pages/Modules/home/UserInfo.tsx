@@ -6,6 +6,9 @@ import avater from '../../../assets/images/avater.png';
 // 导入ant design mobile组件
 import { SystemQRcodeOutline, LinkOutline } from 'antd-mobile-icons';
 
+// 导入ant design mobile
+import { Divider } from 'antd-mobile'
+
 // 导入组件
 import ReturnBasebtn from '../../../components/Modules/base/returnBaseBtn';
 
@@ -26,16 +29,17 @@ function UserInfo() {
                     <div className="avater">
                         <img src={avater} alt="" />
                     </div>
-                    <div className="qrCode">
-                        <LinkOutline />
-                        <SystemQRcodeOutline />
-                    </div>
-                    <div className="name">
-                        <div className="username">
-                            南秋SouthAki
-                        </div>
+                </div>
+                <div className="qrCode">
+                    <LinkOutline />
+                    <SystemQRcodeOutline />
+                </div>
+                <div className="name">
+                    <div className="username">
+                        南秋SouthAki
                     </div>
                 </div>
+                <Divider />
             </div>
         </>
     );
