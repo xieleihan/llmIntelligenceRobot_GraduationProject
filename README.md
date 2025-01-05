@@ -12,30 +12,34 @@
 
 - ***前端***
 
-	**用户C端:**基于`React`+`SCSS`+`TypeScript`打造
+  **用户C端:**基于`React`+`SCSS`+`TypeScript`打造
 
-	**管理员B端:**基于`Vue`+`SCSS`+`TypeScript`打造
+  端口定义:8081
 
-	<div align="left">
-	    <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="45" alt="React logo"  />
-		  <img width="6" />
-		  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="45" alt="Vue3 logo"  />
-		  <img width="6" />
-		  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" height="45" alt="SCSS logo"  />
-		  <img width="6" />
-		  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="45" alt="TypeScript logo"  />
-		  <img width="6" />
-		</div>
+  **管理员B端:**基于`Vue`+`SCSS`+`TypeScript`打造
+
+  <div align="left">
+      <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="45" alt="React logo"  />
+  	  <img width="6" />
+  	  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="45" alt="Vue3 logo"  />
+  	  <img width="6" />
+  	  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" height="45" alt="SCSS logo"  />
+  	  <img width="6" />
+  	  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="45" alt="TypeScript logo"  />
+  	  <img width="6" />
+  	</div>
 
 - ***后端***
 
-	基于Nodejs的`Koa`框架打造
+  基于Nodejs的`Koa`框架打造
 
-	<div align="left">
-		  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="45" alt="Nodejs logo"  />
-	    <img width="6" />
-	    <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="45" alt="JavaScript logo"  />
-		</div>
+  端口定义:8082
+
+  <div align="left">
+  	  <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="45" alt="Nodejs logo"  />
+      <img width="6" />
+      <img src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="45" alt="JavaScript logo"  />
+  	</div>
 
 - ***数据库***
 

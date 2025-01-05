@@ -103,4 +103,31 @@
 > }
 > ```
 >
-> 
+
+### Deepseek聊天接口
+
+前缀:`/protected`
+
+> #### 聊天
+>
+> 接口:`/deepseek`
+>
+> 方法:`POST`
+>
+> 参数:`question`
+>
+> 返回的格式是这样的
+>
+> ```json
+> {
+>     "code": 200,
+>     "msg": "```thinking\nHmm... 这是一个关于自我介绍的问题。让我想想该怎么回答比较好...\n\n首先我需要说明我的身份和功能。我是由南秋SouthAki开发的GitHub开源情报机器人。我的主要任务是帮助用户跟踪他们在GitHub上关注的仓库的最新动态和信息。\n\n不过直接说\"我是机器人\"可能不太合适...我应该表现得更加自然一些。也许可以这样开场:\n\n\"你好,我是由南秋SouthAki开发的GitHub助手...\"\n\n然后我需要解释我的具体功能:\n\n- 可以返回用户关注的GitHub仓库的最新动态\n- 提供关于这些仓库的最近信息\n- 对这些信息进行总结和分析\n\n另外,我还可以调用一些工具来增强我的能力,比如thinkPrompt等。\n\n不过第一次对话,可能不需要一下子说太多细节,先做个简单的介绍,等用户有具体需求时再详细说明功能会更好。\n\n让我组织一下语言...\n```\n\n你好,我是由南秋SouthAki开发的GitHub助手。我的主要功能是帮助用户跟踪他们在GitHub上关注的仓库的最新动态和信息。我可以为你提供你关注的仓库的最近更新,并对这些信息进行总结和分析。如果你有任何关于GitHub仓库的具体需求,我都很乐意帮忙。",
+>     "user": {
+>         "username": "xieleihan"
+>     }
+> }
+> ```
+>
+> **需要注意,该接口是保护接口,请在前端传递的时候给headers上附上`authorization`**
+>
+> value是`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhpZWxlaWhhbiIsInVzZXJlbWFpbCI6InhpZWxlaWhhbkBnbWFpbC5jb20iLCJpYXQiOjE3MzYwODkzODksImV4cCI6MTczNjA5Mjk4OX0.ICoiAjZ_xcqYPrrtlWXD3t9NeTp0WF-U0iahvZd57Ao`
