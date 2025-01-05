@@ -89,6 +89,8 @@ router.post('/register', async (ctx) => {
 router.post('/login', async (ctx) => {
     const { useremail, userpassword, verifySvgCode } = ctx.request.body;
 
+    console.log("前端传递的验证码:",verifySvgCode);
+
     // 参数校验
     if (!useremail || !userpassword) {
         ctx.status = 400;
