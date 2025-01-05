@@ -55,7 +55,9 @@ function HomeView() {
                         dataArray.length === 0 ? (
                             <HomeNoinput />
                         ) : (
-                            <HomeYesinput />
+                                <HomeYesinput
+                                    dataArray={dataArray}
+                                />
                         )
                     }
                 </main>
