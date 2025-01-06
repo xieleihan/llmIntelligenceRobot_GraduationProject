@@ -1,6 +1,7 @@
 import appendix from '../assets/icon/appendix.svg';
 import send from '../assets/icon/send.svg';
 import sendHeightLight from '../assets/icon/send-heightlight.svg';
+import stop from '../assets/icon/stop.svg';
 
 // 导入antd design mobile组件
 import { Input,Toast } from 'antd-mobile';
@@ -10,6 +11,9 @@ import { useState } from 'react';
 
 // 导入样式文件
 import '../style/base.scss';
+
+// 导入接口
+import { sendMsg } from '../api/request';
 
 interface HomebottomComProps { 
     handleClickThree: ({
@@ -24,6 +28,7 @@ interface HomebottomComProps {
 function HomebottomCom({ handleClickThree }: HomebottomComProps) {
     // 定义React变量
     const [inputValCom, setInputValCom] = useState(''); // 输入框内容
+    const [isOpenHover, setIsOpenHover] = useState(false); // 是否打开hover (true:打开, false:关闭) 
 
     const handleClickBottom = () => {
         let obj = {
@@ -33,6 +38,15 @@ function HomebottomCom({ handleClickThree }: HomebottomComProps) {
         // console.log("这是组件内的obj", obj);
         handleClickThree(obj);
     };
+
+    // 返回的回调函数
+    const deepseekReturn = (message:string) => {
+        let obj = {
+            "type": "system",
+            "content": message,
+        }
+        handleClickThree(obj);
+    }
 
     return (
         <>
@@ -52,11 +66,11 @@ function HomebottomCom({ handleClickThree }: HomebottomComProps) {
                 <div
                     className="send"
                     style={
-                        inputValCom === '' ?
+                        inputValCom === '' || isOpenHover ?
                             { backgroundColor: '#dbeafe' } : { backgroundColor: '#4d6bfe' }
                     }
                     onClick={
-                        () => {
+                        async () => {
                             if (inputValCom === '') {
                                 Toast.show({
                                     content: '请输入信息',
@@ -65,6 +79,10 @@ function HomebottomCom({ handleClickThree }: HomebottomComProps) {
                             } else {
                                 // console.log("触发了输入")
                                 handleClickBottom();
+                                // 在写入数据之后清空输入框
+                                setInputValCom('');
+                                // 往组件发送一个开启hover的信号
+                                setIsOpenHover(true);
 
                                 // 正则将输入框的符号转译(<,>,&,",',`)
                                 let reg = /<|>|&|"|'/g;
@@ -85,12 +103,25 @@ function HomebottomCom({ handleClickThree }: HomebottomComProps) {
                                             return '';
                                     }
                                 });
-                                setInputValCom('');
+                                // 给请求加上请求头
+                                const deepseek = await sendMsg({
+                                    "question": val
+                                });
+                                // console.log("deepseek", deepseek);
+                                let str = JSON.stringify(deepseek);
+                                let obj = JSON.parse(str);
+                                deepseekReturn(obj.msg);
+                                // 等到数据写入之后关闭hover
+                                setIsOpenHover(false);
                             }
                         }
                     }
                 >
-                    <img src={inputValCom === '' ? send : sendHeightLight} alt="" />
+                    {
+                        !isOpenHover ?
+                            <img src={inputValCom === '' ? send : sendHeightLight} alt="" /> :
+                            <img src={stop} alt="" />
+                    }
                 </div>
             </div>
         </>

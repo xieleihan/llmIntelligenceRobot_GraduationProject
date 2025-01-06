@@ -321,8 +321,9 @@ router.post('/deepseek', async (ctx) => {
             msg: message,
             user: {
                 username: decoded.username,
-                email: decoded.email,
-            }
+                // email: decoded.email,
+            },
+            type: 'system'
         };
         
     } catch (err) {

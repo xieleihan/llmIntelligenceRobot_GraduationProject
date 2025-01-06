@@ -39,7 +39,7 @@ function HomeView() {
     // 底部的回调函数
     const handleToggleClickThree = (newState:arrayItem) => {
         // console.log("点击底部newState", newState);
-        setDataArray([...dataArray,newState]);
+        setDataArray(prevDataArray => [...prevDataArray, newState]);
     };
 
     // 返回的tsx
