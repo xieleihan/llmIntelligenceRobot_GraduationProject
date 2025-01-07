@@ -3,6 +3,7 @@ const createSvgCodeRouter = require('./Modules/createSvgCode');
 const emailApiRouter = require('./Modules/emailRouter');
 const testGet = require('./Modules/testAxios');
 const deepseekRouter = require('./Modules/deepseekRouter');
+const githubRouter = require('./Modules/githubRouter');
 
 // 导出全部引入的模块
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     createSvgCodeRouter,
     emailApiRouter,
     testGet,
-    deepseekRouter
+    deepseekRouter,
+    githubRouter,
 };

@@ -131,3 +131,281 @@
 > **需要注意,该接口是保护接口,请在前端传递的时候给headers上附上`authorization`**
 >
 > value是`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InhpZWxlaWhhbiIsInVzZXJlbWFpbCI6InhpZWxlaWhhbkBnbWFpbC5jb20iLCJpYXQiOjE3MzYwODkzODksImV4cCI6MTczNjA5Mjk4OX0.ICoiAjZ_xcqYPrrtlWXD3t9NeTp0WF-U0iahvZd57Ao`
+
+### Github接口
+
+前缀:`/public`
+
+需要提前获取GitHub的Token,然后在请求头
+
+```text
+config.headers['Authorization'] = `token ${github_token}`;
+```
+
+
+
+> #### 获取某个用户的仓库信息
+>
+> 接口:`/get-github-repos`
+>
+> 方法:`POST`
+>
+> 参数:`username`
+>
+> 返回的数据
+>
+> ```json
+> {
+>     "code":200,
+>     "repos":[
+>         {
+>             "id": 784660837,
+>             "node_id": "R_kgDOLsT5ZQ",
+>             "name": "1x-web-certificate-gkd",
+>             "full_name": "xieleihan/1x-web-certificate-gkd",
+>             "private": false,
+>             "owner": {
+>                 "login": "xieleihan",
+>                 "id": 57227318,
+>                 "node_id": "MDQ6VXNlcjU3MjI3MzE4",
+>                 "avatar_url": "https://avatars.githubusercontent.com/u/57227318?v=4",
+>                 "gravatar_id": "",
+>                 "url": "https://api.github.com/users/xieleihan",
+>                 "html_url": "https://github.com/xieleihan",
+>                 "followers_url": "https://api.github.com/users/xieleihan/followers",
+>                 "following_url": "https://api.github.com/users/xieleihan/following{/other_user}",
+>                 "gists_url": "https://api.github.com/users/xieleihan/gists{/gist_id}",
+>                 "starred_url": "https://api.github.com/users/xieleihan/starred{/owner}{/repo}",
+>                 "subscriptions_url": "https://api.github.com/users/xieleihan/subscriptions",
+>                 "organizations_url": "https://api.github.com/users/xieleihan/orgs",
+>                 "repos_url": "https://api.github.com/users/xieleihan/repos",
+>                 "events_url": "https://api.github.com/users/xieleihan/events{/privacy}",
+>                 "received_events_url": "https://api.github.com/users/xieleihan/received_events",
+>                 "type": "User",
+>                 "user_view_type": "public",
+>                 "site_admin": false
+>             },
+>             "html_url": "https://github.com/xieleihan/1x-web-certificate-gkd",
+>             "description": null,
+>             "fork": true,
+>             "url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd",
+>             "forks_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/forks",
+>             "keys_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/keys{/key_id}",
+>             "collaborators_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/collaborators{/collaborator}",
+>             "teams_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/teams",
+>             "hooks_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/hooks",
+>             "issue_events_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/issues/events{/number}",
+>             "events_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/events",
+>             "assignees_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/assignees{/user}",
+>             "branches_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/branches{/branch}",
+>             "tags_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/tags",
+>             "blobs_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/git/blobs{/sha}",
+>             "git_tags_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/git/tags{/sha}",
+>             "git_refs_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/git/refs{/sha}",
+>             "trees_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/git/trees{/sha}",
+>             "statuses_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/statuses/{sha}",
+>             "languages_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/languages",
+>             "stargazers_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/stargazers",
+>             "contributors_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/contributors",
+>             "subscribers_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/subscribers",
+>             "subscription_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/subscription",
+>             "commits_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/commits{/sha}",
+>             "git_commits_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/git/commits{/sha}",
+>             "comments_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/comments{/number}",
+>             "issue_comment_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/issues/comments{/number}",
+>             "contents_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/contents/{+path}",
+>             "compare_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/compare/{base}...{head}",
+>             "merges_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/merges",
+>             "archive_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/{archive_format}{/ref}",
+>             "downloads_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/downloads",
+>             "issues_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/issues{/number}",
+>             "pulls_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/pulls{/number}",
+>             "milestones_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/milestones{/number}",
+>             "notifications_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/notifications{?since,all,participating}",
+>             "labels_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/labels{/name}",
+>             "releases_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/releases{/id}",
+>             "deployments_url": "https://api.github.com/repos/xieleihan/1x-web-certificate-gkd/deployments",
+>             "created_at": "2024-04-10T09:46:53Z",
+>             "updated_at": "2024-10-28T13:39:08Z",
+>             "pushed_at": "2024-04-16T17:28:10Z",
+>             "git_url": "git://github.com/xieleihan/1x-web-certificate-gkd.git",
+>             "ssh_url": "git@github.com:xieleihan/1x-web-certificate-gkd.git",
+>             "clone_url": "https://github.com/xieleihan/1x-web-certificate-gkd.git",
+>             "svn_url": "https://github.com/xieleihan/1x-web-certificate-gkd",
+>             "homepage": null,
+>             "size": 79386,
+>             "stargazers_count": 1,
+>             "watchers_count": 1,
+>             "language": "Ruby",
+>             "has_issues": false,
+>             "has_projects": true,
+>             "has_downloads": true,
+>             "has_wiki": true,
+>             "has_pages": false,
+>             "has_discussions": false,
+>             "forks_count": 0,
+>             "mirror_url": null,
+>             "archived": false,
+>             "disabled": false,
+>             "open_issues_count": 0,
+>             "license": {
+>                 "key": "mit",
+>                 "name": "MIT License",
+>                 "spdx_id": "MIT",
+>                 "url": "https://api.github.com/licenses/mit",
+>                 "node_id": "MDc6TGljZW5zZTEz"
+>             },
+>             "allow_forking": true,
+>             "is_template": false,
+>             "web_commit_signoff_required": false,
+>             "topics": [],
+>             "visibility": "public",
+>             "forks": 0,
+>             "open_issues": 0,
+>             "watchers": 1,
+>             "default_branch": "main",
+>             "permissions": {
+>                 "admin": true,
+>                 "maintain": true,
+>                 "push": true,
+>                 "triage": true,
+>                 "pull": true
+>             }
+>         },
+>     ]
+> }
+> ```
+>
+> #### 获取自己关注或者其他用户关注的仓库信息
+>
+> 接口:`/get-github-starred-repos`
+>
+> 方法:`POST`
+>
+> 参数:`username`
+>
+> 返回数据
+>
+> ```json
+> {
+>     "code":200,
+>     "repos":[
+>         {
+>             "id": 164815412,
+>             "node_id": "MDEwOlJlcG9zaXRvcnkxNjQ4MTU0MTI=",
+>             "name": "Studying",
+>             "full_name": "XNoteW/Studying",
+>             "private": false,
+>             "owner": {
+>                 "login": "XNoteW",
+>                 "id": 43038022,
+>                 "node_id": "MDEyOk9yZ2FuaXphdGlvbjQzMDM4MDIy",
+>                 "avatar_url": "https://avatars.githubusercontent.com/u/43038022?v=4",
+>                 "gravatar_id": "",
+>                 "url": "https://api.github.com/users/XNoteW",
+>                 "html_url": "https://github.com/XNoteW",
+>                 "followers_url": "https://api.github.com/users/XNoteW/followers",
+>                 "following_url": "https://api.github.com/users/XNoteW/following{/other_user}",
+>                 "gists_url": "https://api.github.com/users/XNoteW/gists{/gist_id}",
+>                 "starred_url": "https://api.github.com/users/XNoteW/starred{/owner}{/repo}",
+>                 "subscriptions_url": "https://api.github.com/users/XNoteW/subscriptions",
+>                 "organizations_url": "https://api.github.com/users/XNoteW/orgs",
+>                 "repos_url": "https://api.github.com/users/XNoteW/repos",
+>                 "events_url": "https://api.github.com/users/XNoteW/events{/privacy}",
+>                 "received_events_url": "https://api.github.com/users/XNoteW/received_events",
+>                 "type": "Organization",
+>                 "user_view_type": "public",
+>                 "site_admin": false
+>             },
+>             "html_url": "https://github.com/XNoteW/Studying",
+>             "description": "阅读 & 写作 & 学习",
+>             "fork": false,
+>             "url": "https://api.github.com/repos/XNoteW/Studying",
+>             "forks_url": "https://api.github.com/repos/XNoteW/Studying/forks",
+>             "keys_url": "https://api.github.com/repos/XNoteW/Studying/keys{/key_id}",
+>             "collaborators_url": "https://api.github.com/repos/XNoteW/Studying/collaborators{/collaborator}",
+>             "teams_url": "https://api.github.com/repos/XNoteW/Studying/teams",
+>             "hooks_url": "https://api.github.com/repos/XNoteW/Studying/hooks",
+>             "issue_events_url": "https://api.github.com/repos/XNoteW/Studying/issues/events{/number}",
+>             "events_url": "https://api.github.com/repos/XNoteW/Studying/events",
+>             "assignees_url": "https://api.github.com/repos/XNoteW/Studying/assignees{/user}",
+>             "branches_url": "https://api.github.com/repos/XNoteW/Studying/branches{/branch}",
+>             "tags_url": "https://api.github.com/repos/XNoteW/Studying/tags",
+>             "blobs_url": "https://api.github.com/repos/XNoteW/Studying/git/blobs{/sha}",
+>             "git_tags_url": "https://api.github.com/repos/XNoteW/Studying/git/tags{/sha}",
+>             "git_refs_url": "https://api.github.com/repos/XNoteW/Studying/git/refs{/sha}",
+>             "trees_url": "https://api.github.com/repos/XNoteW/Studying/git/trees{/sha}",
+>             "statuses_url": "https://api.github.com/repos/XNoteW/Studying/statuses/{sha}",
+>             "languages_url": "https://api.github.com/repos/XNoteW/Studying/languages",
+>             "stargazers_url": "https://api.github.com/repos/XNoteW/Studying/stargazers",
+>             "contributors_url": "https://api.github.com/repos/XNoteW/Studying/contributors",
+>             "subscribers_url": "https://api.github.com/repos/XNoteW/Studying/subscribers",
+>             "subscription_url": "https://api.github.com/repos/XNoteW/Studying/subscription",
+>             "commits_url": "https://api.github.com/repos/XNoteW/Studying/commits{/sha}",
+>             "git_commits_url": "https://api.github.com/repos/XNoteW/Studying/git/commits{/sha}",
+>             "comments_url": "https://api.github.com/repos/XNoteW/Studying/comments{/number}",
+>             "issue_comment_url": "https://api.github.com/repos/XNoteW/Studying/issues/comments{/number}",
+>             "contents_url": "https://api.github.com/repos/XNoteW/Studying/contents/{+path}",
+>             "compare_url": "https://api.github.com/repos/XNoteW/Studying/compare/{base}...{head}",
+>             "merges_url": "https://api.github.com/repos/XNoteW/Studying/merges",
+>             "archive_url": "https://api.github.com/repos/XNoteW/Studying/{archive_format}{/ref}",
+>             "downloads_url": "https://api.github.com/repos/XNoteW/Studying/downloads",
+>             "issues_url": "https://api.github.com/repos/XNoteW/Studying/issues{/number}",
+>             "pulls_url": "https://api.github.com/repos/XNoteW/Studying/pulls{/number}",
+>             "milestones_url": "https://api.github.com/repos/XNoteW/Studying/milestones{/number}",
+>             "notifications_url": "https://api.github.com/repos/XNoteW/Studying/notifications{?since,all,participating}",
+>             "labels_url": "https://api.github.com/repos/XNoteW/Studying/labels{/name}",
+>             "releases_url": "https://api.github.com/repos/XNoteW/Studying/releases{/id}",
+>             "deployments_url": "https://api.github.com/repos/XNoteW/Studying/deployments",
+>             "created_at": "2019-01-09T07:52:57Z",
+>             "updated_at": "2025-01-06T05:30:41Z",
+>             "pushed_at": "2019-03-07T13:20:33Z",
+>             "git_url": "git://github.com/XNoteW/Studying.git",
+>             "ssh_url": "git@github.com:XNoteW/Studying.git",
+>             "clone_url": "https://github.com/XNoteW/Studying.git",
+>             "svn_url": "https://github.com/XNoteW/Studying",
+>             "homepage": "https://xnotew.github.io/Studying/",
+>             "size": 42678,
+>             "stargazers_count": 91,
+>             "watchers_count": 91,
+>             "language": "Jupyter Notebook",
+>             "has_issues": true,
+>             "has_projects": true,
+>             "has_downloads": true,
+>             "has_wiki": true,
+>             "has_pages": true,
+>             "has_discussions": false,
+>             "forks_count": 28,
+>             "mirror_url": null,
+>             "archived": false,
+>             "disabled": false,
+>             "open_issues_count": 0,
+>             "license": {
+>                 "key": "mit",
+>                 "name": "MIT License",
+>                 "spdx_id": "MIT",
+>                 "url": "https://api.github.com/licenses/mit",
+>                 "node_id": "MDc6TGljZW5zZTEz"
+>             },
+>             "allow_forking": true,
+>             "is_template": false,
+>             "web_commit_signoff_required": false,
+>             "topics": [],
+>             "visibility": "public",
+>             "forks": 28,
+>             "open_issues": 0,
+>             "watchers": 91,
+>             "default_branch": "master",
+>             "permissions": {
+>                 "admin": false,
+>                 "maintain": false,
+>                 "push": false,
+>                 "triage": false,
+>                 "pull": true
+>             }
+>         },
+>     ]
+> }
+> ```
+>
+> 

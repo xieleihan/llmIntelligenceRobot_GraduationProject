@@ -46,7 +46,7 @@ app.use(cors({
 }));
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter,githubRouter } = require('./router/index');
 
 // 使用路由
 app.use(router.routes());
@@ -59,7 +59,8 @@ app.use(userRouter.routes()); // 使用用户路由
 app.use(createSvgCodeRouter.routes()); // 图片验证码路由
 app.use(emailApiRouter.routes()); // 邮箱验证码路由
 app.use(testGet.routes()); // 代理请求路由
-app.use(deepseekRouter.routes()); // 深搜路由
+app.use(deepseekRouter.routes()); // 深度求索路由
+app.use(githubRouter.routes()); // github路由
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));

@@ -3,6 +3,7 @@ require('dotenv').config({ path: '../../.env' }); // 引入环境变量
 const jwt = require('jsonwebtoken'); // 引入 jsonwebtoken 模块
 const Router = require('@koa/router'); // 导入Koa路由
 const OpenAI = require("openai"); // 导入 OpenAI 模块
+// const { OpenAI } = require("../../node_modules/langchain/llms/opeai"); // 导入Langchain OpenAI模块
 
 const router = new Router(
     {
@@ -18,6 +19,8 @@ const deepseek = new OpenAI(
     {
         apiKey: DEEPSEEK_API_KEY,
         baseURL: DEEPSEEK_API_BASE_URL,
+        tempurature: 0,
+        maxTokens: 2000,
     }
 ); // 创建深度求索API实例
 
