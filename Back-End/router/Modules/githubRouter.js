@@ -1,32 +1,11 @@
 const Router = require('@koa/router'); // 导入Koa路由
-const { axiosInternetGet } = require('../../api/index');
+const { getGithubRepos, getGithubStarredRepos } = require('../model/index').github; // 导入GitHub仓库信息获取函数
 
 const router = new Router(
     {
         prefix: '/public',
     }
 ); // 设置公共前缀
-
-// GitHub 自己或其他用户仓库信息的获取函数
-const getGithubRepos = async (username) => {
-    try {
-        const response = await axiosInternetGet(`https://api.github.com/users/${username}/repos`);
-        // console.log("这是获取的仓库数据:", response.data);
-        return response.data; // 返回仓库数据
-    } catch (error) {
-        throw new Error('GitHub API 请求失败');
-    }
-};
-
-// Github获取自己关注或者其他用户关注的仓库信息
-const getGithubStarredRepos = async (username) => {
-    try {
-        const response = await axiosInternetGet(`https://api.github.com/users/${username}/starred`);
-        return response.data; // 返回关注的仓库数据
-    } catch (error) {
-        throw new Error('GitHub API 请求失败');
-    }
-};
 
 // POST 接口：获取自己或其他用户仓库信息
 router.post('/get-github-repos', async (ctx) => {
