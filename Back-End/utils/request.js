@@ -2,11 +2,12 @@ const axios = require('axios');
 const dotenv = require('dotenv'); // 导入dotenv模块
 dotenv.config(); // 读取环境变量
 
-const github_token = process.env.GITHUB_BETA_TOKEN; // 获取环境变量中的 GitHub Token
+// const github_token = process.env.GITHUB_BETA_TOKEN; // 获取环境变量中的 GitHub Token
+const github_token = process.env.GITHUB_TOKEN;
 
 // 创建axios实例
 const service = axios.create({
-    timeout: 5000 // 请求超时时间
+    timeout: 500000 // 请求超时时间
 });
 
 // request拦截器

@@ -36,6 +36,9 @@ dotenv.config();
 //     ctx.body = 'Hello World!';
 // });
 
+// 设置超时时间
+app.timeout = 1000 * 60 * 10; // 10分钟
+
 // 使用跨域
 app.use(cors({
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
