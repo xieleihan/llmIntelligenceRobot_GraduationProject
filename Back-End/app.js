@@ -8,6 +8,8 @@ const cors = require('@koa/cors');
 const bodyParser = require('koa-bodyparser');
 // 引入连接池关闭方法
 const { closePool } = require('./db/index');
+// 引入WebSocket模块
+const WebSocket = require('ws');
 
 // 插件
 // 获取环境变量插件
@@ -17,6 +19,8 @@ const dotenv = require('dotenv');
 const app = new Koa();
 // 创建一个Router对象表示web app的路由
 const router = new Router();
+// 创建一个WebSocket服务器
+const wss = new WebSocket.Server({ noServer: true });
 
 // 读取环境变量
 dotenv.config();
@@ -49,7 +53,7 @@ app.use(cors({
 }));
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter,githubRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter } = require('./router/index');
 
 // 使用路由
 app.use(router.routes());
@@ -64,6 +68,7 @@ app.use(emailApiRouter.routes()); // 邮箱验证码路由
 app.use(testGet.routes()); // 代理请求路由
 app.use(deepseekRouter.routes()); // 深度求索路由
 app.use(githubRouter.routes()); // github路由
+app.use(getServerStateRouter.routes()); // 服务器状态路由
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));
@@ -86,4 +91,20 @@ app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server is running at http://localhost:${process.env.SERVER_PORT}`); // 运行提示
     console.log('----------------------------------------');
     console.log("发件邮箱信息:", process.env.EMAIL," 授权码:", process.env.EMAIL_PASSWORD); // 邮箱信息
+});
+
+// 将http服务器与WebSocket服务器绑定
+// 捕获升级请求
+app.on('upgrade', (request, socket, head) => {
+    // 处理升级为 WebSocket
+    try {
+        wss.handleUpgrade(request, socket, head, (ws) => {
+            // 成功升级后，调用回调函数，将 WebSocket 对象传递给 wss.emit('connection', ...)。
+            wss.emit('connection', ws, request);
+        });
+    } catch (error) {
+        // 处理错误,销毁socket
+        socket.destroy();
+        console.error('WebSocket服务器升级失败:', error);
+    }
 });

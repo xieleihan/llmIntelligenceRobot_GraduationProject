@@ -4,6 +4,7 @@ const emailApiRouter = require('./Modules/emailRouter');
 const testGet = require('./Modules/testAxios');
 const deepseekRouter = require('./Modules/deepseekRouter');
 const githubRouter = require('./Modules/githubRouter');
+const getServerStateRouter = require('./Modules/serverStateRouter');
 
 // 导出全部引入的模块
 module.exports = {
@@ -13,4 +14,5 @@ module.exports = {
     testGet,
     deepseekRouter,
     githubRouter,
+    getServerStateRouter
 };

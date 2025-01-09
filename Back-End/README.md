@@ -5,7 +5,9 @@
 
 ## 运行
 
-> 后端环境变量
+> 后端环境变量(必须配置)
+>
+> 在根目录下创建`.env`
 >
 > ```env
 > SERVER_PORT=8082
@@ -14,11 +16,39 @@
 > MYSQL_PORT=3306
 > MYSQL_USER=root
 > MYSQL_PASSWORD=123456
-> EMAIL_PASSWORD=授权码
-> EMAIL=邮箱
+> EMAIL_PASSWORD=
+> EMAIL=
+> BASE_URL=http://localhost:8082
+> SECRET_KEY=
+> DEEPSEEK_API_KEY=
+> DEEPSEEK_API_BASE_URL=https://api.deepseek.com/v1
+> GITHUB_TOKEN=
+> GITHUB_BETA_TOKEN=
 > ```
 >
 > *部分时候请执行`git rm --cached .env`清除Git的env跟踪*
+>
+> 然后,执行
+>
+> ```bash
+> npm install
+> ```
+>
+> 安装必须的包
+>
+> 运行命令:
+>
+> ```bash
+> npm run dev
+> ```
+>
+> Test命令:
+>
+> ```bash
+> npm run test
+> ```
+>
+> 
 
 ## 接口文档
 
@@ -405,6 +435,44 @@ config.headers['Authorization'] = `token ${github_token}`;
 >             }
 >         },
 >     ]
+> }
+> ```
+>
+> 
+
+### 服务器状态
+
+前缀:`/private`(私有接口,C端不暴露)
+
+> #### 获取系统CPU和内存占用情况
+>
+> 接口:`/get-server-state`
+>
+> 方法:`GET`或者`WS`(会尝试升级成WebSocket,失败切成Http请求)
+>
+> 参数:无
+>
+> 请求头:**需要注意,该接口是保护接口,请在前端传递的时候给headers上附上`authorization`**
+>
+> 返回:
+>
+> ```json
+> {
+>     "memory": {
+>         "total": "13.86 GB",
+>         "used": "11.47 GB",
+>         "free": "2.39 GB"
+>     },
+>     "cpu": {
+>         "cpuUsage": [
+>             {
+>                 "core": 0,
+>                 "usage": "3.55"
+>             },
+>             ...
+>         ],
+>         "total": "35.68%"
+>     }
 > }
 > ```
 >
