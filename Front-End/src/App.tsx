@@ -11,7 +11,7 @@ import { getUserIp } from "./api/request";
 // 使用React Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from './store/index';
-import { setIpInfo } from './store/generalStore';
+import { setIpInfo, setAddressInfo } from './store/generalStore';
 
 function App() {
   const [isStartPage, setIsStartPage] = useState(false); // 控制启动页显示与隐藏
@@ -20,7 +20,8 @@ function App() {
 
   // 初始化Redux
   const dispatch = useDispatch<AppDispatch>();
-  const ipInfo = useSelector((state: RootState) => state.general.ipInfo);
+  const ipInfo = useSelector((state: RootState) => state.general.ipInfo); // 获取IP信息
+  const addressInfo = useSelector((state: RootState) => state.general.addressInfo); // 获取地址信息
 
   // 初始化导航
   const navigate = useNavigate();
@@ -42,8 +43,9 @@ function App() {
       console.log('当前用户位置信息:', address);
       // 更新Redux
       dispatch(setIpInfo(obj.ipinfo.text));
+      dispatch(setAddressInfo(address));
       // 我查看是否写入
-      console.log('Redux中的IP地址信息:', ipInfo);
+      console.log('Redux中的IP地址信息:', ipInfo, 'Redux中的位置信息:', addressInfo);
     }).catch(err => {
       console.log('获取用户IP地址失败:', err);
     });
