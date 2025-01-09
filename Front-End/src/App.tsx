@@ -27,7 +27,7 @@ function App() {
   const navigate = useNavigate();
 
   // 回调函数，用于接收子组件传递的数据
-  const handleDataFromChild = (data:boolean) => {
+  const handleDataFromChild = (data: boolean) => {
     console.log("从子组件接收到的数据:", data);
     setUserData(data); // 更新父组件的状态
     setIsFunctionPage(userData); // 控制功能页显示与隐藏
@@ -87,8 +87,8 @@ function App() {
                 </footer>
               </>
             ) : (
-                // 从子组件获取数据
-                <Outlet context={{ handleDataFromChild }} />
+              // 从子组件获取数据
+              <Outlet context={{ handleDataFromChild }} />
             )
           ) : (
             <>
