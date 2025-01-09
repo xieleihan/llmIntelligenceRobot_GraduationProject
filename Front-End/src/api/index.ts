@@ -42,3 +42,35 @@ export const post = async (url: string, data: any = {}) => {
         throw error; // 继续抛出错误，供调用方捕获
     }
 };
+
+// 封装一个外网GET请求
+export const getOut = async (url: string, params: any = {}) => {
+    try {
+        validateParams(params);
+        const response = await instance({
+            url,
+            method: 'get',
+            params,
+        });
+        return response;
+    } catch (error) {
+        console.error(`GET 请求错误: ${url}`, error);
+        throw error; // 继续抛出错误，供调用方捕获
+    }
+};
+
+// 封装一个外网POST请求
+export const postOut = async (url: string, data: any = {}) => {
+    try {
+        validateParams(data);
+        const response = await instance({
+            url,
+            method: 'post',
+            data,
+        });
+        return response;
+    } catch (error) {
+        console.error(`POST 请求错误: ${url}`, error);
+        throw error; // 继续抛出错误，供调用方捕获
+    }
+};

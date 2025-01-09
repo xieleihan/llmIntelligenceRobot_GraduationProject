@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react"
-import './App.scss'
-import logo from "./assets/icon/peacock_flat.png"
+import { useState, useEffect } from "react";
+import './App.scss';
+import logo from "./assets/icon/peacock_flat.png";
 
 // 路由跳转
-import { Outlet,useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom";
+
+// 导入请求
+import { getUserIp } from "./api/request";
 
 function App() {
   const [isStartPage, setIsStartPage] = useState(false); // 控制启动页显示与隐藏
@@ -11,7 +14,7 @@ function App() {
   const [userData, setUserData] = useState(false); // 存储子组件传递的用户数据
 
   // 初始化导航
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // 回调函数，用于接收子组件传递的数据
   const handleDataFromChild = (data:boolean) => {
@@ -21,12 +24,22 @@ function App() {
   };
 
   useEffect(() => {
+    // 获取用户IP地址
+    getUserIp({}).then(res => {
+      let str = JSON.stringify(res);
+      let obj = JSON.parse(str);
+      let address = obj.adcode.o
+      console.warn('当前用户访问的IP地址信息:', obj.ipinfo.text);
+      console.log('当前用户位置信息:', address);
+    }).catch(err => {
+      console.log('获取用户IP地址失败:', err);
+    });
     const timer = setTimeout(() => {
-      setIsStartPage(true)
+      setIsStartPage(true);
     }, 4200)
 
     return () => {
-      clearTimeout(timer) // 清理定时器，防止组件卸载后继续更新状态
+      clearTimeout(timer); // 清理定时器，防止组件卸载后继续更新状态
     }
   }, [])
 

@@ -4,7 +4,7 @@ import '../../../style/Modules/Multifunctional/UserInfo.scss';
 import avater from '../../../assets/images/avater.png';
 
 // 导入ant design mobile组件
-import { SystemQRcodeOutline, LinkOutline } from 'antd-mobile-icons';
+import { SystemQRcodeOutline, LinkOutline, EditSOutline } from 'antd-mobile-icons';
 
 // 导入ant design mobile
 import { Divider } from 'antd-mobile'
@@ -37,9 +37,17 @@ function UserInfo() {
                 <div className="name">
                     <div className="username">
                         南秋SouthAki
+                        <div className="inputInfo">
+                            <EditSOutline />
+                            修改信息
+                        </div>
+                    </div>
+                    <div className="ipaddress">
+                        IP属地:
                     </div>
                 </div>
                 <Divider />
+                <div className="content"></div>
             </div>
         </>
     );
