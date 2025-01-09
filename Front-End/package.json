@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "amfe-flexible": "^2.2.1",
     "antd-mobile": "^5.38.1",
     "autoprefixer": "^10.4.20",

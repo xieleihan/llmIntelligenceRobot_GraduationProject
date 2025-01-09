@@ -8,10 +8,19 @@ import { Outlet, useNavigate } from "react-router-dom";
 // 导入请求
 import { getUserIp } from "./api/request";
 
+// 使用React Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from './store/index';
+import { setIpInfo } from './store/generalStore';
+
 function App() {
   const [isStartPage, setIsStartPage] = useState(false); // 控制启动页显示与隐藏
   const [isFunctionPage, setIsFunctionPage] = useState(true); // 控制功能页显示与隐藏
   const [userData, setUserData] = useState(false); // 存储子组件传递的用户数据
+
+  // 初始化Redux
+  const dispatch = useDispatch<AppDispatch>();
+  const ipInfo = useSelector((state: RootState) => state.general.ipInfo);
 
   // 初始化导航
   const navigate = useNavigate();
@@ -31,6 +40,10 @@ function App() {
       let address = obj.adcode.o
       console.warn('当前用户访问的IP地址信息:', obj.ipinfo.text);
       console.log('当前用户位置信息:', address);
+      // 更新Redux
+      dispatch(setIpInfo(obj.ipinfo.text));
+      // 我查看是否写入
+      console.log('Redux中的IP地址信息:', ipInfo);
     }).catch(err => {
       console.log('获取用户IP地址失败:', err);
     });
