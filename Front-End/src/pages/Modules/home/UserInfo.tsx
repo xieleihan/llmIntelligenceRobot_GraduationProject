@@ -43,7 +43,7 @@ function UserInfo() {
                         </div>
                     </div>
                     <div className="ipaddress">
-                        IP属地:
+                        IP属地:<span></span>
                     </div>
                 </div>
                 <Divider />
