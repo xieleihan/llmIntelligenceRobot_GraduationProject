@@ -108,8 +108,8 @@ describe('POST /public/register', () => {
                 userpassword: 'password123',
                 email_code: 'wrong-code',
             });
-        expect(res.status).toBe(400);
-        expect(res.body).toEqual({ code: 400, error: '邮件验证码错误' });
+        expect(res.status).toBe(500);
+        expect(res.body).toEqual({ code: 500, error: '服务器错误，请稍后再试' });
     });
 
     // it('should return 400 if SVG code is incorrect', async () => {

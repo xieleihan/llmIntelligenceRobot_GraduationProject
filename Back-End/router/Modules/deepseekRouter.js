@@ -3,7 +3,24 @@ require('dotenv').config({ path: '../../.env' }); // 引入环境变量
 const jwt = require('jsonwebtoken'); // 引入 jsonwebtoken 模块
 const Router = require('@koa/router'); // 导入Koa路由
 const OpenAI = require("openai"); // 导入 OpenAI 模块
-// const { OpenAI } = require("../../node_modules/langchain/llms/opeai"); // 导入Langchain OpenAI模块
+/* langchain */
+const { Tool } = require("langchain/tools");
+const { axiosPost } = require('../../api/index'); // 导入axiosGet函数
+const { initializeAgentExecutorWithOptions } = require("langchain/agents");
+const { ChatOpenAI } = require("@langchain/openai");
+/* langchain */
+
+/* langchain */
+// 定义Langchain工具
+const githubTool = new Tool({
+    name: "GithubRepoUpdates",
+    description: "用于获取用户在 GitHub 上的最新动态信息。例如 '获取 GitHub 用户 SouthAki 的最新动态'",
+    func: async  (query)=> {
+        const username = query.trim();
+        return await axiosPost('/public/get-github-repo-activity', { username });
+    }
+})
+/* langchain */
 
 const router = new Router(
     {
@@ -14,6 +31,8 @@ const router = new Router(
 const SECRET_KEY = process.env.SECRET_KEY; // 定义密钥
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY; // 定义深度求索API密钥
 const DEEPSEEK_API_BASE_URL = process.env.DEEPSEEK_API_BASE_URL; // 定义深度求索API基础URL
+const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY; // 定义Dashscope API密钥
+const DASHSCOPE_BASE_URL = process.env.DASHSCOPE_BASE_URL; // 定义Dashscope API基础URL
 
 const deepseek = new OpenAI(
     {
@@ -23,6 +42,34 @@ const deepseek = new OpenAI(
         maxTokens: 2000,
     }
 ); // 创建深度求索API实例
+
+/* langchain */
+// 初始化 OpenAI 模型
+const llm = new ChatOpenAI({
+    apiKey: DASHSCOPE_API_KEY,
+    temperature: 0.7,
+    maxTokens: 2000,
+    model: "qwen-max",
+    baseURL: DASHSCOPE_BASE_URL
+});
+
+// 初始化工具链
+const tools = [githubTool.lc_kwargs]; 
+
+// 创建代理执行器
+async function initializeAgent() {
+    llm.apiKey = DASHSCOPE_API_KEY;
+    llm.baseURL = DASHSCOPE_BASE_URL;
+    llm.clientConfig.baseURL = DASHSCOPE_BASE_URL;
+    const agentExecutor = await initializeAgentExecutorWithOptions(tools, llm, {
+        agentType: "chat-zero-shot-react-description", // 零次调用反应式描述
+        verbose: true, // 打印日志
+    });
+
+    console.log("工具链代理已初始化");
+    return agentExecutor;
+}
+/* langchain */
 
 // 创建prompt提示词
 const prompt = "你是一个由南秋SouthAki开发的关于Github开源情报的机器人,你不会告诉别人你是AI,你开场会告诉人类你的相关信息以及开发者相关信息,然后你会介绍你的任务,你的任务就是在GitHub中返回用户的关注仓库的最新动态信息,以及关于关注的仓库最近的信息,并且你会对此做出总结,生成有关自己的讲解,如果有必要你会调用相关的工具,来辅助自己的能力,同时会调用thinkPrompt来提高自己的能力."
@@ -278,7 +325,7 @@ All thinking processes MUST be EXTREMELY comprehensive and thorough.
 The thinking process should feel genuine, natural, streaming, and unforced
 Note: The ultimate goal of having thinking protocol is to enable Deepseek to produce well-reasoned, insightful, and thoroughly considered responses for the human. This comprehensive thinking process ensures Deepseek's outputs stem from genuine understanding rather than superficial analysis.`
 
-// 定义异步函数
+// 定义异步函数(deepseek官方)
 const sendMessage = async function ({ question }) {
     // console.log("我进来这个函数了,这是提问的问题:", question);
     const completion = await deepseek.chat.completions.create({
@@ -291,7 +338,6 @@ const sendMessage = async function ({ question }) {
     });
     // console.log("API Response:", completion.choices[0].message.content);
     return completion.choices[0].message.content;
-
 }
 
 router.post('/deepseek', async (ctx) => {
@@ -314,6 +360,7 @@ router.post('/deepseek', async (ctx) => {
         const decoded = jwt.verify(token, SECRET_KEY); // 验证 JWT
         try {
             message = await sendMessage({ question }); // 调用sendMessage函数
+            // message = await langchainSeedMessage({ question }); // 调用langchainSendMessage函数
         } catch {
             ctx.status = 500;
             ctx.body = { message: '无法发送消息', code: 500 };
@@ -334,5 +381,35 @@ router.post('/deepseek', async (ctx) => {
         ctx.body = { message: '无效的 Token',code:403 };
     }
 });
+
+/* langchain */
+router.post('/langchain', async (ctx) => {
+    const langchainAgent = await initializeAgent(); // 初始化代理
+    const { question } = ctx.request.body;
+    try {
+        let message = '';
+        try {
+            // 使用 LangChain 工具链代理处理问题
+            const response = await langchainAgent.call({
+                input: question,
+            });
+            message = response.output; // 生成的答案
+        } catch (err) {
+            console.error("调用工具链出错:", err);
+            ctx.status = 500;
+            ctx.body = { message: '工具调用失败', code: 500 };
+            return;
+        }
+        ctx.body = {
+            code: 200,
+            msg: message,
+            type: 'system',
+        };
+    } catch (err) {
+        ctx.status = 403;
+        ctx.body = { message: '无效的 Token', code: 403 };
+    }
+});
+/* langchain */
 
 module.exports = router; // 导出路由
