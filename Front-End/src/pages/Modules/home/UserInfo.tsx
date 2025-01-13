@@ -13,6 +13,7 @@ import { Divider } from 'antd-mobile'
 
 // 导入组件
 import ReturnBasebtn from '../../../components/Modules/base/returnBaseBtn';
+import PersonalGithubInfo from '../../../components/Modules/UserInfo/PersonalGithubInfo';
 
 // 使用React Redux
 import { useSelector } from 'react-redux';
@@ -60,7 +61,9 @@ function UserInfo() {
                     </div>
                 </div>
                 <Divider />
-                <div className="content"></div>
+                <div className="content">
+                    <PersonalGithubInfo />
+                </div>
             </div>
         </>
     );

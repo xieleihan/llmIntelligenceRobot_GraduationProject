@@ -1,1 +1,15 @@
 @import '../../base.scss';
+
+.personalGithubInfo{
+    width: 100%;
+    font-size: .4rem;
+    .title{
+        font-weight: bold;
+    }
+    .item{
+        width: 100%;
+        .img{
+            width: 100%;
+        }
+    }
+}
