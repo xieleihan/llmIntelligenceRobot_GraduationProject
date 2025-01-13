@@ -98,7 +98,7 @@ router.post('/langchain', async (ctx) => {
             // 使用 LangChain 工具链代理处理问题
             const response = await langchainAgent.call({
                 input: question,
-                agent_scratchpad: "", // 初始化为空
+                // agent_scratchpad: "", // 初始化为空
                 // tool_descriptions: tools.map((tool) => `${tool.name}: ${tool.description}`).join("\n"), // 动态注入工具描述
             });
             message = response.output; // 生成的答案

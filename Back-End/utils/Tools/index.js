@@ -52,9 +52,9 @@ async function initializeAgent() {
             Thought: [进一步的思考]
             Final Answer: [最终回答用户的问题]
         输入用户的问题：{input}
-        当前状态：{agent_scratchpad}`,
+        `,
         
-        inputVariables: ["input", "agent_scratchpad"],
+        inputVariables: ["input"],
     })
     // console.log("pt:", pt);
 
