@@ -6,6 +6,7 @@ const OpenAI = require("openai"); // 导入 OpenAI 模块
 const { initializeAgent } = require("../../utils/Tools/index"); // 导入初始化代理函数
 const { prompt } = require('../../utils/Tools/prompt'); // 导入prompt
 // const { PromptTemplate } = require("@langchain/core/prompts");
+const { githubTool } = require("../../utils/Tools/Modules/githubTool"); // 导入Github工具
 
 const router = new Router(
     {
@@ -88,6 +89,7 @@ router.post('/deepseek', async (ctx) => {
 
 /* langchain */
 router.post('/langchain', async (ctx) => {
+    const tools = [githubTool.lc_kwargs]; // 初始化工具链
     const langchainAgent = await initializeAgent(); // 初始化代理
     const { question } = ctx.request.body;
     try {
@@ -96,7 +98,8 @@ router.post('/langchain', async (ctx) => {
             // 使用 LangChain 工具链代理处理问题
             const response = await langchainAgent.call({
                 input: question,
-                agent_scratchpad: "",
+                agent_scratchpad: "", // 初始化为空
+                // tool_descriptions: tools.map((tool) => `${tool.name}: ${tool.description}`).join("\n"), // 动态注入工具描述
             });
             message = response.output; // 生成的答案
         } catch (err) {
