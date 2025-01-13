@@ -2,6 +2,8 @@ import '../../../style/Modules/Multifunctional/UserInfo.scss';
 
 // 导入头像图片
 import avater from '../../../assets/images/avater.png';
+import vip from '../../../assets/icon/VIP.svg'; // 导入VIP图标
+import vipHeightLight from '../../../assets/icon/VIP-heightlight.svg'; // 导入VIP高亮图标
 
 // 导入ant design mobile组件
 import { SystemQRcodeOutline, LinkOutline, EditSOutline } from 'antd-mobile-icons';
@@ -12,12 +14,20 @@ import { Divider } from 'antd-mobile'
 // 导入组件
 import ReturnBasebtn from '../../../components/Modules/base/returnBaseBtn';
 
+// 使用React Redux
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/index';
+
 function UserInfo() {
+    // 定义按钮配置
     const buttonConfig = {
         backgroundColor: 'rgba(0,0,0,.5)',
         goToUrlStr: '/home',
         iconColor: true,
     };
+
+    const addressInfo = useSelector((state: RootState) => state.general.addressInfo); // 获取地址信息
+
     return (
         <>
             <div className='userInfo'>
@@ -27,7 +37,10 @@ function UserInfo() {
                 <div className="background">
                     <img src="https://picsum.photos/1920/1080.webp" alt="" />
                     <div className="avater">
-                        <img src={avater} alt="" />
+                        <div className="avaterBox">
+                            <img className='avaterImg' src={avater} alt="" />
+                            <img className='vip' src={vipHeightLight} alt="" />
+                        </div>
                     </div>
                 </div>
                 <div className="qrCode">
@@ -43,7 +56,7 @@ function UserInfo() {
                         </div>
                     </div>
                     <div className="ipaddress">
-                        IP属地:<span></span>
+                        IP属地:<span>{addressInfo}</span>
                     </div>
                 </div>
                 <Divider />
