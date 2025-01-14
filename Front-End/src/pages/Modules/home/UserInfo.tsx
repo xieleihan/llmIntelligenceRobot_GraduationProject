@@ -9,17 +9,24 @@ import vipHeightLight from '../../../assets/icon/VIP-heightlight.svg'; // 导入
 import { SystemQRcodeOutline, LinkOutline, EditSOutline } from 'antd-mobile-icons';
 
 // 导入ant design mobile
-import { Divider } from 'antd-mobile'
+import { Divider, Popup, Modal } from 'antd-mobile'
 
 // 导入组件
 import ReturnBasebtn from '../../../components/Modules/base/returnBaseBtn';
 import PersonalGithubInfo from '../../../components/Modules/UserInfo/PersonalGithubInfo';
+
+// 导入React
+import { useState } from 'react';
 
 // 使用React Redux
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/index';
 
 function UserInfo() {
+    // 定义React变量
+    const [popBottomUp, setPopBottomUp] = useState(false); // 定义底部弹出框
+    // const [popCenterUp, setPopCenterUp] = useState(false); // 定义中部弹出框
+
     // 定义按钮配置
     const buttonConfig = {
         backgroundColor: 'rgba(0,0,0,.5)',
@@ -32,6 +39,20 @@ function UserInfo() {
     return (
         <>
             <div className='userInfo'>
+                {/* 分享弹出框 */}
+                <Popup
+                    visible={popBottomUp}
+                    onMaskClick={() => setPopBottomUp(false)}
+                    onClose={() => setPopBottomUp(false)}
+                    position='bottom'
+                    showCloseButton
+                    bodyStyle={{
+                        height: '30dvh',
+                        borderTopLeftRadius: '8px',
+                        borderTopRightRadius: '8px',
+                    }}
+                ></Popup>
+                
                 <ReturnBasebtn
                     buttonConfig={buttonConfig}
                 />
@@ -45,8 +66,24 @@ function UserInfo() {
                     </div>
                 </div>
                 <div className="qrCode">
-                    <LinkOutline />
-                    <SystemQRcodeOutline />
+                    <LinkOutline onClick={
+                        () => {
+                            setPopBottomUp(true)
+                        }
+                    } />
+                    <SystemQRcodeOutline
+                        onClick={
+                            () => {
+                                {/* 二维码弹出框 */ }
+                                // setPopCenterUp(true)
+                                Modal.show({
+                                    content: '',
+                                    closeOnMaskClick: true,
+                                    showCloseButton: true,
+                                })
+                            }
+                        }
+                    />
                 </div>
                 <div className="name">
                     <div className="username">
