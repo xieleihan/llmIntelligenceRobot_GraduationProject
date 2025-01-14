@@ -59,4 +59,14 @@ html {
     font-size: 0.3rem;
 }
 
+input{
+    outline: none;
+    border: none;
+}
+
+button{
+    outline: none;
+    border: none;
+}
+
 /* end */

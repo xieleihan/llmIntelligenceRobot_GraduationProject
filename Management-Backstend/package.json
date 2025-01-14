@@ -12,6 +12,7 @@
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.20",
     "element-plus": "^2.9.1",
+    "pinia": "^2.3.0",
     "postcss-pxtorem": "^5.1.1",
     "sass-embedded": "^1.83.0",
     "scss-loader": "^0.0.1",
