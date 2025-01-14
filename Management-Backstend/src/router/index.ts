@@ -18,7 +18,19 @@ const routes: any = [
     {
         path: '/home',
         name: 'Home',
+        meta: {
+            breadcrumb:'首页'
+        },
         component: () => import('../views/HomePages.vue'), // 主页
+        children: [
+            {
+                path: 'systemInfo',
+                component: () => import('../views/Modules/home/SysteminfoPages.vue'), // 系统信息
+                meta: {
+                    breadcrumb:'系统信息'
+                },
+            }
+        ]
     }
     
 ]

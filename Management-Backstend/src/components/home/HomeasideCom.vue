@@ -1,40 +1,46 @@
 <template>
     <div class="homeAside">
-        <el-collapse
-            class="collapse"
-            v-model="activeName"
-            accordion
-        >
-            <el-collapse-item
-                class="collapseItem"
-                title="系统"
-                name="1"
-            >
-                
-            </el-collapse-item>
-            <el-collapse-item
-                class="collapseItem"
-                title="用户管理"
-                name="2"
-            >
-
-            </el-collapse-item>
-            <el-collapse-item
-                class="collapseItem"
-                title="关于我们"
-                name="3"
-            >
-
-            </el-collapse-item>
-
-        </el-collapse>
+        <el-row>
+            <el-col :span="24">
+                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
+                    @close="handleClose">
+                    <el-sub-menu index="1">
+                        <template #title>
+                            <span>系统</span>
+                        </template>
+                        <el-menu-item index="1-1">
+                            <router-link to="/home/systemInfo">系统总览</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-2">服务器状态</el-menu-item>
+                        <el-menu-item index="1-3">日志管理</el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="2">
+                        <template #title>
+                            <span>用户管理</span>
+                        </template>
+                        <el-menu-item index="2-1">用户信息</el-menu-item>
+                    </el-sub-menu>
+                    <el-sub-menu index="3">
+                        <template #title>
+                            <span>关于</span>
+                        </template>
+                        <el-menu-item index="3-1">联系我们</el-menu-item>
+                        <el-menu-item index="3-2">项目介绍</el-menu-item>
+                    </el-sub-menu>
+                </el-menu>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 
-const activeName = ref('1')
+const handleOpen = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
 </script>
 
 <style scoped lang="scss">
@@ -46,23 +52,62 @@ const activeName = ref('1')
     border-radius: .05rem;
     background-color: white;
     font-size: .01rem;
+    border-radius: .05rem;
+    overflow: hidden;
 
-    .collapse {
+    ::v-deep(.el-menu) {
         width: 100%;
-        height: 100%;
 
-        ::v-deep(.collapseItem) {
-            .el-collapse-item__header {
-                padding-left: .1rem;
-                height: .5rem; // 设置标题高度
-                font-size: 0.1rem; // 设置标题字体大小
+        .el-sub-menu,
+        .el-menu-item-group {
+            width: 100%;
+
+            .el-menu-item-group__title {
+                padding: .05rem .05rem;
+                width: 100%;
+                height: .5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: .1rem;
+                color: black;
             }
 
-            .el-collapse-item__content {
-                padding: 0.01rem; // 设置内容区域的内边距
-                font-size: 0.1rem; // 设置内容字体大小
+            .el-sub-menu__title {
+                padding: .05rem .2rem;
+                width: 100%;
+                height: .5rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span {
+                    font-size: .1rem;
+                    line-height: .5rem;
+                }
+
+                .el-icon {
+                    width: .3rem;
+                    height: .3rem;
+                    font-size: .1rem;
+                    line-height: .5rem;
+                }
+
+                .el-sub-menu__icon-arrow {
+                    right: .01rem;
+                }
+            }
+
+            .el-menu-item {
+                width: 100%;
+                height: .5rem;
+                padding: .05rem .05rem;
+                font-size: .08rem;
+                line-height: .5rem;
+                padding-left: .3rem;
             }
         }
     }
+
 }
 </style>

@@ -5,12 +5,16 @@
                 <HometopCom />
             </el-header>
             <el-container class="main">
-                <el-aside class="aside" width="200px">
+                <el-aside class="aside" width="1.5rem">
                     <HomeasideCom />
                 </el-aside>
-                <el-main class="content">main</el-main>
+                <el-main class="content">
+                    <HomecontentCom />
+                </el-main>
             </el-container>
-            <el-footer class="footer" height=".3rem">Footer</el-footer>
+            <el-footer class="footer" height=".3rem">
+                <HomefooterCom />
+            </el-footer>
         </div>
     </div>
 </template>
@@ -19,6 +23,8 @@
 // 导入组件
 import HometopCom from '../components/home/HometopCom.vue';
 import HomeasideCom from '../components/home/HomeasideCom.vue';
+import HomecontentCom from '../components/home/HomecontentCom.vue';
+import HomefooterCom from '../components/home/HomefooterCom.vue';
 
 
 </script>
@@ -43,7 +49,8 @@ import HomeasideCom from '../components/home/HomeasideCom.vue';
                     padding: .05rem .05rem;
                 }
                 .content{
-                    padding: 0;
+                    padding: .03rem;
+
                 }
 
             }
