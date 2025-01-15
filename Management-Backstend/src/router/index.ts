@@ -73,6 +73,14 @@ const routes: any = [
                     breadcrumb: '用户信息',
                     icon: logo
                 }
+            },
+            {
+                path: 'sendEmail',
+                component: () => import('../views/Modules/User/SenduseremailPages.vue'), // 发送邮件
+                meta: {
+                    breadcrumb: '发送邮件',
+                    icon: logo
+                }
             }
         ]
     }

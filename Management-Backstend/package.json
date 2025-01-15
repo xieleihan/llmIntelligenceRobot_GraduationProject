@@ -4,14 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 9008",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "amfe-flexible": "^2.2.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
+    "echarts": "^5.6.0",
     "element-plus": "^2.9.1",
     "pinia": "^2.3.0",
     "postcss-pxtorem": "^5.1.1",

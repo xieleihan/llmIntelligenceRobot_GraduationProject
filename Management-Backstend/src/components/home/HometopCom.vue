@@ -1,11 +1,7 @@
 <template>
     <div class="homeTopCom">
         <div class="left">
-            <img
-                src="../../assets/images/peacock_flat.png"
-                alt="logo"
-                class="img"
-            >
+            <img src="../../assets/images/peacock_flat.png" alt="logo" class="img">
             <span>SouthAki的LLM情报机器人管理后台</span>
         </div>
         <div class="right">
@@ -15,47 +11,33 @@
             <div class="avaterBox">
                 <el-dropdown trigger="click">
                     <div class="avater">
-                        <img
-                            src="../../assets/images/avater.jpg"
-                            alt=""
-                        >
+                        <img src="../../assets/images/avater.jpg" alt="">
                         <span>Admin,{{ timeWelcomeStr }}好</span>
                     </div>
                     <template #dropdown>
                         <el-dropdown-menu>
-                            <el-dropdown-item>Action 1</el-dropdown-item>
                             <el-dropdown-item>
-                                Action 2
+                                个人信息
                             </el-dropdown-item>
-                            
+                            <el-dropdown-item>
+                                修改密码
+                            </el-dropdown-item>
+
                         </el-dropdown-menu>
                     </template>
                 </el-dropdown>
             </div>
-            <div
-                class="power"
-                @click="centerDialogVisible = true"
-            >
-                <img
-                    src="../../assets/icon/power.svg"
-                    alt=""
-                >
+            <div class="power" @click="centerDialogVisible = true">
+                <img src="../../assets/icon/power.svg" alt="">
                 <span>退出系统</span>
             </div>
         </div>
-        <el-dialog
-            v-model="centerDialogVisible"
-            title="Warning"
-            align-center
-        >
+        <el-dialog v-model="centerDialogVisible" title="Warning" align-center>
             <span>你正在退出系统中,退出后需要进行重新登录,请确认是否继续操作</span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false">取消</el-button>
-                    <el-button
-                        type="primary"
-                        @click="centerDialogVisible = false"
-                    >
+                    <el-button type="primary" @click="centerDialogVisible = false">
                         确认
                     </el-button>
                 </div>
@@ -126,29 +108,34 @@ onUnmounted(() => {
             cursor: default;
         }
 
-        .avaterBox{
+        .avaterBox {
             height: 100%;
             display: flex;
             align-items: center;
             margin-right: .2rem;
-            .el-dropdown{
+
+            .el-dropdown {
+
                 height: 100%;
                 width: 1rem;
+
             }
-            img{
+
+            img {
                 height: 70%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 border: .01px solid #ccc;
                 margin-right: 0.03rem;
             }
-            
-            .avater{
+
+            .avater {
                 width: 100%;
                 height: 100%;
                 display: flex;
                 align-items: center;
-                span{
+
+                span {
                     font-size: .1rem;
                     color: white;
                 }
@@ -159,6 +146,7 @@ onUnmounted(() => {
             height: 100%;
             display: flex;
             align-items: center;
+
             img {
                 width: .15rem;
                 height: .15rem;
@@ -167,21 +155,24 @@ onUnmounted(() => {
         }
     }
 
-    ::v-deep(.el-dialog){
+    ::v-deep(.el-dialog) {
         width: 3rem;
         height: 1.5rem;
         padding: .1rem;
-        .el-dialog__header{
+
+        .el-dialog__header {
             padding: 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
             height: .3rem;
-            .el-dialog__title{
+
+            .el-dialog__title {
                 font-size: .2rem;
             }
-            .el-dialog__headerbtn{
+
+            .el-dialog__headerbtn {
                 width: .5rem;
                 height: .5rem;
                 display: flex;
@@ -190,27 +181,43 @@ onUnmounted(() => {
                 line-height: .5rem;
             }
         }
-        .el-dialog__body{
+
+        .el-dialog__body {
             padding: .1rem;
             font-size: .1rem;
         }
-        .el-dialog__footer{
+
+        .el-dialog__footer {
             padding-top: .3rem;
-            .dialog-footer{
-                .el-button{
+
+            .dialog-footer {
+                .el-button {
                     width: .6rem;
                     height: .2rem;
                     margin-right: .01rem;
                     padding: 0;
-                    &:last-child{
+
+                    &:last-child {
                         margin-left: .03rem;
                     }
-                    span{
+
+                    span {
                         font-size: .1rem;
                     }
                 }
             }
         }
     }
+}
+::v-deep(.el-dropdown-menu__item) {
+    width: 1rem;
+    height: .3rem;
+    text-align: center;
+    line-height: .3rem;
+    font-size: .1rem;
+    padding: 0 .1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>

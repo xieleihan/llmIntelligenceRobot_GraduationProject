@@ -13,10 +13,14 @@ import router from './router';
 import 'amfe-flexible';
 // 导入存储库
 import store from './store/index';
+// 引入Echarts
+import * as echarts from 'echarts'
 
-// createApp(App).mount('#app')
 const app = createApp(App);
+// createApp(App).mount('#app')
 
+// echarts挂载到全局
+app.config.globalProperties.$echarts = echarts
 // 使用element-plus
 app.use(ElementPlus);
 // 使用路由

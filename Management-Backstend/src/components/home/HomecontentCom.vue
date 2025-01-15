@@ -9,17 +9,31 @@
             </el-breadcrumb>
         </div>
         <div class="bottom">
-            <router-view />
+            <!-- 默认视图 -->
+            <defaultHomepages v-if="isOpenRouterView" />
+            <!-- 路由出口 -->
+            <router-view v-if="!isOpenRouterView" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+// 导入Vue
 import { computed } from 'vue';
+// 导入Vue-Router
 import { useRoute } from 'vue-router';
+
+// 导入组件
+import defaultHomepages from '../../views/Modules/defaultHomepages.vue';
 
 // 假设 routes 的 meta 定义了面包屑的结构
 const route = useRoute();
+
+// 读取url是否在home页面,如果路径在home页面,改变isOpenRouterView的布尔值
+const isOpenRouterView = computed(() => {
+    // console.log("这是判断当前路径是否在/home上", route.path === '/home')
+    return route.path === '/home';
+});
 
 const breadcrumbList = computed(() => {
     const matchedRoutes = route.matched.filter(item => item.meta && item.meta.breadcrumb);
@@ -53,6 +67,7 @@ const breadcrumbList = computed(() => {
         .bottom{
             width: 100%;
             height: calc(100% - .3rem);
+            border-top: .01px solid #ccc;
         }
     }
 </style>

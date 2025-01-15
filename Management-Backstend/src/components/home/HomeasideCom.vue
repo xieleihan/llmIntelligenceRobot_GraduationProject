@@ -2,16 +2,11 @@
     <div class="homeAside">
         <el-row>
             <el-col :span="24">
-                <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    unique-opened
-                    @open="handleOpen"
-                    @close="handleClose"
-                >
+                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
+                    @close="handleClose">
                     <el-sub-menu index="1">
                         <template #title>
-                            <span>系统</span>
+                            <router-link class="homeSystem" to="/home">系统</router-link>
                         </template>
                         <el-menu-item index="1-1">
                             <router-link to="/home/systemInfo">系统总览</router-link>
@@ -29,6 +24,9 @@
                         </template>
                         <el-menu-item index="2-1">
                             <router-link to="/home/userInfo">用户信息</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="2-2">
+                            <router-link to="/home/sendEmail">发送邮件</router-link>
                         </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
@@ -77,7 +75,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         .el-sub-menu,
         .el-menu-item-group {
             width: 100%;
-
+            .homeSystem,
             .el-menu-item-group__title {
                 padding: .05rem .05rem;
                 width: 100%;
