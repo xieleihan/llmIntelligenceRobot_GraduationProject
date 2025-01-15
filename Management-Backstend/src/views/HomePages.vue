@@ -40,7 +40,7 @@ import HomefooterCom from '../components/home/HomefooterCom.vue';
             width: 100%;
             height: 100%;
             .header{
-                background-color: $googleBlue;
+                background-color: #409EFF;
             }
             .main{
                 height: calc(100% - .7rem);

@@ -1,3 +1,4 @@
+// 格式化时间
 function parseTime(time: string | number | Date, cFormat: string = '{y}-{m}-{d} {h}:{i}:{s}'): string | null {
     if (arguments.length === 0 || !time) {
         return null
@@ -48,6 +49,30 @@ function parseTime(time: string | number | Date, cFormat: string = '{y}-{m}-{d} 
     return time_str;
 }
 
+// 返回当前时间的早上下午晚上
+function getNowTime() {
+    const now = new Date();
+    const hour = now.getHours();
+    if (hour < 6) {
+        return '凌晨';
+    } else if (hour < 9) {
+        return '早上';
+    } else if (hour < 12) {
+        return '上午';
+    } else if (hour < 14) {
+        return '中午';
+    } else if (hour < 17) {
+        return '下午';
+    } else if (hour < 19) {
+        return '傍晚';
+    } else if (hour < 22) {
+        return '晚上';
+    } else {
+        return '深夜';
+    }
+}
+
 export {
-    parseTime
+    parseTime,
+    getNowTime
 };

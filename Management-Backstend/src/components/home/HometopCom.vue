@@ -1,24 +1,61 @@
 <template>
     <div class="homeTopCom">
         <div class="left">
-            <img src="../../assets/images/peacock_flat.png" alt="logo" class="img">
+            <img
+                src="../../assets/images/peacock_flat.png"
+                alt="logo"
+                class="img"
+            >
             <span>SouthAki的LLM情报机器人管理后台</span>
         </div>
         <div class="right">
             <div class="time">
                 {{ time }}
             </div>
-            <div class="power" @click="centerDialogVisible = true">
-                <img src="../../assets/icon/power.svg" alt="">
+            <div class="avaterBox">
+                <el-dropdown trigger="click">
+                    <div class="avater">
+                        <img
+                            src="../../assets/images/avater.jpg"
+                            alt=""
+                        >
+                        <span>Admin,{{ timeWelcomeStr }}好</span>
+                    </div>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>Action 1</el-dropdown-item>
+                            <el-dropdown-item>
+                                Action 2
+                            </el-dropdown-item>
+                            
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+            </div>
+            <div
+                class="power"
+                @click="centerDialogVisible = true"
+            >
+                <img
+                    src="../../assets/icon/power.svg"
+                    alt=""
+                >
                 <span>退出系统</span>
             </div>
         </div>
-        <el-dialog v-model="centerDialogVisible" title="Warning" align-center>
+        <el-dialog
+            v-model="centerDialogVisible"
+            title="Warning"
+            align-center
+        >
             <span>你正在退出系统中,退出后需要进行重新登录,请确认是否继续操作</span>
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="centerDialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="centerDialogVisible = false">
+                    <el-button
+                        type="primary"
+                        @click="centerDialogVisible = false"
+                    >
                         确认
                     </el-button>
                 </div>
@@ -29,19 +66,25 @@
 
 <script setup lang="ts">
 // 导入工具
-import { parseTime } from '../../utils/index';
+import { parseTime, getNowTime } from '../../utils/index';
 
 // 定义Vue
-import { onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 // 定义Vue变量
 const time = ref(parseTime(new Date(), '{y}-{m}-{d} {h}:{i}:{s} 星期{a}'))
+const timeWelcomeStr = ref('')
 const centerDialogVisible = ref(false)
 
 // 定义定时器
 const intervalId = setInterval(() => {
     time.value = parseTime(new Date(), '{y}-{m}-{d} {h}:{i}:{s} 星期{a}')
 }, 1000)
+
+// 生命周期组件加载时
+onMounted(() => {
+    timeWelcomeStr.value = getNowTime()
+})
 
 // 注销定时器
 onUnmounted(() => {
@@ -79,7 +122,37 @@ onUnmounted(() => {
             height: 100%;
             display: flex;
             align-items: center;
-            margin-right: .3rem;
+            margin-right: .1rem;
+            cursor: default;
+        }
+
+        .avaterBox{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin-right: .2rem;
+            .el-dropdown{
+                height: 100%;
+                width: 1rem;
+            }
+            img{
+                height: 70%;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                border: .01px solid #ccc;
+                margin-right: 0.03rem;
+            }
+            
+            .avater{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                span{
+                    font-size: .1rem;
+                    color: white;
+                }
+            }
         }
 
         .power {

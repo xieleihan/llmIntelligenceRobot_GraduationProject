@@ -2,8 +2,13 @@
     <div class="homeAside">
         <el-row>
             <el-col :span="24">
-                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
-                    @close="handleClose">
+                <el-menu
+                    default-active="2"
+                    class="el-menu-vertical-demo"
+                    unique-opened
+                    @open="handleOpen"
+                    @close="handleClose"
+                >
                     <el-sub-menu index="1">
                         <template #title>
                             <span>系统</span>
@@ -11,21 +16,31 @@
                         <el-menu-item index="1-1">
                             <router-link to="/home/systemInfo">系统总览</router-link>
                         </el-menu-item>
-                        <el-menu-item index="1-2">服务器状态</el-menu-item>
-                        <el-menu-item index="1-3">日志管理</el-menu-item>
+                        <el-menu-item index="1-2">
+                            <router-link to="/home/serverStatus">服务器状态</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-3">
+                            <router-link to="/home/systemLog">日志管理</router-link>
+                        </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="2">
                         <template #title>
                             <span>用户管理</span>
                         </template>
-                        <el-menu-item index="2-1">用户信息</el-menu-item>
+                        <el-menu-item index="2-1">
+                            <router-link to="/home/userInfo">用户信息</router-link>
+                        </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
                         <template #title>
                             <span>关于</span>
                         </template>
-                        <el-menu-item index="3-1">联系我们</el-menu-item>
-                        <el-menu-item index="3-2">项目介绍</el-menu-item>
+                        <el-menu-item index="3-1">
+                            <router-link to="/home/contactus">联系我们</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="3-2">
+                            <router-link to="/home/about">项目介绍</router-link>
+                        </el-menu-item>
                     </el-sub-menu>
                 </el-menu>
             </el-col>
@@ -55,6 +70,7 @@ const handleClose = (key: string, keyPath: string[]) => {
     border-radius: .05rem;
     overflow: hidden;
 
+    // ::v-deep是深度监听，可以让样式穿透到子组件
     ::v-deep(.el-menu) {
         width: 100%;
 
@@ -103,8 +119,12 @@ const handleClose = (key: string, keyPath: string[]) => {
                 height: .5rem;
                 padding: .05rem .05rem;
                 font-size: .08rem;
-                line-height: .5rem;
+                line-height: .4rem;
                 padding-left: .3rem;
+                a{
+                    width: 100%;
+                    height: 100%;
+                }
             }
         }
     }
