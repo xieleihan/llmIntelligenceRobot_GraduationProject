@@ -14,6 +14,7 @@
             <!-- 路由出口 -->
             <router-view v-if="!isOpenRouterView" />
         </div>
+        <CustomerBtn />
     </div>
 </template>
 
@@ -25,6 +26,7 @@ import { useRoute } from 'vue-router';
 
 // 导入组件
 import defaultHomepages from '../../views/Modules/defaultHomepages.vue';
+import CustomerBtn from '../base/CustomerBtn.vue';
 
 // 假设 routes 的 meta 定义了面包屑的结构
 const route = useRoute();
@@ -48,6 +50,7 @@ const breadcrumbList = computed(() => {
     .HomecontentCom {
         width: 100%;
         height: 100%;
+        position: relative;
         .top{
             width: 100%;
             height: .3rem;
