@@ -21,11 +21,43 @@ const Store = useGeneralStore();
 // 将通用信息的state转换为ref
 const { form } = storeToRefs(Store);
 
+interface formItem {
+  ipinfo: {
+    type: string,
+    text: string,
+    cnip: string,
+  },
+  ipdata: {
+    info1: string,
+    info2: string,
+    info3: string,
+    isp: string,
+  },
+  adcode: {
+    o: string,
+    p: string,
+    c: string,
+    n: string,
+    r: string,
+    a: string,
+    i: boolean,
+  }
+}
+
 // 获取用户ip
 onMounted(() => {
   getUserIp({}).then(res => {
     console.log(res);
-    Store.setForm(res.data);
+    const formData: formItem = {
+      // @ts-ignore
+      ipinfo: res.ipinfo,
+      // @ts-ignore
+      ipdata: res.ipdata,
+      // @ts-ignore
+      adcode: res.adcode
+    };
+    // 将获取到的数据存储到pinia中
+    Store.setForm(formData);
     console.log("pinia存储的数据",form.value);
   });
 });

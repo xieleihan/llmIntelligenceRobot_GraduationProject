@@ -1,77 +1,26 @@
 <template>
     <div class="SysteminfoPages">
-        <div id="china-map" class="chinaMap"></div>
-        
+        <div class="sTop">
+            <div class="sTop-left">
+                <p class="mapTitle">全国用户访问情况图</p>
+                <ChinaMap class="chinaMap" :list="dataList" />
+            </div>
+            <div class="sTop-right">
+                <div class="top">
+                    <TableMap :list="dataList" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { china } from '../../../utils/china.ts';
-import * as echarts from 'echarts';
-import { onMounted } from 'vue';
+// 导入组件
+import ChinaMap from '../../../components/System/chinaMap.vue';
+import TableMap from '../../../components/System/TableMap.vue';
 
 function randomValue() {
     return Math.round(Math.random() * 1000);
-}
-
-function renderMap() {
-    const chartDom = document.getElementById('china-map');
-    const myChart = echarts.init(chartDom);
-
-    // @ts-ignore
-    echarts.registerMap('china', china);
-
-    const option = {
-        tooltip: {
-            formatter: (params:any) => {
-                return `${params.seriesName}<br />${params.name}：${params.value || 0}`;
-            },
-        },
-        visualMap: {
-            min: 0,
-            max: 1500,
-            left: 'left',
-            top: 'bottom',
-            text: ['高', '低'],
-            inRange: {
-                color: ['#fbf8f3', '#94d2a5'],
-            },
-            show: true,
-        },
-        geo: {
-            map: 'china',
-            roam: false,
-            zoom: 1.23,
-            label: {
-                show: true,
-                fontSize: 10,
-                color: 'rgba(0,0,0,0.7)',
-            },
-            itemStyle: {
-                normal: {
-                    borderColor: 'rgba(0, 0, 0, 0.2)',
-                },
-                emphasis: {
-                    areaColor: 'tomato',
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 0,
-                    shadowBlur: 20,
-                    borderWidth: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)',
-                },
-            },
-        },
-        series: [
-            {
-                name: '信息量',
-                type: 'map',
-                geoIndex: 0,
-                data: dataList,
-            },
-        ],
-    };
-
-    myChart.setOption(option);
 }
 
 const dataList = [
@@ -112,18 +61,40 @@ const dataList = [
     { name: '澳门', value: randomValue() },
 ]
 
-onMounted(() => {
-    renderMap();
-})
+
 </script>
 
 <style scoped lang="scss">
-    .SysteminfoPages{
-        width: 100%;
-        height: 100%;
-        .chinaMap{
-            width: 50%;
-            height: 100%;
+.SysteminfoPages {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+
+    .sTop {
+        display: flex;
+
+        .sTop-left {
+            width: 3.5rem;
+            height: fit-content;
+            margin-top: .1rem;
+
+            .mapTitle {
+                text-align: center;
+                font-size: .2rem;
+                font-weight: bold;
+                margin-bottom: .05rem;
+                color: #606266;
+            }
+        }
+
+        .sTop-right {
+            width: calc(100% - 3.5rem);
+            height: 3.45rem;
+            .top{
+                height: 2rem;
+                width: 100%;
+            }
         }
     }
+}
 </style>

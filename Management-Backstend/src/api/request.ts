@@ -7,8 +7,8 @@ export const sendMsg = function (data: any) {
 /**
  * 获取用户IP
  * @param {string} params
- * @returns res.data.ip
+ * @returns res.ip
  */
-export const getUserIp = function (params: any) {
+export const getUserIp = function (params: any){
     return getOut('https://api.vore.top/api/IPdata', params);
 }
