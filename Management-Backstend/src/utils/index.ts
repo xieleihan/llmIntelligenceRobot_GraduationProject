@@ -72,7 +72,65 @@ function getNowTime() {
     }
 }
 
+/**
+ * 防抖函数(实时性高的,在n秒内执行该事件,但是在n秒重复触发,则重新计时)
+ * @param {Function} func
+ * @param {number} wait
+ * @param {boolean} immediate
+ * @return { Function } 防抖后的结果
+ */
+function debounce<T extends (...args: any[]) => any>(
+    func: T,
+    wait: number,
+    immediate: boolean = false
+): (...args: Parameters<T>) => ReturnType<T> | undefined {
+    let timeout: ReturnType<typeof setTimeout> | null = null;
+    let context: any;
+    let args: Parameters<T>;
+    let timestamp: number;
+    let result: ReturnType<T> | undefined;
+
+    const later = () => {
+        const last = Date.now() - timestamp;
+
+        if (last < wait && last > 0) {
+            timeout = setTimeout(later, wait - last);
+        } else {
+            timeout = null;
+
+            if (!immediate) {
+                result = func.apply(context, args);
+                if (!timeout) {
+                    context = null;
+                    args = null!;
+                }
+            }
+        }
+    };
+
+    return function (this: any, ...newArgs: Parameters<T>) {
+        context = this;
+        args = newArgs;
+        timestamp = Date.now();
+        const callNow = immediate && !timeout;
+
+        if (!timeout) {
+            timeout = setTimeout(later, wait);
+        }
+
+        if (callNow) {
+            result = func.apply(context, args);
+            context = null;
+            args = null!;
+        }
+
+        return result;
+    };
+}
+
+
 export {
     parseTime,
-    getNowTime
+    getNowTime,
+    debounce
 };

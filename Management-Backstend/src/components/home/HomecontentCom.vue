@@ -51,6 +51,7 @@ const breadcrumbList = computed(() => {
         width: 100%;
         height: 100%;
         position: relative;
+        
         .top{
             width: 100%;
             height: .3rem;
