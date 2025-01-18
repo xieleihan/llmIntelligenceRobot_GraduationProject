@@ -2,7 +2,7 @@
     <div class="homeTopCom">
         <div class="left">
             <img src="../../assets/images/peacock_flat.png" alt="logo" class="img">
-            <span>SouthAki的LLM情报机器人管理后台</span>
+            <span><span class="signature">SouthAki</span>的LLM情报机器人管理后台</span>
         </div>
         <div class="right">
             <div class="time">
@@ -75,6 +75,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@import '../../style/base.scss';
 .homeTopCom {
     width: 100%;
     height: 100%;
@@ -92,6 +93,14 @@ onUnmounted(() => {
             height: 70%;
             aspect-ratio: 1/1;
             margin-right: .08rem;
+        }
+
+        span{
+            font-weight: bold;
+            font-size: .13rem;
+            .signature{
+                font-family: 'signature';
+            }
         }
     }
 

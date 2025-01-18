@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 9008",
+    "dev": "vite --port 5173",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
   },

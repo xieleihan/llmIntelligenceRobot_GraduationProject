@@ -29,7 +29,9 @@ function isOpenCustomer() {
         // 添加样式函数
         const expand = () => {
             btn.classList.add('expanded')
-            isDisplayIcon.value = false;
+            setTimeout(() => {
+                isDisplayIcon.value = false;
+            }, 1000);
         };
         const collapse = () => {
             btn.classList.remove('expanded')
@@ -69,6 +71,7 @@ function isOpenCustomer() {
     border-radius: 50%;
     cursor: pointer;
     transition: all .5s;
+    overflow: hidden;
 
     &:hover {
         background-color: #f5f5f5;
@@ -77,8 +80,8 @@ function isOpenCustomer() {
 
     &.expanded {
         width: 2.3rem;
-        height: 4rem;
-        border-radius: .01rem;
+        height: 3rem;
+        border-radius: .1rem;
         cursor: default;
     }
 

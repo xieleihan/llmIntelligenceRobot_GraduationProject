@@ -53,7 +53,7 @@ app.use(cors({
 }));
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter,superAdminRouter } = require('./router/index');
 
 // 使用路由
 app.use(router.routes());
@@ -69,6 +69,7 @@ app.use(testGet.routes()); // 代理请求路由
 app.use(deepseekRouter.routes()); // 深度求索路由
 app.use(githubRouter.routes()); // github路由
 app.use(getServerStateRouter.routes()); // 服务器状态路由
+app.use(superAdminRouter.routes()); // 超级管理员路由
 
 // 静态资源分发
 app.use(require('koa-static')(__dirname + '/public'));
