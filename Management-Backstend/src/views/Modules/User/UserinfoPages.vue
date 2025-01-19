@@ -3,19 +3,33 @@
         <div class="top"></div>
         <div class="main">
             <el-row class="tableBox">
-                <el-col :span="24">
-                    <UserinfoTable />
+                <el-col class="tableBox" :span="24">
+                    <UserinfoTable @table-totel="getSum" :current="sendNumber" />
                 </el-col>
             </el-row>
         </div>
         <div class="bottom">
-            <el-pagination size="small" background layout="prev, pager, next" :total="10" class="mt-4" />
+            <el-pagination size="small" background layout="prev, pager, next" :total="paginationTotel" class="mt-4"
+                @current-change="sendFiter" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import UserinfoTable from '../../../components/System/UserinfoTable.vue';
+
+// 定义Vue变量
+const paginationTotel = ref(0);
+const sendNumber = ref(1);
+
+const getSum = (sum: number) => {
+    paginationTotel.value = sum;
+};
+
+function sendFiter(currentPage: number) {
+    sendNumber.value = currentPage;
+}
 </script>
 
 <style scoped lang="scss">

@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in dataList as DataItem[]" :key="index">
+            <tr v-for="(item, index) in paginatedData as DataItem[]" :key="index">
                 <td>{{ item.id }}</td>
                 <td>{{ item.username }}</td>
                 <td>{{ item.usergithub }}</td>
@@ -21,13 +21,28 @@
                 <td>{{ item.useraddress }}</td>
                 <td>{{ item.userregistertime }}</td>
                 <td>{{ item.useruuid }}</td>
+                <td>
+                    <div class="functionBox">
+                        <el-button type="primary">编辑</el-button>
+                        <el-button type="danger">删除</el-button>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import { ref, defineEmits, defineProps, computed } from 'vue';
+
+const emit = defineEmits(['tableTotel'])
+
+const props = defineProps({
+    current: {
+        type: Number,
+        required: true
+    }
+})
 
 interface DataItem {
     id: number;
@@ -49,7 +64,136 @@ const dataList = ref<DataItem[]>([
         userregistertime: '2021-10-10',
         useruuid: '1234535436546436542564664646464643',
     },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+    
 ]);
+
+let sum = 0
+sum = dataList.value.length - 1
+emit('tableTotel', sum)
+
+const paginatedData = computed(() => {
+    const start = (props.current - 1) * 10;
+    const end = start + 10;
+    return dataList.value.slice(start, end);
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -58,10 +202,10 @@ const dataList = ref<DataItem[]>([
     height: 100%;
     display: block;
     position: relative;
-    border: .01px solid rgb(221.7, 222.6, 224.4);
+    // border: .01px solid rgb(221.7, 222.6, 224.4);
     margin-top: .001rem;
-    border-radius: .1rem;
-    overflow: hidden;
+    // border-radius: .1rem;
+    // overflow: hidden;
 
     thead {
         width: 100%;
@@ -129,6 +273,7 @@ const dataList = ref<DataItem[]>([
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
+                padding: 0 .1rem;
 
                 .functionBox {
                     display: flex;
