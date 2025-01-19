@@ -30,6 +30,7 @@
                                 v-model="inputPassword"
                                 placeholder="请输入密码"
                                 class="input"
+                                @keyup.enter="inputEnter($event)"
                             />
                             <img
                                 :src="isOpenPswHide"
@@ -38,7 +39,7 @@
                             >
                         </div>
                     </div>
-                    <button class="login">登录</button>
+                    <button class="login" @click="login">登录</button>
                 </div>
             </div>
         </div>
@@ -46,12 +47,24 @@
 </template>
 
 <script setup lang="ts">
+// 导入Vue
 import { ref } from 'vue'
+// 导入工具
 import getRandomNumber from '../utils/getRandomNumber'
+import { setCookie } from '../utils'
 
 // 导入图片
 import displayPsw from '../assets/icon/displayPsw.svg'
 import noDisplayPsw from '../assets/icon/noDisplayPsw.svg'
+
+// 导入网络请求
+import { adminLogin } from '../api/request';
+
+// 导入Vue-router
+import { useRouter } from 'vue-router';
+import { ElMessage } from 'element-plus'
+
+const router = useRouter();
 
 let isToggling = false;
 function toggleHidePsw() {
@@ -66,6 +79,40 @@ function toggleHidePsw() {
         isOpenPswType.value = 'password';
         isToggling = false; // 重置状态
     }, 2000);
+}
+interface resItem{
+    code: number,
+    token: string
+}
+function login() {
+    adminLogin({
+        superadminname: inputUsername.value,
+        superadminpassword: inputPassword.value,
+    })
+    // @ts-ignore
+        .then((res: resItem) => {
+            // console.log(res);
+            if (res.code === 200) {
+                setCookie('AUTO_TOKEN', res.token, 1/24);
+                ElMessage({
+                    message: '登录成功',
+                    type: 'success',
+                    customClass: 'message',
+                });
+                setTimeout(() => {
+                    router.push('/home');
+                }, 1000);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+        });
+}
+
+function inputEnter(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+        login();
+    }
 }
 
 const randomNumber = ref(getRandomNumber(1, 5))
@@ -183,4 +230,5 @@ const isOpenPswType = ref('password')
         }
     }
 }
+
 </style>

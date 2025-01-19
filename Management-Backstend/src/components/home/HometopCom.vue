@@ -36,8 +36,8 @@
             <span>你正在退出系统中,退出后需要进行重新登录,请确认是否继续操作</span>
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button @click="centerDialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="centerDialogVisible = false">
+                    <el-button @click="noExitSystem">取消</el-button>
+                    <el-button type="primary" @click="exitSystem">
                         确认
                     </el-button>
                 </div>
@@ -48,15 +48,40 @@
 
 <script setup lang="ts">
 // 导入工具
+import { ElMessage } from 'element-plus';
 import { parseTime, getNowTime } from '../../utils/index';
 
 // 定义Vue
 import { onMounted, onUnmounted, ref } from 'vue';
 
+// 导入Vue-router
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 // 定义Vue变量
 const time = ref(parseTime(new Date(), '{y}-{m}-{d} {h}:{i}:{s} 星期{a}'))
 const timeWelcomeStr = ref('')
 const centerDialogVisible = ref(false)
+
+function exitSystem() {
+    centerDialogVisible.value = false
+    ElMessage({
+        message: '退出成功',
+        type: 'success',
+        customClass: 'message'
+    })
+    router.push('/')
+}
+
+function noExitSystem() {
+    centerDialogVisible.value = false
+    ElMessage({
+        message: '已取消退出',
+        type: 'info',
+        customClass: 'message'
+    })
+}
 
 // 定义定时器
 const intervalId = setInterval(() => {

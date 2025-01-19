@@ -1,16 +1,24 @@
 <template>
     <div class="SysteminfoPages">
-        <div class="sTop">
-            <div class="sTop-left">
-                <p class="mapTitle">全国用户访问情况图</p>
-                <ChinaMap class="chinaMap" :list="dataList" />
-            </div>
-            <div class="sTop-right">
-                <div class="top">
-                    <TableMap :list="dataList" />
+        <el-row v-loading="elLoading" element-loading-text="加载中..." class="row">
+            <el-col :span="24">
+                <div class="sTop">
+                    <div class="sTop-left">
+                        <p class="mapTitle">全国用户访问情况图</p>
+                        <ChinaMap v-if="loading" class="chinaMap" :list="dataList" />
+                    </div>
+                    <div class="sTop-right">
+                        <div class="top">
+                            <TableMap v-if="loading" :list="dataList" />
+                        </div>
+                        <div class="bottom">
+                            <DeviceInfo />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -18,49 +26,32 @@
 // 导入组件
 import ChinaMap from '../../../components/System/chinaMap.vue';
 import TableMap from '../../../components/System/TableMap.vue';
+import DeviceInfo from '../../../components/System/DeviceInfo.vue';
 
-function randomValue() {
-    return Math.round(Math.random() * 1000);
-}
+import { ref } from 'vue'
 
-const dataList = [
-    { name: "南海诸岛", value: 0 },
-    { name: '北京', value: randomValue() },
-    { name: '天津', value: randomValue() },
-    { name: '上海', value: randomValue() },
-    { name: '重庆', value: randomValue() },
-    { name: '河北', value: randomValue() },
-    { name: '河南', value: randomValue() },
-    { name: '云南', value: randomValue() },
-    { name: '辽宁', value: randomValue() },
-    { name: '黑龙江', value: randomValue() },
-    { name: '湖南', value: randomValue() },
-    { name: '安徽', value: randomValue() },
-    { name: '山东', value: randomValue() },
-    { name: '新疆', value: randomValue() },
-    { name: '江苏', value: randomValue() },
-    { name: '浙江', value: randomValue() },
-    { name: '江西', value: randomValue() },
-    { name: '湖北', value: randomValue() },
-    { name: '广西', value: randomValue() },
-    { name: '甘肃', value: randomValue() },
-    { name: '山西', value: randomValue() },
-    { name: '内蒙古', value: randomValue() },
-    { name: '陕西', value: randomValue() },
-    { name: '吉林', value: randomValue() },
-    { name: '福建', value: randomValue() },
-    { name: '贵州', value: randomValue() },
-    { name: '广东', value: randomValue() },
-    { name: '青海', value: randomValue() },
-    { name: '西藏', value: randomValue() },
-    { name: '四川', value: randomValue() },
-    { name: '宁夏', value: randomValue() },
-    { name: '海南', value: randomValue() },
-    { name: '台湾', value: randomValue() },
-    { name: '香港', value: randomValue() },
-    { name: '澳门', value: randomValue() },
-]
+let loading = ref(false)
+const elLoading = ref(true)
 
+// 导入网络请求
+import { chinaDataList } from '../../../api/request';
+
+const dataList = ref<any[]>([]);
+
+chinaDataList().then(res => {
+    console.log(res);
+    // @ts-ignore
+    const chinaDataList = res.chinaDataList.map((item: any) => {
+        return {
+            ...item,
+            value: item.accessvalue,
+            name: item.province,
+        };
+    });
+    dataList.value = chinaDataList;
+    loading.value = true
+    elLoading.value = false
+});
 
 </script>
 
@@ -90,9 +81,64 @@ const dataList = [
         .sTop-right {
             width: calc(100% - 3.5rem);
             height: 3.45rem;
-            .top{
+
+            .top {
                 height: 2rem;
                 width: 100%;
+            }
+
+            .bottom {
+                width: 100%;
+                height: 1.45rem;
+            }
+        }
+    }
+}
+
+::v-deep(.row) {
+    .el-loading-mask {
+        .el-loading-spinner {
+            transform: translateY(-50%);
+
+            .el-loading-text {
+                font-size: .1rem;
+            }
+        }
+    }
+
+    .el-descriptions {
+        font-size: .1rem;
+
+        .el-descriptions__header {
+            margin-bottom: .1rem;
+
+            .el-descriptions__title {
+                font-size: .2rem;
+            }
+        }
+
+        .el-descriptions__cell {
+            padding-bottom: .1rem;
+            font-size: .14rem;
+            line-height: .14rem;
+
+            .el-tag{
+                font-size: .1rem;
+                line-height: .14rem;
+                height: .15rem;
+                padding: 0 .05rem;
+                border-radius: .03rem;
+            }
+
+            .el-descriptions__label {
+                margin-right: .1rem;
+            }
+
+            .el-descriptions__content {
+                img {
+                    width: .14rem;
+                    height: .14rem;
+                }
             }
         }
     }

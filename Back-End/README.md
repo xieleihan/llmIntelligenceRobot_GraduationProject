@@ -134,6 +134,28 @@
 > ```
 >
 
+### 超级管理员登录
+
+前缀:`/private`
+
+> 接口:`/superadminlogin`
+>
+> 方法:`POST`,
+>
+> 参数:`superadminname`,`superadminpassword`
+>
+> 返回
+>
+> ```json
+> {
+>     "code": 200,
+>     "message": "登录成功",
+>     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbnVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE3MzcyMTQ1MTgsImV4cCI6MTczNzIxODExOH0.IRt6d4FrGY3dJVxGxqT5RNVGiXpudTP9AkI10sMSumo"
+> }
+> ```
+>
+> 
+
 ### Deepseek聊天接口
 
 前缀:`/protected`
@@ -476,4 +498,31 @@ config.headers['Authorization'] = `token ${github_token}`;
 > }
 > ```
 >
-> 
+
+### 中国(包含港澳台)用户访问信息
+
+前缀:`/private`
+
+> 接口:`/get-china-datalist`
+>
+> 方法:`GET`
+>
+> 返回:
+>
+> ```json
+> {
+>     "code": 200,
+>     "chinaDataList": [
+>         {
+>             "id": 1,
+>             "province": "香港",
+>             "accessvalue": "0"
+>         },
+>         ...
+>     ]
+> }
+> ```
+>
+> 海外用户因为数据保护法案,暂不收集返回,港澳台的可在后续的更新中,给予选择权限.
+>
+> 大陆用户不会弹出提示,但是会对数据进行脱敏.

@@ -70,3 +70,10 @@ button{
 }
 
 /* end */
+
+.message {
+    padding: .1rem .2rem !important;
+    .el-message__content{
+        font-size: .15rem;
+    }
+}

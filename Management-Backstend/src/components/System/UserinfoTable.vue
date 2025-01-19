@@ -1,73 +1,55 @@
 <template>
-    <table
-        class="table"
-        rules="rows"
-    >
+    <table class="table" rules="rows">
         <thead>
             <tr>
-                <th>日期</th>
-                <th>名称</th>
-                <th>数值</th>
-                <th>
-                    <el-input
-                        v-model="input"
-                        placeholder="搜索"
-                    />
-                </th>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>用户Github</th>
+                <th>用户IP</th>
+                <th>用户地理位置</th>
+                <th>用户注册时间</th>
+                <th>用户唯一标识符</th>
+                <th>操作区</th>
             </tr>
         </thead>
         <tbody>
-            <tr
-                v-for="(item, index) in dataList as DataItem[]"
-                :key="index"
-            >
-                <td>{{ item.date }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.value }}</td>
-                <td>
-                    <div class="functionBox">
-                        <el-button>编辑</el-button>
-                        <el-button
-                            type="primary"
-                            
-                            @click="removeItem(index)"
-                        >删除</el-button>
-                    </div>
-                </td>
+            <tr v-for="(item, index) in dataList as DataItem[]" :key="index">
+                <td>{{ item.id }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.usergithub }}</td>
+                <td>{{ item.userip }}</td>
+                <td>{{ item.useraddress }}</td>
+                <td>{{ item.userregistertime }}</td>
+                <td>{{ item.useruuid }}</td>
             </tr>
         </tbody>
     </table>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
-
-// 搜索框的值
-const input = ref<string>('');
-
-// 定义组件的 props
-const props = defineProps<{
-    list: Array<{ name: string; value: number }>;
-}>();
+import {ref} from 'vue';
 
 interface DataItem {
-    date: string;
-    name: string;
-    value: number;
+    id: number;
+    username: string;
+    usergithub: string;
+    userip: string;
+    useraddress: string;
+    userregistertime: string;
+    useruuid: string;
 }
 
-// 初始化数据
-const dataList = ref<DataItem[]>(
-    props.list.map(item => ({
-        ...item,
-        date: new Date().toLocaleDateString(),
-    }))
-);
-
-// 删除条目方法
-const removeItem = (index: number) => {
-    dataList.value.splice(index, 1);
-};
+const dataList = ref<DataItem[]>([
+    {
+        id: 1,
+        username: 'admin',
+        usergithub: 'xieleihan',
+        userip: '0.0.0.0',
+        useraddress: '中国',
+        userregistertime: '2021-10-10',
+        useruuid: '1234535436546436542564664646464643',
+    },
+]);
 </script>
 
 <style scoped lang="scss">
@@ -91,7 +73,7 @@ const removeItem = (index: number) => {
 
             th {
                 display: inline-block;
-                width: 25%;
+                width: calc(100% / 8);
                 height: 100%;
                 line-height: .3rem;
                 text-align: center;
@@ -140,10 +122,13 @@ const removeItem = (index: number) => {
 
             td {
                 display: inline-block;
-                width: 25%;
+                width: calc(100% / 8);
                 height: 100%;
                 line-height: .3rem;
                 text-align: center;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
 
                 .functionBox {
                     display: flex;

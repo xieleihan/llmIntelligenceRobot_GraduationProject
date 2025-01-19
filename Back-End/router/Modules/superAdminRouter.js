@@ -11,6 +11,8 @@ const router = new Router(
     }
 );
 
+const SECRET_KEY = process.env.SECRET_KEY; // 定义密钥
+
 // 登录
 router.post('/superadminlogin', async (ctx) => {
     const { superadminname, superadminpassword } = ctx.request.body;
@@ -24,15 +26,16 @@ router.post('/superadminlogin', async (ctx) => {
 
     try {
         // 1. 查询用户是否存在
-        const [superadmin] = await pool.query('SELECT * FROM adminuser WHERE adminusername = ?', [superadminname]);
-        if (superadmin.length === 0) {
+        const [adminuser] = await pool.query('SELECT * FROM adminuser WHERE adminusername = ?', [superadminname]);
+
+        if (adminuser.length === 0) {
             ctx.status = 401;
             ctx.body = { code: 401, error: '用户不存在' };
             return;
         }
 
         // 2. 检查密码是否正确
-        const match = await bcrypt.compare(superadminpassword, superadmin[0].superadminpassword);
+        const match = await bcrypt.compare(superadminpassword, adminuser[0].adminuserpassword);
         if (!match) {
             ctx.status = 401;
             ctx.body = { code: 401, error: '密码错误' };
@@ -42,10 +45,9 @@ router.post('/superadminlogin', async (ctx) => {
         // 3. 生成token
         const token = jwt.sign(
             {
-                superadminname: superadmin[0].superadminname,
-                superadminid: superadmin[0].superadminid,
+                adminusername: adminuser[0].adminusername,
             },
-            process.env.SECRET_KEY,
+            SECRET_KEY,
             {
                 expiresIn: '1h',
             }
@@ -58,5 +60,30 @@ router.post('/superadminlogin', async (ctx) => {
         ctx.body = { code: 500, error: '服务器错误' };
     }
 });
+
+// 返回china地图的数据
+router.get('/get-china-datalist', async (ctx) => {
+    const authHeader = ctx.headers['authorization']; // 获取请求头中的authorization
+
+    if (!authHeader) {
+        ctx.status = 401;
+        ctx.body = { message: '未授权的访问', code: 401 };
+        return;
+    }
+
+    const token = authHeader;
+    if (!jwt.verify(token, SECRET_KEY)) {
+        return ctx.body = { message: 'token过期或者无效', code: 400 };
+    }
+
+    try {
+        const [chinaDataList] = await pool.query('SELECT * FROM chinaaccess');
+        ctx.status = 200;
+        ctx.body = { code: 200, chinaDataList };
+    } catch (error) {
+        ctx.status = 500;
+        ctx.body = { code: 500, error: '服务器错误' };
+    }
+})
 
 module.exports = router;
