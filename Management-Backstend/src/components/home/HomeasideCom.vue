@@ -2,19 +2,11 @@
     <div class="homeAside">
         <el-row>
             <el-col :span="24">
-                <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    unique-opened
-                    @open="handleOpen"
-                    @close="handleClose"
-                >
+                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
+                    @close="handleClose">
                     <el-sub-menu index="1">
                         <template #title>
-                            <router-link
-                                class="homeSystem"
-                                to="/home"
-                            >系统</router-link>
+                            <router-link class="homeSystem" to="/home">系统</router-link>
                         </template>
                         <el-menu-item index="1-1">
                             <router-link to="/home/systemInfo">系统总览</router-link>
@@ -40,7 +32,7 @@
                             <router-link to="/home/sendEmail">发送邮件</router-link>
                         </el-menu-item>
                         <el-menu-item index="2-3">
-                            <router-link to="/home/sendEmail">用户日志</router-link>
+                            <router-link to="/home/userLog">用户日志</router-link>
                         </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
@@ -54,6 +46,11 @@
                             <router-link to="/home/about">项目介绍</router-link>
                         </el-menu-item>
                     </el-sub-menu>
+                    <el-menu-item class="website" index="4">
+                        <router-link class="homeSystem" to="https://google.com"><el-icon>
+                                <Compass />
+                            </el-icon>用户端官网</router-link>
+                    </el-menu-item>
                 </el-menu>
             </el-col>
         </el-row>
@@ -89,6 +86,7 @@ const handleClose = (key: string, keyPath: string[]) => {
         .el-sub-menu,
         .el-menu-item-group {
             width: 100%;
+
             .homeSystem,
             .el-menu-item-group__title {
                 padding: .05rem .05rem;
@@ -99,6 +97,10 @@ const handleClose = (key: string, keyPath: string[]) => {
                 align-items: center;
                 font-size: .1rem;
                 color: black;
+            }
+
+            .homeSystem {
+                padding-left: 0;
             }
 
             .el-sub-menu__title {
@@ -133,9 +135,34 @@ const handleClose = (key: string, keyPath: string[]) => {
                 font-size: .08rem;
                 line-height: .4rem;
                 padding-left: .3rem;
-                a{
+
+                a {
                     width: 100%;
                     height: 100%;
+                }
+            }
+        }
+
+        .el-menu-item {
+            &.website {
+                width: 100%;
+                height: .5rem;
+                padding: .05rem .05rem;
+                font-size: .1rem;
+                line-height: .4rem;
+                padding-left: .1rem;
+                a{
+                    line-height: .5rem;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    .el-icon{
+                        width: .1rem;
+                        height: .1rem;
+                        font-size: .1rem;
+                        line-height: .5rem;
+                        margin-right: .01rem;
+                    }
                 }
             }
         }

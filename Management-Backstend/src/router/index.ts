@@ -101,6 +101,15 @@ const routes: any = [
                     icon: logo,
                     requiresAuth: true
                 }
+            },
+            {
+                path: 'userLog',
+                component: () => import('../views/Modules/User/UserlogsPages.vue'), // 用户日志
+                meta: {
+                    breadcrumb: '用户日志',
+                    icon: logo,
+                    requiresAuth: true
+                }
             }
         ]
     }
