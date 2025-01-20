@@ -39,6 +39,9 @@
                         <el-menu-item index="2-2">
                             <router-link to="/home/sendEmail">发送邮件</router-link>
                         </el-menu-item>
+                        <el-menu-item index="2-3">
+                            <router-link to="/home/sendEmail">用户日志</router-link>
+                        </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="3">
                         <template #title>
