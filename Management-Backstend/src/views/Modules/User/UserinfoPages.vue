@@ -1,6 +1,8 @@
 <template>
     <div class="userinfoPages">
-        <div class="top"></div>
+        <div class="top">
+            <UserinfoFunction />
+        </div>
         <div class="main">
             <el-row class="tableBox">
                 <el-col class="tableBox" :span="24">
@@ -17,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import UserinfoFunction from '../../../components/System/UserinfoFunction.vue';
 import UserinfoTable from '../../../components/System/UserinfoTable.vue';
 
 // 定义Vue变量
