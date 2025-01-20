@@ -19,8 +19,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import UserinfoFunction from '../../../components/System/UserinfoFunction.vue';
-import UserinfoTable from '../../../components/System/UserinfoTable.vue';
+import UserinfoFunction from '../../../components/User/UserinfoFunction.vue';
+import UserinfoTable from '../../../components/User/UserinfoTable.vue';
 
 // 定义Vue变量
 const paginationTotel = ref(0);
