@@ -58,6 +58,15 @@ const routes: any = [
                 },
             },
             {
+                path: 'changeApi',
+                component: () => import('../views/Modules/System/ChangeApikeypages.vue'), // API管理
+                meta: {
+                    breadcrumb: 'API管理',
+                    icon: logo,
+                    requiresAuth: true
+                },
+            },
+            {
                 path: 'about',
                 component: () => import('../views/Modules/About/AboutPages.vue'), // 关于
                 meta: {

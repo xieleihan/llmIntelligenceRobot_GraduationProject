@@ -2,11 +2,19 @@
     <div class="homeAside">
         <el-row>
             <el-col :span="24">
-                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
-                    @close="handleClose">
+                <el-menu
+                    default-active="2"
+                    class="el-menu-vertical-demo"
+                    unique-opened
+                    @open="handleOpen"
+                    @close="handleClose"
+                >
                     <el-sub-menu index="1">
                         <template #title>
-                            <router-link class="homeSystem" to="/home">系统</router-link>
+                            <router-link
+                                class="homeSystem"
+                                to="/home"
+                            >系统</router-link>
                         </template>
                         <el-menu-item index="1-1">
                             <router-link to="/home/systemInfo">系统总览</router-link>
@@ -16,6 +24,9 @@
                         </el-menu-item>
                         <el-menu-item index="1-3">
                             <router-link to="/home/systemLog">日志管理</router-link>
+                        </el-menu-item>
+                        <el-menu-item index="1-4">
+                            <router-link to="/home/changeApi">API Key</router-link>
                         </el-menu-item>
                     </el-sub-menu>
                     <el-sub-menu index="2">
