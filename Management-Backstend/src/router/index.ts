@@ -127,10 +127,11 @@ router.beforeEach((to, from, next) => {
         // 获取cookies中是否有auto_token字段
         const token = getCookie('AUTO_TOKEN');;
         if (!token) {
-            next({
-                path: '/start',
-                query: { redirect: to.fullPath }
-            })
+            // next({
+            //     path: '/start',
+            //     query: { redirect: to.fullPath }
+            // }) // 生产环境使用
+            next() // 开发环境使用
         } else {
             next()
         }
