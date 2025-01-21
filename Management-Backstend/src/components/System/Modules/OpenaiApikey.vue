@@ -1,33 +1,20 @@
 <template>
     <div class="openaiapikeyPages">
         <div class="logo">
-            <img
-                src="../../../assets/icon/openai.svg"
-                alt=""
-            ><span>OpenAI</span>
+            <img src="../../../assets/icon/openai.svg" alt=""><span>OpenAI</span>
         </div>
         <div class="distribution">
             <div class="openBox">
-                <el-switch
-                    v-model="enable"
-                    size="small"
-                    active-text="Open"
-                    inactive-text="Close"
-                />
+                <el-switch v-model="enable" size="small" active-text="Open" inactive-text="Close" />
             </div>
             <div class="inputBox">
-                <el-input
-                    v-model="baseUrl"
-                    placeholder="Please input"
-                >
+                <el-input v-model="baseUrl" placeholder="Please input">
                     <template #prepend>BaseURL:</template>
                 </el-input>
-                <el-input
-                    v-model="api_key"
-                    placeholder="Please input"
-                >
+                <el-input v-model="api_key" placeholder="Please input">
                     <template #prepend>API_key:</template>
                 </el-input>
+                <el-button type="primary" plain size="small">替换</el-button>
             </div>
         </div>
     </div>
@@ -55,10 +42,27 @@ const enable = ref(false)
     ::v-deep(.distribution) {
         width: 80%;
         height: 80%;
+        display: flex;
+        flex-direction: column;
+        .inputBox{
+            display: flex;
+            flex-direction: column;
+            margin-top: .1rem;
+            width: 30%;
+            .el-button{
+                padding: .05rem .02rem;
+                font-size: .1rem;
+                line-height: .1rem;
+                height: .3rem;
+                width: 40%;
+                
+            }
+        }
 
         .el-input {
             width: 2rem;
             height: .3rem;
+            margin-bottom: .1rem;
 
             .el-input__wrapper {
                 padding: .05rem .1rem;

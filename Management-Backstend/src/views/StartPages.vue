@@ -104,8 +104,12 @@ function login() {
                 }, 1000);
             }
         })
-        .catch(err => {
-            console.error(err);
+        .catch((err:string) => {
+            ElMessage({
+                message: err,
+                type: 'error',
+                customClass: 'message',
+            });
         });
 }
 
