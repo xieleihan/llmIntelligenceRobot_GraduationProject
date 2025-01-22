@@ -15,6 +15,7 @@ const { initializeAgentExecutorWithOptions } = require("langchain/agents");
 const { ChatOpenAI } = require("@langchain/openai");
 const { Tool } = require("langchain/tools");
 const OpenAI = require("openai"); // 导入 OpenAI 模块
+const { ZeroShotAgent } = require("langchain/agents");
 
 // 插件
 // 获取环境变量插件
@@ -95,9 +96,14 @@ async function initializeAgent() {
     llm.baseURL = DEEPSEEK_API_BASE_URL;
     llm.apiKey = DEEPSEEK_API_KEY;
     llm.clientConfig.baseURL = DEEPSEEK_API_BASE_URL;
+    const agent = ZeroShotAgent.fromLLMAndTools(llm,
+        tools, {
+        outputParser: new CustomOutputParser(),
+    });
     const agentExecutor = await initializeAgentExecutorWithOptions([githubTool.lc_kwargs], llm, {
         agentType: "chat-zero-shot-react-description", // 零次调用反应式描述
         verbose: true, // 打印日志
+        agent
     });
 
     console.log("工具链代理已初始化");

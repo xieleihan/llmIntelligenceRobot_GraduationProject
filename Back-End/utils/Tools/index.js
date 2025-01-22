@@ -29,8 +29,8 @@ async function initializeAgent() {
     llm.clientConfig.baseURL = DASHSCOPE_BASE_URL;
     
     // 初始化工具链
-    const tools = [githubTool.lc_kwargs]; 
-    // const tools = [githubTool];
+    // const tools = [githubTool.lc_kwargs]; 
+    const tools = [githubTool];
     console.log("tools:", tools);
     // 初始化prompt
     const pt = new PromptTemplate({
@@ -86,6 +86,7 @@ async function initializeAgent() {
 
     // 初始化zeroShotAgent来传入prompt
     // 使用 ZeroShotAgent 创建代理
+
     const agent = ZeroShotAgent.fromLLMAndTools(llm,
         tools, {
             prompt: pt,
