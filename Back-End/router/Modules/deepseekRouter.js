@@ -18,6 +18,8 @@ const router = new Router(
 const SECRET_KEY = process.env.SECRET_KEY; // 定义密钥
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY; // 定义深度求索API密钥
 const DEEPSEEK_API_BASE_URL = process.env.DEEPSEEK_API_BASE_URL; // 定义深度求索API基础URL
+const MOONSHOT_API_KEY = process.env.MOONSHOT_API_KEY; // 定义Moonshot API密钥
+const MOONSHOT_API_BASE_URL = process.env.MOONSHOT_API_BASE_URL; // 定义Moonshot API基础URL
 
 const deepseek = new OpenAI(
     {
@@ -27,6 +29,13 @@ const deepseek = new OpenAI(
         maxTokens: 2000,
     }
 ); // 创建深度求索API实例
+
+const moonshot = new OpenAI(
+    {
+        apiKey: MOONSHOT_API_KEY,
+        baseURL: MOONSHOT_API_BASE_URL,
+    }
+);
 
 // 定义异步函数(deepseek官方)
 const sendMessage = async function ({ question, tool }) {
@@ -41,6 +50,26 @@ const sendMessage = async function ({ question, tool }) {
         model: "deepseek-chat",
     });
     // console.log("API Response:", completion.choices[0].message.content);
+    return completion.choices[0].message.content;
+}
+
+// 定义异步函数(MOONSHOT)
+const moonshotFunc = async function ({question}) {
+    const completion = await moonshot.chat.completions.create({
+        model: "moonshot-v1-8k",
+        messages: [
+            {
+                role: "system",
+                content:"你是 Kimi，由 Moonshot AI 提供的人工智能助手，你更擅长中文的对话。你会为用户提供安全，有帮助，准确的回答。同时，你会拒绝一切涉及恐怖主义，种族歧视，黄色暴力等问题的回答。Moonshot AI 为专有名词，不可翻译成其他语言。"
+            },
+            {
+                role: "user",
+                content: question
+            }
+        ],
+        tempurature: 1,
+    });
+
     return completion.choices[0].message.content;
 }
 
@@ -218,5 +247,29 @@ router.post('/langchain', async (ctx) => {
     }
 });
 /* langchain */
+
+// 给Telegram使用的模型调用方法
+router.post('/telebot', async (ctx) => {
+    const { question } = ctx.request.body;
+    
+    try {
+        let message = '';
+        try {
+            message = await moonshotFunc({ question });
+        } catch {
+            ctx.status = 500;
+            ctx.body = { message: '无法发送消息', code: 500 };
+            return;
+        } // 调用sendMessage函数
+        ctx.body = {
+            code: 200,
+            msg: message,
+            type: 'system'
+        };
+    } catch (err) {
+        ctx.status = 403;
+        ctx.body = { message: '无效的 Token', code: 403 };
+    }
+})
 
 module.exports = router; // 导出路由

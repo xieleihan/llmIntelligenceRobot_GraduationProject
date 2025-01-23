@@ -44,6 +44,7 @@
     "supertest": "^7.0.0",
     "svg-captcha": "^1.4.0",
     "swagger-jsdoc": "^6.2.8",
+    "telegraf": "^4.16.3",
     "uuid": "^11.0.3",
     "ws": "^8.18.0"
   },

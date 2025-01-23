@@ -6,6 +6,7 @@ const deepseekRouter = require('./Modules/deepseekRouter');
 const githubRouter = require('./Modules/githubRouter');
 const getServerStateRouter = require('./Modules/serverStateRouter');
 const superAdminRouter = require('./Modules/superAdminRouter');
+const TelegramRouter = require('./Modules/TelerafRouter');
 
 // 导出全部引入的模块
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     deepseekRouter,
     githubRouter,
     getServerStateRouter,
-    superAdminRouter
+    superAdminRouter,
+    TelegramRouter,
 };
