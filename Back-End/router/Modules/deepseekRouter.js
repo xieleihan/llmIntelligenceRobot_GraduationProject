@@ -43,13 +43,13 @@ const sendMessage = async function ({ question, tool }) {
     const str = question + JSON.stringify(tool);
     const completion = await deepseek.chat.completions.create({
         messages: [
-            { role: "system", content: thinkPrompt },
+            // { role: "system", content: thinkPrompt },
             { role: "system", content: prompt },
             { role: "user", content: str }
         ],
         model: "deepseek-chat",
     });
-    // console.log("API Response:", completion.choices[0].message.content);
+    console.log("API Response:", completion.choices[0].message.content);
     return completion.choices[0].message.content;
 }
 
@@ -136,7 +136,6 @@ router.post('/devdeepseek', async (ctx) => {
 
     // 检查question中是否含有'GitHub'的关键字
     if (question.includes('GitHub')) {
-        console.log("有关键字")
         try {
             let message = '';
             let tool = '';
@@ -154,6 +153,53 @@ router.post('/devdeepseek', async (ctx) => {
                 msg: message,
                 type: 'system'
             };
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
+    } else if (question.includes('关注')) {
+        try {
+            let message = '';
+            let tool = '';
+            const response = await axiosPost('/public/get-github-starred-repos', { username: 'AtomicGlimpses' });
+            console.log(response)
+            tool = response.data.repos;
+            try {
+                message = await sendMessage({ question, tool });
+                ctx.body = {
+                    code: 200,
+                    msg: message,
+                    type: 'system'
+                };
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用githubTool.callbacks函数
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
+
+    } else if (question.includes('自己')) {
+        try {
+            let message = '';
+            let tool = '';
+            const response = await axiosPost('/public/get-github-repos', { username: 'AtomicGlimpses' });
+            console.log(response)
+            tool = response.data.repos;
+            try {
+                message = await sendMessage({ question, tool });
+                ctx.body = {
+                    code: 200,
+                    msg: message,
+                    type: 'system'
+                };
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用githubTool.callbacks函数
         } catch (err) {
             ctx.status = 403;
             ctx.body = { message: '无效的 Token', code: 403 };
