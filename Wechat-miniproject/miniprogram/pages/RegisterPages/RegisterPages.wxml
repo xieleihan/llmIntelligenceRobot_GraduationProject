@@ -1,0 +1,24 @@
+<!--pages/RegisterPages/RegisterPages.wxml-->
+<view class="registerPages">
+  <view class="container">
+    <h2 class="title">Register</h2>
+    <p class="desc">注册<span class="goToLoginPages" bind:tap="goToLoginPages">--已有账号?</span></p>
+    <view class="inputBox">
+      <input class="input" type="text" placeholder="请输入用户名"/>
+      <input class="input" type="text" placeholder="请输入邮箱"/>
+      <view class="verifyCodeBox" style="margin-bottom: .5rem;">
+        <input type="text" placeholder="邮箱验证码" maxlength="4"/>
+        <view bind:tap="sendVerifyCode" class="sendVerifyCode">{{ emailSendVerifyCodeText }}</view>
+      </view>
+      <input class="input" type="password" placeholder="请输入密码"/>
+      <view class="verifyCodeBox">
+        <input type="text" placeholder="验证码" maxlength="4"/>
+        <!-- <image src="" mode=""/> -->
+      </view>
+    </view>
+    <view class="buttonBox">
+      <button class="btn">注册</button>
+    </view>
+  </view>
+  
+</view>

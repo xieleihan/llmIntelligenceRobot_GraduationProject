@@ -1,0 +1,12 @@
+<!--components/aboutCom/aboutList.wxml-->
+<view class="list">
+  <view class="listItem">
+    <view class="left">
+      <image class="icon" src="" mode=""/>
+      <view class="text"></view>
+    </view>
+    <view class="right">
+      <image class="icon" src="/assets/icon/left.svg" mode=""/>
+    </view>
+  </view>
+</view>

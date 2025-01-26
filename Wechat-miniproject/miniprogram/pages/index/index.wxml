@@ -5,7 +5,7 @@
 
     <view class="buttonBox">
       <button class="lognin" bind:tap="goToLogninPages">登录</button>
-      <button class="register">注册</button>
+      <button class="register" bind:tap="goToRegisterPages">注册</button>
     </view>
   </view>
   <view class="footer">

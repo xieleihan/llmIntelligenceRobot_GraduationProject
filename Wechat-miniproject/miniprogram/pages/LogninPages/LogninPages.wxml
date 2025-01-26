@@ -10,11 +10,15 @@
         <input type="text" placeholder="验证码" maxlength="4"/>
         <!-- <image src="" mode=""/> -->
       </view>
+      <view class="goToRegisterText">暂无账号,<span class="click">点击前往注册</span></view>
     </view>
     <view class="buttonBox">
       <button class="btn">登录</button>
-      <button class="btn">一键登录</button>
+      <button class="btn" bind:tap="goToHome">
+        <image class="icon" src="/assets/icon/WeChat.svg" mode=""/>
+        一键登录
+      </button>
     </view>
   </view>
-  <p>暂无账号,前往注册</p>
+  
 </view>

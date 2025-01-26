@@ -1,4 +1,4 @@
-// pages/LogninPages/LogninPages.ts
+// pages/about/about.ts
 Page({
 
   /**
@@ -62,11 +62,5 @@ Page({
    */
   onShareAppMessage() {
 
-  },
-
-  goToHome(){
-    wx.switchTab({
-      url:"/pages/home/home"
-    })
   }
 })

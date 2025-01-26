@@ -1,0 +1,18 @@
+<!--pages/about/about.wxml-->
+<view class="about">
+  <view class="avaterBox">
+    <view class="left">
+      <image class="avater" src="/assets/images/avater.jpg" mode="widthFix"/>
+    </view>
+    <view class="right">
+      <view class="rightl">
+        <view class="username">南秋SouthAki</view>
+        <view class="signal">人的一生只会经历一次夏天剩下都是和它作比较</view>
+      </view>
+      <view class="rightr">
+        <image class="righticon" src="/assets/icon/left.svg" mode=""/>
+      </view>
+    </view>
+  </view>
+  <AboutList />
+</view>

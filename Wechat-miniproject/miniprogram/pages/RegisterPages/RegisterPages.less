@@ -1,5 +1,5 @@
-/* pages/LogninPages/LogninPages.wxss */
-.logninPages{
+/* pages/RegisterPages/RegisterPages.wxss */
+.registerPages{
   width: 100vw;
   height: 100vh;
   background: url(https://github.com/xieleihan/llmIntelligenceRobot_GraduationProject/blob/main/Front-End/src/assets/images/banner_background.jpeg?raw=true) no-repeat;
@@ -24,10 +24,14 @@
     }
     .desc{
       font-size: 1rem;
+      .goToLoginPages{
+        color: @googlegreen;
+        margin-left: .5rem;      
+      }
     }
     .inputBox{
       width: 18rem;
-      height: 16rem;
+      height: 19rem;
       padding: 1rem 0;
       position: relative;
       box-sizing: border-box;
@@ -47,22 +51,23 @@
         border-radius: @radius;
         box-sizing: border-box;
         height: 3rem;
+        display: flex;
+        font-size: 1rem;
+        align-items: center;
+        .sendVerifyCode{
+          width: 50%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: @googleblue;
+        }
         input{
           width: 50%;
           height: 3rem;
           font-size: 1rem;
           padding: 0 1rem;
           box-sizing: border-box;
-        }
-      }
-      .goToRegisterText{
-        width: 100%;
-        text-align: center;
-        margin-top: .5rem;
-        font-size: .7rem;
-        color: #ccc;
-        .click{
-          text-decoration: underline;
         }
       }
     }
@@ -73,21 +78,8 @@
         font-size: 1rem;
         font-weight: 400;
         color: white;
-        &:first-child{
-          background-color: @googleblue;
-        }
-        &:last-child{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          .icon{
-            width: 1rem;
-            height: 1rem;
-            margin-right: .5rem;
-          }
-          margin-top: 1rem;
-          background-color: @googlegreen;
-        }
+        background-color: @googleblue;
+        
       }
     }
   }
