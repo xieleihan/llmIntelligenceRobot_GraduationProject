@@ -1,0 +1,59 @@
+/* pages/LogninPages/LogninPages.wxss */
+.logninPages{
+  width: 100vw;
+  height: 100vh;
+  background: url(https://github.com/xieleihan/llmIntelligenceRobot_GraduationProject/blob/main/Front-End/src/assets/images/banner_background.jpeg?raw=true) no-repeat;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 18rem;
+    height: 25rem;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: @radius;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem .8rem;
+    .title{
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .desc{
+      font-size: 1rem;
+    }
+    .inputBox{
+      width: 18rem;
+      height: 16rem;
+      padding: 1rem 0;
+      position: relative;
+      box-sizing: border-box;
+      .input{
+        width: 100%;
+        height: 3rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: @radius;
+        margin-bottom: .5rem;
+        padding:0 1rem;
+        box-sizing: border-box;
+      }
+      .verifyCodeBox{
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: @radius;
+        box-sizing: border-box;
+        input{
+          width: 50%;
+          height: 3rem;
+          font-size: 1rem;
+          padding: 0 1rem;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/LogninPages/LogninPages"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText":"LLM情报机器人",
+    "navigationBarTitleText": "LLM情报机器人",
     "navigationBarBackgroundColor": "#fff",
     "navigationStyle": "default"
   },

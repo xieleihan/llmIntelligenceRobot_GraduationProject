@@ -1,3 +1,14 @@
 <view class="home">
-  <view>home</view>
+  <view class="container">
+    <image class="logo" src="/assets/images/peacock_flat.png" mode=""/>
+    <h1 class="title">LLM情报机器人</h1>
+
+    <view class="buttonBox">
+      <button class="lognin" bind:tap="goToLogninPages">登录</button>
+      <button class="register">注册</button>
+    </view>
+  </view>
+  <view class="footer">
+    Copyright© 2025 SouthAki,All rights reserved.
+  </view>
 </view>

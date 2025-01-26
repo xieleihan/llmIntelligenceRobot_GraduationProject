@@ -4,4 +4,53 @@
   background: url(https://github.com/xieleihan/llmIntelligenceRobot_GraduationProject/blob/main/Front-End/src/assets/images/banner_background.jpeg?raw=true) no-repeat;
   background-size: cover;
   background-position: center center;
+  position: relative;
+  .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 18rem;
+    height: 25rem;
+    background-color: rgba(255, 255, 255, .5);
+    border-radius: @radius;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem .5rem;
+    .logo{
+      width: 10rem;
+      height: 10rem;
+      aspect-ratio: 1/1;
+    }
+    .title{
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 5rem;
+    }
+    .buttonBox{
+      font-size: 1rem;
+      .lognin{
+        margin-bottom: 1rem;
+        background-color: @googleblue;
+        color: white;
+        font-weight: 400;
+      }
+      .register{
+        background-color: @googlegreen;
+        color: white;
+        font-weight: 400;
+      }
+    }
+  }
+  .footer{
+    color: #ccc;
+    position: absolute;
+    bottom: 1px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: .8rem;
+    width: 100%;
+    text-align: center;
+  }
 }

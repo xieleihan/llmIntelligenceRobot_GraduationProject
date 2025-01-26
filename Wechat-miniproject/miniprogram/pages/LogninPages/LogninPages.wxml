@@ -1,0 +1,20 @@
+<!--pages/LogninPages/LogninPages.wxml-->
+<view class="logninPages">
+  <view class="container">
+    <h2 class="title">Login</h2>
+    <p class="desc">登录</p>
+    <view class="inputBox">
+      <input class="input" type="text" placeholder="请输入用户名"/>
+      <input class="input" type="password" placeholder="请输入密码"/>
+      <view class="verifyCodeBox">
+        <input type="text" placeholder="验证码" maxlength="4"/>
+        <!-- <image src="" mode=""/> -->
+      </view>
+    </view>
+    <view class="buttonBox">
+      <button class="btn">登录</button>
+      <button class="btn">一键登录</button>
+    </view>
+  </view>
+  <p>暂无账号,前往注册</p>
+</view>
