@@ -2,12 +2,15 @@
   "name": "miniprogram-ts-less-quickstart",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "",
   "dependencies": {
+    "amfe-flexible": "^2.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "postcss-cli": "^11.0.0"
   },
   "devDependencies": {
     "miniprogram-api-typings": "^2.8.3-1"
