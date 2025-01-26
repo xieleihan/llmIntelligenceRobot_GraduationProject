@@ -15,4 +15,5 @@
     </view>
   </view>
   <AboutList />
+  <button class="btn">登出账户</button>
 </view>

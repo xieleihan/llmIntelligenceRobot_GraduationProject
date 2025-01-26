@@ -1,3 +1,17 @@
 <!--pages/home/home.wxml-->
 <view class="home">
+  <view class="header">
+    <image class="top-icon" src="/assets/icon/top-left.svg" mode=""/>
+    <view class="signature">SouthAki</view>
+    <image class="top-icon" src="/assets/icon/top-right.svg" mode=""/>
+  </view>
+  <view class="main">
+    
+  </view>
+  <view class="footer">
+    <view class="inputBox">
+      <input type="text" placeholder="请输入聊天信息"/>
+      <image class="icon" src="/assets/icon/airport.svg" mode=""/>
+    </view>
+  </view>
 </view>

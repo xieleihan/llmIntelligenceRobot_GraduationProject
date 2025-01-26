@@ -15,15 +15,15 @@ Component({
     list:[
       {
         "text":"订单详情",
-        "icon":""
+        "icon":"/assets/icon/list.svg"
       },
       {
         "text":"联系我们",
-        "icon":"",
+        "icon":"/assets/icon/airport.svg",
       },
       {
         "text":"设置",
-        "icon":"",
+        "icon":"/assets/icon/settings.svg",
       }
     ]
   },
