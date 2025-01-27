@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "HomeInfo" : "/components/homeCom/homeInfo"
+    "HomeInfo" : "/components/homeCom/homeInfo",
+    "MessageCom": "/components/MessageCom/MessageCom"
   }
 }

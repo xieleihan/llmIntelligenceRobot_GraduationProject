@@ -1,0 +1,4 @@
+<!--components/MessageCom/MessageCom.wxml-->
+<view class="message">
+  <view class="time"></view>
+</view>

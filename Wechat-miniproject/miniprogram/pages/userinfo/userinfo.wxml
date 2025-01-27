@@ -3,5 +3,10 @@
   <view class="top">
     <image class="avater" src="/assets/images/avater.jpg" mode=""/>
   </view>
+  <view class="usernameBox">
+    <view class="username">南秋SouthAki</view>
+    <view class="ip">IP属地:<span></span></view>
+    <image class="qrcode" src="/assets/icon/qrcode.svg" mode=""/>
+  </view>
 
 </view>

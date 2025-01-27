@@ -9,13 +9,16 @@
     <block wx:if="{{isOpenFunctionBox === true}}">
       <view class="leftFunction" animation="{{animationData}}"></view>
     </block>
-    <block>
+    <block wx:if="{{isCloseInfo}}">
       <HomeInfo />
+    </block>
+    <block wx:else="{{isCloseInfo}}">
+      <MessageCom />
     </block>
   </view>
   <view class="footer">
     <view class="inputBox">
-      <input type="text" placeholder="请输入聊天信息"/>
+      <input bindinput="inputMsg" type="text" placeholder="请输入聊天信息"/>
       <image class="icon" src="/assets/icon/airport.svg" mode=""/>
     </view>
   </view>

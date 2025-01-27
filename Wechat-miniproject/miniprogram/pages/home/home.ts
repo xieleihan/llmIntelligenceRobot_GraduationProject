@@ -1,4 +1,12 @@
 // pages/home/home.ts
+interface eItem{
+  detail:{
+    value: string,
+    cursor: number,
+    keyCode: number
+  }
+}
+
 Page({
   animation: null as WechatMiniprogram.Animation | null,
   /**
@@ -7,6 +15,7 @@ Page({
   data: {
     isOpenFunctionBox: false,
     animationData:null as WechatMiniprogram.AnimationExportResult | null, // 存储动画对象
+    isCloseInfo: true
   },
 
   /**
@@ -87,6 +96,15 @@ Page({
       setTimeout(() => {
         this.setData({ isOpenFunctionBox: false });
       }, 500);
+    }
+  },
+
+  inputMsg(e:eItem){
+    // console.log(e.detail.value);
+    if(e.detail.value !== ''){
+      this.setData({
+        isCloseInfo: false
+      })
     }
   }
 })
