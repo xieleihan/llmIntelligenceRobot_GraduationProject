@@ -1,0 +1,7 @@
+<!--pages/userinfo/userinfo.wxml-->
+<view class="userinfo">
+  <view class="top">
+    <image class="avater" src="/assets/images/avater.jpg" mode=""/>
+  </view>
+
+</view>

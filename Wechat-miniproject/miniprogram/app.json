@@ -4,7 +4,8 @@
     "pages/LogninPages/LogninPages",
     "pages/RegisterPages/RegisterPages",
     "pages/home/home",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/userinfo/userinfo"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -35,7 +36,7 @@
       },
       {
         "pagePath": "pages/about/about",
-        "text":"我的",
+        "text": "我的",
         "iconPath": "/assets/icon/user.png",
         "selectedIconPath": "/assets/icon/user-heightlight.png"
       }

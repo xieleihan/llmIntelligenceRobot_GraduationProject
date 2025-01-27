@@ -1,11 +1,11 @@
-// pages/about/about.ts
+// pages/userinfo/userinfo.ts
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+
   },
 
   /**
@@ -62,17 +62,5 @@ Page({
    */
   onShareAppMessage() {
 
-  },
-
-  lognout(){
-    wx.navigateTo({
-      url:'/pages/index/index'
-    })
-  },
-
-  goToUserInfoPages(){
-    wx.navigateTo({
-      url:'/pages/userinfo/userinfo'
-    })
   }
 })

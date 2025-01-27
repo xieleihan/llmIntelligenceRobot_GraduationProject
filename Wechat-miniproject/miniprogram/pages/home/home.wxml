@@ -1,12 +1,17 @@
 <!--pages/home/home.wxml-->
 <view class="home">
   <view class="header">
-    <image class="top-icon" src="/assets/icon/top-left.svg" mode=""/>
+    <image bind:tap="changeFunctionBox" class="top-icon" src="/assets/icon/top-left.svg" mode=""/>
     <view class="signature">SouthAki</view>
     <image class="top-icon" src="/assets/icon/top-right.svg" mode=""/>
   </view>
   <view class="main">
-    
+    <block wx:if="{{isOpenFunctionBox === true}}">
+      <view class="leftFunction" animation="{{animationData}}"></view>
+    </block>
+    <block>
+      <HomeInfo />
+    </block>
   </view>
   <view class="footer">
     <view class="inputBox">

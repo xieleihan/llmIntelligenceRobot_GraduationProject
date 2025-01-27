@@ -1,0 +1,8 @@
+<!--components/homeCom/homeInfo.wxml-->
+<view class="homeInfo">
+  <view class="content">
+    <image class="logo" src="/assets/images/peacock_flat.png" mode=""/>
+    <view class="title">我是<span class="dev">南秋SouthAki</span>开发的智能助手,很高兴见到你!🎉🎉🎉</view>
+    <view class="desc">我具体能帮你跟踪GitHub开源项目的具体情况,并且生成一份总结,发到你邮箱等许多操作,快来试试吧!</view>
+  </view>
+</view>

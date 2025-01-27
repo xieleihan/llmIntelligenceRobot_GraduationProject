@@ -54,5 +54,17 @@
     height: calc(100% - 8rem);
     padding: 1rem;
     box-sizing: border-box;
+    position: relative;
+    .leftFunction{
+      position: absolute;
+      box-sizing: border-box;
+      height: 100%;
+      width: 40%;
+      top: 0;
+      left: 0;
+      background-color: white;
+      border-radius: 0 @radius @radius 0;
+      z-index: 999999;
+    }
   }
 }

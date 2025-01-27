@@ -1,0 +1,34 @@
+/* components/homeCom/homeInfo.wxss */
+.homeInfo{
+  width: 20rem;
+  height: 12rem;
+  background-color: rgba(255, 255, 255, .3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: @radius;
+  .content{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    .logo{
+      width: 4.2rem;
+      height: 4.2rem;
+    }
+    .title{
+      font-size: 1rem;
+      font-weight: bold;
+      .dev{
+        text-decoration: underline;
+        color: @googleblue;
+      }
+    }
+    .desc{
+      font-size: .8rem;
+      color: #ccc;
+      letter-spacing: .2rem;
+    }
+  }
+}

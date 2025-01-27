@@ -1,18 +1,22 @@
 // pages/home/home.ts
 Page({
-
+  animation: null as WechatMiniprogram.Animation | null,
   /**
    * 页面的初始数据
    */
   data: {
-
+    isOpenFunctionBox: false,
+    animationData:null as WechatMiniprogram.AnimationExportResult | null, // 存储动画对象
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    this.animation = wx.createAnimation({
+      duration: 500,
+      timingFunction:"ease"
+    })
   },
 
   /**
@@ -62,5 +66,27 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  changeFunctionBox() {
+    const { isOpenFunctionBox } = this.data;
+
+    if (!this.animation) return; // 确保 animation 已经初始化
+
+    if (!isOpenFunctionBox) {
+      this.setData({ isOpenFunctionBox: true });
+
+      setTimeout(() => {
+        this.animation!.width("40%").step();
+        this.setData({ animationData: this.animation!.export() });
+      }, 50);
+    } else {
+      this.animation!.width(0).step();
+      this.setData({ animationData: this.animation!.export() });
+
+      setTimeout(() => {
+        this.setData({ isOpenFunctionBox: false });
+      }, 500);
+    }
   }
 })
