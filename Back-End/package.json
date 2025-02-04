@@ -46,6 +46,7 @@
     "swagger-jsdoc": "^6.2.8",
     "telegraf": "^4.16.3",
     "uuid": "^11.0.3",
+    "wechat": "^2.1.0",
     "ws": "^8.18.0"
   },
   "devDependencies": {

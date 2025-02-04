@@ -12,8 +12,10 @@
       </view>
       <input class="input" type="password" placeholder="请输入密码"/>
       <view class="verifyCodeBox">
-        <input type="text" placeholder="验证码" maxlength="4"/>
-        <!-- <image src="" mode=""/> -->
+        <input type="text" placeholder="图片验证码" maxlength="4"/>
+        <view class="sendVerifyCode">
+          <rich-text class="svg" nodes="{{img}}"/>
+        </view>
       </view>
     </view>
     <view class="buttonBox">

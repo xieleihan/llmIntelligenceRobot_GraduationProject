@@ -1,4 +1,6 @@
 // pages/RegisterPages/RegisterPages.ts
+import { register, createSvgCode} from '../../api/Modules/general'
+
 Page({
   intervalId: 0 as number, // 保存页面实例
   /**
@@ -6,14 +8,26 @@ Page({
    */
   data: {
     emailSendVerifyCodeText:"发送验证码",
-    isButtonDisabled: false
+    isButtonDisabled: false,
+    inputusername: '', // 用户名
+    inputemail:'', // 邮箱
+    inputemailverifycode: '', // 邮箱验证码
+    inputpassword: '', // 密码
+    inputimgverify: '', // 图片验证码
+    img:'', // 图片验证码
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-
+    const svgImg = createSvgCode().then(
+      (response)=>{
+        this.setData({
+          img: response.data
+        })
+      }
+    );
   },
 
   /**
