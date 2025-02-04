@@ -14,7 +14,7 @@
       <view class="verifyCodeBox">
         <input type="text" placeholder="图片验证码" maxlength="4"/>
         <view class="sendVerifyCode">
-          <rich-text class="svg" nodes="{{img}}"/>
+          <canvas canvas-id="myCanvas" class="svg"></canvas>
         </view>
       </view>
     </view>

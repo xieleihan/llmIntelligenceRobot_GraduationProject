@@ -21,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    const svgImg = createSvgCode().then(
+    createSvgCode().then(
       (response)=>{
         this.setData({
           img: response.data
@@ -34,7 +34,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    const query = wx.createSelectorQuery()
+    query.select('#myCanvas')
+    
   },
 
   /**
