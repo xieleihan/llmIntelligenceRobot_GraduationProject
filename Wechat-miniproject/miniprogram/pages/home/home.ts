@@ -13,9 +13,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isOpenFunctionBox: false,
+    isOpenFunctionBox: false, // 是否打开功能框
     animationData:null as WechatMiniprogram.AnimationExportResult | null, // 存储动画对象
-    isCloseInfo: true
+    isCloseInfo: true, // 是否关闭信息
+    inputMessage: '', // 输入的信息
   },
 
   /**
@@ -103,8 +104,20 @@ Page({
     // console.log(e.detail.value);
     if(e.detail.value !== ''){
       this.setData({
-        isCloseInfo: false
+        isCloseInfo: false,
+        inputMessage: e.detail.value
       })
     }
+  },
+
+  sendMsg(){
+    const app = getApp();
+    app.globalData.megArrayList.push({
+      type: 'user',
+      content: this.data.inputMessage
+    })
+    this.setData({
+      inputMessage: ''
+    })
   }
 })

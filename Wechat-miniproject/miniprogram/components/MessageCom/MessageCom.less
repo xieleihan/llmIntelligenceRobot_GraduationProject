@@ -2,4 +2,67 @@
 .message{
   width: 100%;
   height: 100%;
+  .time{
+    width: 100%;
+    font-size: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .word{
+      color: white;
+      background-color: #ccc;
+      padding: .1rem;
+    }
+  }
+  .msg{
+    width: 100%;
+    height: calc(100% - .8rem);
+    overflow: scroll;
+    .user,
+    .system
+    {
+      width: 100%;
+      margin-bottom: .3rem;
+      .avaterBox{
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        color: #ccc;
+        width: 100%;
+        .avater{
+          width: 2rem;
+          height: 2rem;
+          margin: 0 .3rem;
+          border-radius: 50%;
+          border: 1px solid #ccc;
+          box-sizing: border-box;
+        }
+      }
+
+      .msgWord{
+        font-size: 1rem;
+        padding: 0 2rem;
+        .content{
+          background-color: @googleblue;
+          padding: .5rem;
+          box-sizing: border-box;
+          color: white;
+          border-radius: 0 @radius @radius @radius;
+
+        }
+      }
+    }
+
+    .user{
+      .avaterBox{
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+      }
+      .msgWord{
+        .content{
+          border-radius: @radius 0 @radius @radius
+        }
+      }
+    }
+  }
 }

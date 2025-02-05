@@ -18,8 +18,8 @@
   </view>
   <view class="footer">
     <view class="inputBox">
-      <input bindinput="inputMsg" type="text" placeholder="请输入聊天信息"/>
-      <image class="icon" src="/assets/icon/airport.svg" mode=""/>
+      <input value="{{inputMessage}}" bindinput="inputMsg" type="text" placeholder="请输入聊天信息"/>
+      <image bind:tap="sendMsg" class="icon" src="/assets/icon/airport.svg" mode=""/>
     </view>
   </view>
 </view>

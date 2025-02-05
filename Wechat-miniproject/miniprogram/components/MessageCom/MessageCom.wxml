@@ -1,4 +1,33 @@
 <!--components/MessageCom/MessageCom.wxml-->
 <view class="message">
-  <view class="time"></view>
+  <view class="time"><span class="word">{{nowTime}}</span></view>
+  <view class="msg">
+    <!-- <view class="user">
+      <view class="avaterBox">
+        <image class="avater" src="/assets/images/avater.jpg" alt=""/>
+        <view class="username">user</view>
+      </view>
+      <view class="msgWord">
+        <view class="content">这是示例代码手机里这是示例代码手机里的覅不能这是示例代码手机里的覅不能这是示例代码手机里的覅不能这是示例代码手机里的覅不能的覅不能</view>
+      </view>
+    </view>
+    <view class="system">
+      <view class="avaterBox">
+        <image class="avater" src="/assets/images/avater.jpg" alt=""/>
+        <view class="username">user</view>
+      </view>
+      <view class="msgWord">
+        <view class="content">这是示例代码手机里这是示例代码手机里的覅不能这是示例代码手机里的覅不能这是示例代码手机里的覅不能这是示例代码手机里的覅不能的覅不能</view>
+      </view>
+    </view> -->
+    <view wx:for="{{megArrayList}}" wx:key="index" class="{{item.type}}">
+      <view class="avaterBox">
+        <image class="avater" src="/assets/images/avater.jpg" alt=""/>
+        <view class="username">{{item.type}}</view>
+      </view>
+      <view class="msgWord">
+        <view class="content">{{item.content}}</view>
+      </view>
+    </view>
+  </view>
 </view>
