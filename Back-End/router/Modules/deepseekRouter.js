@@ -123,15 +123,15 @@ router.post('/deepseek', async (ctx) => {
 router.post('/devdeepseek', async (ctx) => {
     // 获取body中的question
     const { question } = ctx.request.body;
-    // const authHeader = ctx.headers['authorization']; // 获取请求头中的authorization
+    const authHeader = ctx.headers['authorization']; // 获取请求头中的authorization
 
-    // if (!authHeader) {
-    //     ctx.status = 401;
-    //     ctx.body = { message: '未授权的访问', code: 401 };
-    //     return;
-    // }
+    if (!authHeader) {
+        ctx.status = 401;
+        ctx.body = { message: '未授权的访问', code: 401 };
+        return;
+    }
 
-    // const token = authHeader;
+    const token = authHeader;
     // console.log("token", token, "anquanma",SECRET_KEY);
 
     // 检查question中是否含有'GitHub'的关键字
@@ -141,6 +141,7 @@ router.post('/devdeepseek', async (ctx) => {
             let tool = '';
             const response = await axiosPost('/public/get-github-repo-activity', { username: 'AtomicGlimpses' });
             tool = response.data.repoActivity;
+            const decoded = jwt.verify(token, SECRET_KEY);
             try {
                 message = await sendMessage({ question, tool });
             } catch {
@@ -151,6 +152,10 @@ router.post('/devdeepseek', async (ctx) => {
             ctx.body = {
                 code: 200,
                 msg: message,
+                user: {
+                    username: decoded.username,
+                    // email: decoded.email,
+                },
                 type: 'system'
             };
         } catch (err) {
@@ -164,11 +169,16 @@ router.post('/devdeepseek', async (ctx) => {
             const response = await axiosPost('/public/get-github-starred-repos', { username: 'AtomicGlimpses' });
             console.log(response)
             tool = response.data.repos;
+            const decoded = jwt.verify(token, SECRET_KEY);
             try {
                 message = await sendMessage({ question, tool });
                 ctx.body = {
                     code: 200,
                     msg: message,
+                    user: {
+                        username: decoded.username,
+                        // email: decoded.email,
+                    },
                     type: 'system'
                 };
             } catch {
@@ -188,11 +198,16 @@ router.post('/devdeepseek', async (ctx) => {
             const response = await axiosPost('/public/get-github-repos', { username: 'AtomicGlimpses' });
             console.log(response)
             tool = response.data.repos;
+            const decoded = jwt.verify(token, SECRET_KEY);
             try {
                 message = await sendMessage({ question, tool });
                 ctx.body = {
                     code: 200,
                     msg: message,
+                    user: {
+                        username: decoded.username,
+                        // email: decoded.email,
+                    },
                     type: 'system'
                 };
             } catch {
@@ -213,7 +228,7 @@ router.post('/devdeepseek', async (ctx) => {
                 message = await sendMessage({ question,tool }); // 调用sendMessage函数
                 // message = await langchainSeedMessage({ question }); // 调用langchainSendMessage函数
                 console.log("message:", message);
-                
+                const decoded = jwt.verify(token, SECRET_KEY);
             } catch {
                 ctx.status = 500;
                 ctx.body = { message: '无法发送消息', code: 500 };
@@ -222,6 +237,10 @@ router.post('/devdeepseek', async (ctx) => {
             ctx.body = {
                 code: 200,
                 msg: message,
+                user: {
+                    username: decoded.username,
+                    // email: decoded.email,
+                },
                 type: 'system'
             };
     
