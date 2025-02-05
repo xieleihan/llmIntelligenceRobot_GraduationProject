@@ -8,7 +8,7 @@ const baseURL = url;
  * @returns Promise 对象
  */
 export function get(url: string, data?: any): Promise<any> {
-  console.log("1111",baseURL+url,data)
+  console.log("发起一个GET请求:请求的url是:"+url+"数据是:"+data)
   return new Promise((resolve, reject) => {
     wx.request({
       url: baseURL+url,

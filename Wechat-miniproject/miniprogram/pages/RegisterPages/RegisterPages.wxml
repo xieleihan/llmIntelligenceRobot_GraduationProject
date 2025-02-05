@@ -4,22 +4,22 @@
     <h2 class="title">Register</h2>
     <p class="desc">注册<span class="goToLoginPages" bind:tap="goToLoginPages">--已有账号?</span></p>
     <view class="inputBox">
-      <input class="input" type="text" placeholder="请输入用户名"/>
-      <input class="input" type="text" placeholder="请输入邮箱"/>
+      <input bindinput="changeInputUsername" class="input" type="text" placeholder="请输入用户名"/>
+      <input bindinput="changeInputEmail" class="input" type="text" placeholder="请输入邮箱"/>
       <view class="verifyCodeBox" style="margin-bottom: .5rem;">
-        <input type="text" placeholder="邮箱验证码" maxlength="4"/>
+        <input bindinput="changeInputEmailVerifyCode" type="text" placeholder="邮箱验证码" maxlength="4"/>
         <view bind:tap="sendVerifyCode" class="sendVerifyCode">{{ emailSendVerifyCodeText }}</view>
       </view>
-      <input class="input" type="password" placeholder="请输入密码"/>
+      <input bindinput="changeInputPassword" class="input" type="password" placeholder="请输入密码"/>
       <view class="verifyCodeBox">
-        <input type="text" placeholder="图片验证码" maxlength="4"/>
-        <view class="sendVerifyCode">
-          <canvas canvas-id="myCanvas" class="svg"></canvas>
+        <input bindinput="changeInputImgVerifyCode" type="text" placeholder="图片验证码" maxlength="4"/>
+        <view class="sendVerifyCode" bind:tap="changeImg">
+          <image class="svg" src="{{imgts}}" mode=""/>
         </view>
       </view>
     </view>
     <view class="buttonBox">
-      <button class="btn">注册</button>
+      <button class="btn" bind:tap="registerBtn">注册</button>
     </view>
   </view>
   
