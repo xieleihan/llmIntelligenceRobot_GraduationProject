@@ -233,11 +233,11 @@ router.post('/devdeepseek', async (ctx) => {
         try {
             let message = '';
             let tool = ''
+            const decoded = jwt.verify(token, SECRET_KEY);
             try {
                 message = await sendMessage({ question,tool }); // 调用sendMessage函数
                 // message = await langchainSeedMessage({ question }); // 调用langchainSendMessage函数
                 console.log("message:", message);
-                const decoded = jwt.verify(token, SECRET_KEY);
             } catch {
                 ctx.status = 500;
                 ctx.body = { message: '无法发送消息', code: 500 };

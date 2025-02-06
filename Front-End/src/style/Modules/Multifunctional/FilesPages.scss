@@ -1,0 +1,50 @@
+@import '../../base.scss';
+
+.filesPages {
+    width: 100dvw;
+    height: 100dvh;
+
+    .content {
+        width: 100%;
+        height: calc(100% - 1.2rem - 1.06667rem);
+        overflow-y: scroll;
+
+        .item{
+            width: 100%;
+            height: 2.8rem;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            .left{
+                width: 80%;
+                height: 100%;
+                padding: .2rem .2rem .2rem .4rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+
+                .filename{
+                    font-weight: bold;
+                }
+                .selectType{
+                    .pick{
+                        color: #ccc;
+                        font-size: .3rem;
+                        text-wrap: nowrap;
+                        margin-left: .2rem;
+                        .heightlight{
+                            color: $googleRed;
+                        }
+                    }
+                }
+            }
+            .right{
+                width: 20%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}

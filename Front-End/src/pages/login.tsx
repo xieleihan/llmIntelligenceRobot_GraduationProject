@@ -92,7 +92,7 @@ function Login() {
                 duration: 2000
             })
             return
-        } else if (passwordReg.test(password) === false) {
+        } else if (passwordReg.test(password) === true) {
             Toast.show({
                 content: '密码格式不正确',
                 duration: 2000

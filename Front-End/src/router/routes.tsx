@@ -10,6 +10,7 @@ import ContactUs from '../pages/Modules/home/ContactUs'; // 联系我们视图
 import UserInfo from '../pages/Modules/home/UserInfo'; // 用户信息视图
 import SettingPage from '../pages/Modules/home/SettingPage'; // 设置视图
 import AuthorizationPages from '../pages/Modules/home/AuthorizationPages'; // 授权视图
+import FilePages from '../pages/Modules/home/FilePages'; // 文件视图
 
 // 蒙版路径
 const maskArray = [
@@ -60,6 +61,10 @@ const routes = [
     {
         path: '/authorization',
         element: <AuthorizationPages />
+    },
+    {
+        path: '/file',
+        element: <FilePages />
     },
     {
         path: '*',
