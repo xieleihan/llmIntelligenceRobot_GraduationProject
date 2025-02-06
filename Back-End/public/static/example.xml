@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<document>
+  <body>
+    <_>
+      <h1>
+        <_>Hello Markdown</_>
+      </h1>
+    </_>
+    <_>
+      <p>
+        <_>This is a </_>
+        <_>
+          <strong>
+            <_>test</_>
+          </strong>
+        </_>
+        <_> file.</_>
+      </p>
+    </_>
+  </body>
+</document>

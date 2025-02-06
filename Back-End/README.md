@@ -526,3 +526,51 @@ config.headers['Authorization'] = `token ${github_token}`;
 > 海外用户因为数据保护法案,暂不收集返回,港澳台的可在后续的更新中,给予选择权限.
 >
 > 大陆用户不会弹出提示,但是会对数据进行脱敏.
+
+### 文件格式生成
+
+> 此处是用`markdown`格式的字符串转成对应的格式文件
+>
+> 前缀:`/protected`
+>
+> 方法均为`POST`
+>
+> 返回的都是json
+>
+> ```json
+> {
+>     "code": 200,
+>     "message": "PDF 生成成功",
+>     "url": "http://localhost:10089/static/example.pdf"
+> }
+> ```
+>
+> 
+
+1. 保存为`Markdown`文件
+
+   > 接口:`/save-md`
+
+2. 保存为`PDF`文件
+
+   > 接口:`/save-pdf`
+
+3. 保存为`XML`文件
+
+   > 接口:`/save-xml`
+
+4. 保存为`HTML`文件
+
+   > 接口: `/save-html`
+
+5. 保存为`Word`文件
+
+   > 接口: `/save-docx`
+
+6. 保存为`JSON`文件
+
+   > 接口:`/save-json`
+
+7. 保存为`TXT`文件
+
+   > 接口:`/save-txt`

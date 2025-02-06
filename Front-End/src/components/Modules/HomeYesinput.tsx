@@ -11,6 +11,12 @@ import { parseTime } from '../../utils/common';
 import Avatar from '../../assets/images/avater.png';
 import SystemIcon from '../../assets/icon/peacock_flat.png';
 
+// 导入react-markdown
+// import ReactMarkdown from "react-markdown";
+
+// 导入Markdown渲染器
+import MarkdownRenderer from './base/MarkdownRenderer';
+
 function HomeYesinput(dataArray: any) {
     // 定义React变量
     const [nowTime, setNowTime] = useState(''); // 当前时间
@@ -76,7 +82,8 @@ function HomeYesinput(dataArray: any) {
                                                 }
                                             }
                                         >
-                                            {item.content}
+                                            {/* {item.content} */}
+                                            <MarkdownRenderer markdownText={item.content} />
                                         </span>
                                     </div>
                                 </div>

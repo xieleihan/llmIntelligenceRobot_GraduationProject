@@ -8,6 +8,14 @@ const { prompt, thinkPrompt } = require('../../utils/Tools/prompt'); // 导入pr
 // const { PromptTemplate } = require("@langchain/core/prompts");
 const { githubTool } = require("../../utils/Tools/Modules/githubTool"); // 导入Github工具
 const { axiosPost } = require('../../api/index'); // 导入axiosGet函数
+const fs = require('fs'); // 导入fs模块
+const path = require('path'); // 导入path模块
+const puppeteer = require("puppeteer"); // 导入puppeteer模块
+const { marked } = require("marked"); // 导入marked模块
+const { JSDOM } = require("jsdom"); // 导入jsdom模块
+const { create } = require('xmlbuilder2'); // 导入xmlbuilder2模块
+const {htmlDocx} = require("html-docx-js"); // 导入html-docx-js模块(已弃用,2016)
+const {asBlob} = require("html-docx-js-typescript"); // 导入html-docx-js-typescript模块(2021)
 
 const router = new Router(
     {
@@ -20,6 +28,7 @@ const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY; // 定义深度求索API�
 const DEEPSEEK_API_BASE_URL = process.env.DEEPSEEK_API_BASE_URL; // 定义深度求索API基础URL
 const MOONSHOT_API_KEY = process.env.MOONSHOT_API_KEY; // 定义Moonshot API密钥
 const MOONSHOT_API_BASE_URL = process.env.MOONSHOT_API_BASE_URL; // 定义Moonshot API基础URL
+const server_port = process.env.SERVER_PORT; // 定义POST
 
 const deepseek = new OpenAI(
     {
@@ -334,6 +343,324 @@ router.post('/telebot', async (ctx) => {
     } catch (err) {
         ctx.status = 403;
         ctx.body = { message: '无效的 Token', code: 403 };
+    }
+})
+
+// 接收Markdown内容并保存在文件中
+router.post('/save-md', async (ctx) => {
+    // console.log("触发")
+    const { filename, content } = ctx.request.body;
+
+    // 检查参数是否为空
+    if (!filename || !content) {
+        ctx.body = { code: 400, message: '参数错误,文件名和内容不能重复' };
+        return;
+    }
+    // 生成 .md 文件路径
+    const staticDir = path.join(__dirname, '../../public/static');
+    const filePath = path.join(staticDir, `${filename}.md`);
+
+    try {
+        // 使用 `fs.promises.writeFile` 进行异步写入
+        await fs.promises.writeFile(filePath, content, "utf8");
+
+        ctx.body = {
+            code: 200,
+            message: "保存成功",
+            url: `http://localhost:${server_port}/static/${filename}.md`,
+        };
+    } catch (error) {
+        console.error("写入文件失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "保存失败" };
+    }
+})
+
+// 接收Markdown内容转换成PDF并保存
+router.post('/save-pdf', async (ctx) => {
+    const { filename, content } = ctx.request.body;
+
+    // 校验参数
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+    const staticDir = path.join(__dirname, '../../public/static');
+    const pdfPath = path.join(staticDir, `${filename}.pdf`);
+
+    try {
+        // 📝 1. 把 Markdown 转换为 HTML
+        const htmlContent = `
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    h1, h2, h3 { color: #333; }
+                    pre { background: #f4f4f4; padding: 10px; }
+                </style>
+            </head>
+            <body>
+                 ${await marked.parse(content)}
+            </body>
+        </html>`;
+
+        // 🖥️ 2. 启动 Puppeteer，生成 PDF
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.setContent(htmlContent, { waitUntil: "load" });
+        await page.pdf({ path: pdfPath, format: "A4" });
+
+        await browser.close();
+
+        ctx.body = {
+            code: 200,
+            message: "PDF 生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.pdf`,
+        };
+    } catch (error) {
+        console.error("生成 PDF 失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "PDF 生成失败" };
+    }
+})
+
+// 接收Markdown内容转换成XML并保存
+router.post('/save-xml', async (ctx) => {
+    const { filename, content } = ctx.request.body;
+
+    // 校验参数
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+
+    try {
+        // Markdown 转 HTML
+        const htmlContent = await marked.parse(content);
+
+        // HTML 转 XML
+        const dom = new JSDOM(htmlContent);
+        const document = dom.window.document;
+
+        const xmlObj = { document: {} };
+        const convertElement = (node) => {
+            if (node.nodeType === 3) {
+                return node.textContent.trim() ? node.textContent : null;
+            }
+            if (node.nodeType !== 1) return null;
+
+            const obj = { [node.tagName.toLowerCase()]: {} };
+            if (node.attributes.length) {
+                obj[node.tagName.toLowerCase()].$ = {};
+                for (let attr of node.attributes) {
+                    obj[node.tagName.toLowerCase()].$[attr.name] = attr.value;
+                }
+            }
+
+            let children = [];
+            for (let child of node.childNodes) {
+                let converted = convertElement(child);
+                if (converted) children.push(converted);
+            }
+            if (children.length) {
+                obj[node.tagName.toLowerCase()]._ = children;
+            }
+            return obj;
+        };
+
+        xmlObj.document = convertElement(document.body) || {};
+
+        // 生成 XML 字符串
+        const xmlString = create(xmlObj).end({ prettyPrint: true });
+
+        // 保存到 static 目录
+        const staticDir = path.join(__dirname, "../../public/static");
+        if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
+
+        const xmlPath = path.join(staticDir, `${filename}.xml`);
+        fs.writeFileSync(xmlPath, xmlString);
+
+        ctx.body = {
+            code: 200,
+            message: "XML 生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.xml`,
+        };
+    } catch (error) {
+        console.error("XML 生成失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "XML 生成失败" };
+    }
+})
+
+// 接收Markdown内容转换成HTML并保存
+router.post('/save-html', async (ctx) => {
+    const { filename, content } = ctx.request.body;
+
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+
+    try {
+        // Markdown 转 HTML
+        const htmlContent = `
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>${filename}</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    h1, h2, h3 { color: #333; }
+                    pre { background: #f4f4f4; padding: 10px; }
+                </style>
+            </head>
+            <body>
+                ${marked(content)}
+            </body>
+        </html>`;
+
+        // 保存到 static 目录
+        const staticDir = path.join(__dirname, "../../public/static");
+        if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
+
+        const htmlPath = path.join(staticDir, `${filename}.html`);
+        fs.writeFileSync(htmlPath, htmlContent);
+
+        ctx.body = {
+            code: 200,
+            message: "HTML 生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.html`,
+        };
+    } catch (error) {
+        console.error("HTML 生成失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "HTML 生成失败" };
+    }
+})
+
+// 将Markdown转为DOCX并保存
+router.post('/save-docx', async (ctx) => { 
+    const { filename, content } = ctx.request.body;
+
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+
+    try {
+        // Markdown 转 HTML
+        const htmlContent = `
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 20px; }
+                    h1, h2, h3 { color: #333; }
+                    pre { background: #f4f4f4; padding: 10px; }
+                </style>
+            </head>
+            <body>
+                ${marked(content)}
+            </body>
+        </html>`;
+
+        // HTML 转 DOCX
+        const docxBuffer = await asBlob(htmlContent);
+
+        // 保存到 static 目录
+        const staticDir = path.join(__dirname, "../../public/static");
+        if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
+
+        const wordPath = path.join(staticDir, `${filename}.docx`);
+        fs.writeFileSync(wordPath, docxBuffer);
+
+        ctx.body = {
+            code: 200,
+            message: "Word 文件生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.docx`,
+        };
+    } catch (error) {
+        console.error("Word 生成失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "Word 生成失败" };
+    }
+});
+
+// 将Markdown转为JSON并保存
+router.post('/save-json', async (ctx) => {
+    const { filename, content } = ctx.request.body;
+
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+
+    try {
+        const htmlContent = marked.parse(content); // Markdown 转 HTML
+        const { mdToJson } = require('../../utils/Tools/Modules/mdToJson'); // 导入mdToJson函数
+        const jsonContent = mdToJson(htmlContent); // HTML 转 JSON
+
+        // 保存到 static 目录
+        const staticDir = path.join(__dirname, "../../public/static");
+        if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
+
+        const jsonPath = path.join(staticDir, `${filename}.json`);
+        fs.writeFileSync(jsonPath, JSON.stringify(jsonContent, null, 2));
+
+        ctx.body = {
+            code: 200,
+            message: "JSON 文件生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.json`,
+        };
+    } catch (error) {
+        console.error("JSON 生成失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "JSON 生成失败" };
+    }
+})
+
+// 将Markdown转为TXT并保存
+router.post('/save-txt', async (ctx) => {
+    const { filename, content } = ctx.request.body;
+
+    if (!filename || !content) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
+        return;
+    }
+
+    try {
+        // 1. Markdown 转 纯文本
+        const plainText = marked(content)
+            .replace(/<\/?[^>]+(>|$)/g, "") // 移除 HTML 标签
+            .replace(/&nbsp;/g, " ") // 替换空格符
+            .replace(/\n\s*\n/g, "\n") // 去掉多余的空行
+            .trim();
+
+        // 2. 确保 static 目录存在
+        const staticDir = path.join(__dirname, "../../public/static");
+        if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
+
+        // 3. 生成 TXT 文件
+        const txtPath = path.join(staticDir, `${filename}.txt`);
+        fs.writeFileSync(txtPath, plainText, "utf-8");
+
+        // ✅ 4. 返回成功响应
+        ctx.body = {
+            code: 200,
+            message: "TXT 文件生成成功",
+            url: `http://localhost:${server_port}/static/${filename}.txt`,
+        };
+    } catch (error) {
+        console.error("TXT 生成失败:", error);
+        ctx.status = 500;
+        ctx.body = { code: 500, message: "TXT 生成失败" };
     }
 })
 

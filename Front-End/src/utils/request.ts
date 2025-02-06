@@ -1,10 +1,10 @@
-import axios from 'axios'; // 导入axios
+import axios from "axios"; // 导入axios
 
 // 获取Cookie的数据
 const getCookie = (name: string): string | null => {
-  const cookies = document.cookie.split(';');
+  const cookies = document.cookie.split(";");
   for (const cookie of cookies) {
-    const [key, value] = cookie.split('=').map(c => c.trim());
+    const [key, value] = cookie.split("=").map((c) => c.trim());
     if (key === name) {
       return decodeURIComponent(value);
     }
@@ -17,18 +17,19 @@ const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_API, // api的base_url
   timeout: 50000, // 请求超时时间
   headers: {
-    'Content-Type': 'application/json;charset=UTF-8',
+    "Content-Type": "application/json;charset=UTF-8",
   },
 });
 
 // 添加请求拦截器
-instance.interceptors.request.use((config) => {
-  const token = getCookie('AUTO_TOKEN');
-  config.headers['Authorization'] = token;
-  console.log("config:", config);
-  // return config;
-  return Promise.resolve(config);
-},
+instance.interceptors.request.use(
+  (config) => {
+    const token = getCookie("AUTO_TOKEN");
+    config.headers["Authorization"] = token;
+    console.log("config:", config);
+    // return config;
+    return Promise.resolve(config);
+  },
   (error) => {
     // 对请求错误做些什么
     return Promise.reject(error);

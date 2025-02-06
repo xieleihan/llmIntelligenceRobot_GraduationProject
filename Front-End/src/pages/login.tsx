@@ -5,6 +5,9 @@ import '../style/returnBtn.scss';
 // 导入react组件
 import { useEffect, useState } from 'react';
 
+// 导入解码jwt
+import {jwtDecode} from 'jwt-decode';
+
 // 导入ant-design mobile组件
 import { Button, Toast, Input, Mask } from 'antd-mobile'
 import { EyeInvisibleOutline, EyeOutline } from 'antd-mobile-icons'
@@ -17,6 +20,11 @@ import { Outlet, useNavigate, useOutletContext } from "react-router-dom"
 
 // 导入API
 import { get, post } from '../api/index'
+
+// 使用React Redux
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../store/index';
+import { setUsername } from '../store/userStore';
 
 // Define the type for the context
 interface OutletContextType {
@@ -42,6 +50,9 @@ function Login() {
 
     // 初始化导航
     const navigate = useNavigate();
+
+    // 初始化Redux
+    const dispatch = useDispatch<AppDispatch>();
 
     // 生命周期
     useEffect(() => {
@@ -81,7 +92,7 @@ function Login() {
                 duration: 2000
             })
             return
-        } else if (passwordReg.test(password) === true) {
+        } else if (passwordReg.test(password) === false) {
             Toast.show({
                 content: '密码格式不正确',
                 duration: 2000
@@ -104,6 +115,13 @@ function Login() {
 
                         // 把obj.token存进cookies 设置过期时间为1h
                         document.cookie = `AUTO_TOKEN=${obj.token};max-age=3600`
+
+                        // 解码token
+                        const token = obj.token
+                        const decoded = jwtDecode(token)
+                        const decodedStr = JSON.stringify(decoded)
+                        const decodedObj = JSON.parse(decodedStr)
+                        dispatch(setUsername(decodedObj.username))
 
                         setTimeout(() => {
                             navigate('/home')
