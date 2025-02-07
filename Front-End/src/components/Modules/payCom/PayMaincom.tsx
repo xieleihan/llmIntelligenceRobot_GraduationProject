@@ -21,7 +21,8 @@ function PayMaincom() {
                     isHeaderWord ? (
                         <PremiumpagesCom />
                     ) : (
-                            <FreepagesCom />
+                            // <FreepagesCom />
+                            <PremiumpagesCom />
                     )
                 }
             </div>
