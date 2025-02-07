@@ -535,13 +535,24 @@ config.headers['Authorization'] = `token ${github_token}`;
 >
 > 方法均为`POST`
 >
+> 传入:
+>
+> ```json
+> {
+>   "filename": "example",
+>   "content": "# Hello Markdown\n\nThis is a **test** file."
+> }
+> ```
+>
+> 
+>
 > 返回的都是json
 >
 > ```json
 > {
->     "code": 200,
->     "message": "PDF 生成成功",
->     "url": "http://localhost:10089/static/example.pdf"
+>  "code": 200,
+>  "message": "PDF 生成成功",
+>  "url": "http://localhost:10089/static/example.pdf"
 > }
 > ```
 >
@@ -574,3 +585,45 @@ config.headers['Authorization'] = `token ${github_token}`;
 7. 保存为`TXT`文件
 
    > 接口:`/save-txt`
+
+### 文件信息
+
+> 前缀:`/protected`
+>
+> #### 获取文件信息
+>
+> 接口:`/getFileInfo`
+>
+> 方法:`POST`
+>
+> 传入:只要前端登录就行,在cookies的auto_token获取username
+>
+> 返回
+>
+> ```json
+> {
+>     code: 200,
+>     data: result
+> }
+> ```
+>
+> #### 插入文件信息
+>
+> 接口:`/insertFileInfo`
+>
+> 方法:`POST`
+>
+> 传入三个参数,其中一个是自动传入
+>
+> 只需传入`filename`,`content`就行
+>
+> 返回
+>
+> ```json
+> {
+>     code: 200,
+>     message: ""
+> }
+> ```
+>
+> 
