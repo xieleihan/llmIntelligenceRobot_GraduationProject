@@ -339,7 +339,8 @@ router.post('/telebot', async (ctx) => {
     try {
         let message = '';
         try {
-            message = await moonshotFunc({ question });
+            // message = await moonshotFunc({ question });
+            message = await sendMessage({ question });// 深度求索
         } catch {
             ctx.status = 500;
             ctx.body = { message: '无法发送消息', code: 500 };

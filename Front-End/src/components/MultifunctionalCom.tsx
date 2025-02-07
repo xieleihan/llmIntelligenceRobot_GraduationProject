@@ -11,6 +11,12 @@ import FunctionboxCom from './Modules/FunctionboxCom';
 // 路由跳转
 import { useNavigate } from "react-router-dom"
 
+// 导入Ant Design Mobile
+import { Button,Dialog,Toast } from 'antd-mobile';
+
+// 导入js-cookie
+import Cookies from 'js-cookie';
+
 function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean, handleToggleClickTwo: (clickBool: boolean) => void }) {
     // 定义React变量
     const [isComOpen, setIsComOpen] = useState(isOpen); // 点击状态
@@ -23,6 +29,12 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
 
     // 初始化导航
     const navigate = useNavigate();
+
+    // 清除cookies(使用js-cookie)
+    const clearCookies = () => {
+        const cookies = Cookies.get();
+        Object.keys(cookies).forEach(cookieName => Cookies.remove(cookieName, { path: '/' }));
+    };
 
     return (
         <>
@@ -57,6 +69,34 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
                     <div className="functionBox">
                         <FunctionboxCom />
                     </div>
+                    <Button onClick={
+                        () => {
+                            // 清除cookies
+                            // clearCookies();
+                            // navigate('/login');
+                            Dialog.confirm({
+                                title: '提示',
+                                content: '是否退出登录?',
+                                onConfirm: () => {
+                                    Toast.show({
+                                        content: '退出成功',
+                                        duration: 2000
+                                    })
+                                    setTimeout(() => {
+                                        clearCookies();
+                                        navigate('/login');
+                                    },2000)
+                                },
+                                onCancel: () => {
+                                    console.log('取消退出');
+                                    Toast.show({
+                                        content: '取消退出',
+                                        duration: 2000
+                                    })
+                                }
+                            })
+                        }
+                    } color='danger' className='exit'>退出</Button>
                 </div>
                 <div className="copyright">
                     <span>Copyright© 2024 SouthAki</span>

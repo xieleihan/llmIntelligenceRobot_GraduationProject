@@ -19,8 +19,6 @@ const llm = new ChatOpenAI({
     baseURL: DASHSCOPE_BASE_URL
 });
 
-
-
 // 创建代理执行器
 async function initializeAgent() {
     // console.log("prompt:", prompt);

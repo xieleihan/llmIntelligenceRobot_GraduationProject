@@ -121,6 +121,10 @@ function Login() {
                         const decoded = jwtDecode(token)
                         const decodedStr = JSON.stringify(decoded)
                         const decodedObj = JSON.parse(decodedStr)
+
+                        // 把用户名存进sessionStorage
+                        sessionStorage.setItem('username', decodedObj.username)
+
                         dispatch(setUsername(decodedObj.username))
 
                         setTimeout(() => {

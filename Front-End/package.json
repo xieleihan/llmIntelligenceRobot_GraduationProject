@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 9008",
+    "dev": "vite --port 9008 --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -15,6 +15,7 @@
     "antd-mobile": "^5.38.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "postcss-loader": "^8.1.1",
     "postcss-px-to-viewport": "^1.1.1",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

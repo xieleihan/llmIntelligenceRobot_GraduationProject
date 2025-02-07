@@ -1,0 +1,21 @@
+@import '../../../base.scss';
+
+.freepagesCom{
+    width: 100%;
+    height: calc(100% - .4rem);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 .4rem;
+    .icon{
+        width: 50%;
+        aspect-ratio: 1/1;
+        margin-bottom: .8rem;
+    }
+    .desc{
+        font-size: .5rem;
+        color: #ccc;
+        text-align: center;
+    }
+}

@@ -11,6 +11,7 @@ import UserInfo from '../pages/Modules/home/UserInfo'; // 用户信息视图
 import SettingPage from '../pages/Modules/home/SettingPage'; // 设置视图
 import AuthorizationPages from '../pages/Modules/home/AuthorizationPages'; // 授权视图
 import FilePages from '../pages/Modules/home/FilePages'; // 文件视图
+import PayPages from '../pages/Modules/home/PayPages';
 
 // 蒙版路径
 const maskArray = [
@@ -65,6 +66,10 @@ const routes = [
     {
         path: '/file',
         element: <FilePages />
+    },
+    {
+        path: '/pay',
+        element: <PayPages />
     },
     {
         path: '*',

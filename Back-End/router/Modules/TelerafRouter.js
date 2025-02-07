@@ -60,10 +60,6 @@ bot.telegram.setMyCommands([
         description: '获取用户信息'
     },
     {
-        command: 'deepseek',
-        description: '开始聊天'
-    },
-    {
         command: 'help',
         description: '获取帮助'
     },

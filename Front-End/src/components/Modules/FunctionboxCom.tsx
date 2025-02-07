@@ -4,6 +4,7 @@ import { SetOutline, RightOutline, MessageOutline } from 'antd-mobile-icons'
 // 导入图片
 import Authorization from '../../assets/icon/authotization.svg';
 import File from '../../assets/icon/file.svg';
+import Pay from '../../assets/icon/pay.svg';
 
 // 路由跳转
 import { useNavigate } from "react-router-dom"
@@ -25,6 +26,22 @@ function FunctionboxCom() {
                 <div className="item-left">
                     <img src={File} alt="" />
                     <span>情报文档</span>
+                </div>
+                <div className="item-right">
+                    <RightOutline />
+                </div>
+            </div>
+            <div
+                className="item"
+                onClick={
+                    () => {
+                        navigate('/pay');
+                    }
+                }
+            >
+                <div className="item-left">
+                    <img src={Pay} alt="" />
+                    <span>付费赞助</span>
                 </div>
                 <div className="item-right">
                     <RightOutline />

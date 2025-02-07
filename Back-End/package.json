@@ -45,6 +45,7 @@
     "path": "^0.12.7",
     "pdfkit": "^0.16.0",
     "puppeteer": "^24.2.0",
+    "redis": "^4.7.0",
     "serpapi": "^2.1.0",
     "supertest": "^7.0.0",
     "svg-captcha": "^1.4.0",

@@ -24,7 +24,7 @@ router.post('/save-json', async (ctx) => {
 
     try {
         const htmlContent = marked.parse(content); // Markdown 转 HTML
-        const { mdToJson } = require('../../utils/Tools/Modules/mdToJson'); // 导入mdToJson函数
+        const { mdToJson } = require('../../../../utils/Tools/Modules/mdToJson'); // 导入mdToJson函数
         const jsonContent = mdToJson(htmlContent); // HTML 转 JSON
 
         // 保存到 static 目录
