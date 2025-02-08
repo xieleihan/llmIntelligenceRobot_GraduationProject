@@ -1,7 +1,7 @@
 // 导入React
 import { useState } from 'react';
 
-function PayHeadercom() {
+function PayHeadercom({ callback }: { callback: (value: boolean) => void }) {
     // 定义React变量
     const [isMaskChange, setIsMaskChange] = useState(false); // 点击状态
     const [isMaskSpan, setIsMaskSpan] = useState(false); // 点击后文字状态(后端有一个字段判断是否展示这个)
@@ -11,6 +11,7 @@ function PayHeadercom() {
             <header className='header'>
                 <div className="free" onClick={() => {
                     setIsMaskChange(false);
+                    callback(false);
                 }}>
                     <div className='title'>Free</div>
                     <div className='china-title'>免费版</div>
@@ -27,6 +28,7 @@ function PayHeadercom() {
                 </div>
                 <div className="payment" onClick={() => {
                     setIsMaskChange(true);
+                    callback(true);
                 }}>
                     <div className='title'>Premium</div>
                     <div className='china-title'>高级版</div>

@@ -142,7 +142,7 @@ router.post('/devdeepseek', async (ctx) => {
     }
 
     const token = authHeader;
-    // console.log("token", token, "anquanma",SECRET_KEY);
+    console.log("token", token, "anquanma",SECRET_KEY);
 
     // 检查question中是否含有'GitHub'的关键字(这是查找别人的信息,需要使用[])
     if (question.includes('GitHub') || question.includes('github') || question.includes('Git') || question.includes('git') || question.includes('gitHub') || question.includes('GITHUB') || question.includes('GITHUB') || question.includes('Github')) {

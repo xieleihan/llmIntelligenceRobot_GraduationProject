@@ -12,7 +12,12 @@ import PayMaincom from '../../../components/Modules/payCom/PayMaincom';
 import PayFootercom from '../../../components/Modules/payCom/PayFootercom';
 import PayHeadercom from '../../../components/Modules/payCom/PayHeadercom';
 
+// 导入React
+import { useState } from 'react';
+
 function PayPages() {
+    // 定义React变量
+    const [is,setIs] = useState(false);
 
     // 定义路由跳转
     const navigate = useNavigate();
@@ -23,14 +28,20 @@ function PayPages() {
         navigate('/home');
     }
 
+    // 定义回调函数
+    const callback = (value: boolean) => {
+        setIs(value);
+        // console.log(value);
+    }
+
     return (
         <>
             <div className="pay">
                 <NavBar className='navbar' onBack={back}>支付</NavBar>
                 <div className="container">
-                    <PayHeadercom />
+                    <PayHeadercom callback={callback} />
                     <main className='main'>
-                        <PayMaincom />
+                        <PayMaincom callbackMsg={is} />
                     </main>
                     <PayFootercom />
                 </div>
