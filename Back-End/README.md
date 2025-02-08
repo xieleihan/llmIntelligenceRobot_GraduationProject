@@ -747,3 +747,64 @@ config.headers['Authorization'] = `token ${github_token}`;
 > ```
 >
 > 
+
+### 用户信息接口
+
+> 前缀: `/protected`
+>
+> 接口:`/userinfo`
+>
+> 方法:`POST`
+>
+> 参数:`username`(必须),`useraddress`,`userip`,`usergithub`,`userdesc`,`isDelete`(必须)
+>
+> `isDelete`:如果为`0`,则是**更新或者查询操作**,为`1`,是**删除操作**.
+>
+> 是number
+>
+> 必选参数一定需要传入
+>
+> 且选参不可一堆传过去,只可以选择一个参数传入
+>
+> 注册自动的返回数据
+>
+> ```json
+> {
+>     code: 200,
+>     message: "用户信息写入成功"
+> }
+> ```
+>
+> 查询返回的结果
+>
+> ```json
+> {
+>     code: 200,
+>     message: "查询成功",
+>     data: userinfo
+> }
+> ```
+>
+> 更新返回的
+>
+> ```json
+> {
+>     "code": 200,
+>     "message": "用户地理位置信息更新成功",
+>     "data": [
+>         {
+>             "id": 1,
+>             "useravater": "http://localhost:10089/avater_img/21.png",
+>             "userdesc": "你写下的每一个bug，都是人类反抗被人工智能统治的一颗子弹!",
+>             "useraddress": "香港",
+>             "username": "xieleihan",
+>             "usergithub": "xieleihan",
+>             "userip": "0.0.0.0",
+>             "registerTime": "1739007334931",
+>             "uuid": "0d296018-2a5c-4fed-ac06-65517611f12d"
+>         }
+>     ]
+> }
+> ```
+>
+> 

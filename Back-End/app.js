@@ -53,7 +53,7 @@ app.use(cors({
 }));
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter, superAdminRouter, TelegramRouter, getFileInfoRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter, superAdminRouter, TelegramRouter, getFileInfoRouter,userinfoRouter } = require('./router/index');
 const utilsIndex = require('./router/Modules/base/index');
 
 // 使用路由
@@ -72,6 +72,7 @@ app.use(githubRouter.routes()); // github路由
 app.use(getServerStateRouter.routes()); // 服务器状态路由
 app.use(superAdminRouter.routes()); // 超级管理员路由
 app.use(getFileInfoRouter.routes()); // 文件信息路由
+app.use(userinfoRouter.routes()); // 用户信息路由
 app.use(utilsIndex.saveMd.routes()); // 保存Markdown路由
 app.use(utilsIndex.saveJson.routes()); // 保存JSON路由
 app.use(utilsIndex.saveTxt.routes()); // 保存TXT路由

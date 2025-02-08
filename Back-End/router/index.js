@@ -9,6 +9,7 @@ const superAdminRouter = require('./Modules/superAdminRouter');
 const TelegramRouter = require('./Modules/TelerafRouter');
 const getFileInfoRouter = require('./Modules/getFileInfo');
 const utilsIndex = require('./Modules/base/index');
+const userinfoRouter = require('./Modules/userinfo');
 
 // 导出全部引入的模块
 module.exports = {
@@ -22,5 +23,6 @@ module.exports = {
     superAdminRouter,
     TelegramRouter,
     getFileInfoRouter,
-    utilsIndex
+    utilsIndex,
+    userinfoRouter
 };

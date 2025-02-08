@@ -10,4 +10,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src') // 路径别名
     }
   },
+  css: {
+    modules: {
+      generateScopedName: '[name]__[local]__[hash:base64:6]' // CSS模块化
+    }
+  }
 });
