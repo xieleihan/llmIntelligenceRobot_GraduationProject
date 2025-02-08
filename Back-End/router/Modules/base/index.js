@@ -5,6 +5,7 @@ const saveXml = require('./Modules/saveXml');
 const saveJson = require('./Modules/saveJson');
 const saveDocx = require('./Modules/saveDocx');
 const saveTxt = require('./Modules/saveTxt');
+const getSaveNumber = require('./Modules/getSaveNumber');
 
 // 导出全部引入的模块
 module.exports = {
@@ -14,5 +15,6 @@ module.exports = {
     saveXml,
     saveJson,
     saveDocx,
-    saveTxt
+    saveTxt,
+    getSaveNumber
 }

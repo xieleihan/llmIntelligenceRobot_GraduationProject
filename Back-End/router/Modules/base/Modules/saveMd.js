@@ -22,7 +22,7 @@ router.post('/save-md', async (ctx) => {
         return;
     }
     // 生成 .md 文件路径
-    const staticDir = path.join(__dirname, '../../public/static');
+    const staticDir = path.join(__dirname, '../../../../public/static');
     const filePath = path.join(staticDir, `${filename}.md`);
 
     try {

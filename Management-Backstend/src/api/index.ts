@@ -1,8 +1,11 @@
 // 导入axios实例
 import instance from "../utils/request";
 
+// 判断当前是否是本地开发环境
+const isLocal = window.location.hostname === 'localhost';
+
 // 导入host_url
-const host_url = import.meta.env.VITE_BASE_API;
+const host_url = isLocal ? import.meta.env.VITE_BASE_API : import.meta.env.VITE_BASE_LAN_API;
 
 // 校验参数是否为对象类型
 const validateParams = (params: any) => {

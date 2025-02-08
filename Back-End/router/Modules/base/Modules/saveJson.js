@@ -28,7 +28,7 @@ router.post('/save-json', async (ctx) => {
         const jsonContent = mdToJson(htmlContent); // HTML 转 JSON
 
         // 保存到 static 目录
-        const staticDir = path.join(__dirname, "../../public/static");
+        const staticDir = path.join(__dirname, "../../../../public/static");
         if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
         const jsonPath = path.join(staticDir, `${filename}.json`);

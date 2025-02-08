@@ -1,50 +1,39 @@
-# React + TypeScript + Vite
+# React + Sass + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 前端项目
+>
+> 作者: `@SouthAki`
 
-Currently, two official plugins are available:
+## 项目启动
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. 安装必要的模块
 
-## Expanding the ESLint configuration
+   ```bash
+   npm i
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. 配置环境变量
 
-- Configure the top-level `parserOptions` property like this:
+   - 开发环境: 在根目录下新建`.env.development`文件
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+     ```text
+     # 本地开发环墨境变量配置
+     VITE_BASE_API=http://localhost:10089
+     VITE_BASE_LAN_API=http://10.10.28.19:10089
+     ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+   - 生产环境: 新建`.env.production`文件,内容同上
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+3. 启动
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   npm run dev
+   ```
+
+4. 打包
+
+   ```bash
+   npm run build
+   ```
+
+   

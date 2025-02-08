@@ -65,7 +65,7 @@ router.post('/save-xml', async (ctx) => {
         const xmlString = create(xmlObj).end({ prettyPrint: true });
 
         // 保存到 static 目录
-        const staticDir = path.join(__dirname, "../../public/static");
+        const staticDir = path.join(__dirname, "../../../../public/static");
         if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
         const xmlPath = path.join(staticDir, `${filename}.xml`);

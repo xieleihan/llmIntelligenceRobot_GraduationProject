@@ -626,4 +626,124 @@ config.headers['Authorization'] = `token ${github_token}`;
 > }
 > ```
 >
+
+### 操作文件夹下的文件信息
+
+> 前缀: `/protected`
+>
+> #### 获取文件夹下的信息
+>
+> 接口:`/file-stats`
+>
+> 方法:`GET`
+>
+> 返回一个json
+>
+> ```json
+> {
+>     "code": 200,
+>     "data": {
+>         "fileCounts": {
+>             ".docx": 1,
+>             ".html": 1,
+>             ...
+>         },
+>         "fileDetails": [
+>             {
+>                 "fileName": "example.docx",
+>                 "extension": ".docx",
+>                 "createdTime": "2025-02-06T08:07:40.635Z",
+>                 "openUrl": "http://localhost:10089/static/example.docx"
+>             },
+>             ...
+>         ]
+>     }
+> }
+> ```
+>
+> #### 删除文件夹下某个文件信息
+>
+> 接口:`/delete-file`
+>
+> 方法:`POST`
+>
+> 参数:`filename`(需要后缀)
+>
+> 返回:
+>
+> success
+>
+> ```json
+> {
+>   "code": 200,
+>   "message": "文件 'test.txt' 删除成功"
+> }
+> 
+> ```
+>
+> 缺少`filename`参数
+>
+> ```json
+> {
+>   "code": 400,
+>   "error": "缺少 fileName 参数"
+> }
+> ```
+>
+> 文件不存在
+>
+> ```json
+> {
+>   "code": 404,
+>   "error": "文件 'test.txt' 不存在"
+> }
+> ```
+>
+> 其他错误
+>
+> ```json
+> {
+>   "code": 500,
+>   "error": "删除文件失败"
+> }
+> ```
+>
+> #### 清空static文件夹
+>
+> 接口:`/clear-static`
+>
+> 方法:`POST`
+>
+> 返回一个JSON
+>
+> 如果本身为空
+>
+> ```json
+> {
+>   "code": 200,
+>   "message": "static 文件夹已为空"
+> }
+> 
+> ```
+>
+> 不为空,但是成功
+>
+> ```json
+> {
+>   "code": 200,
+>   "message": "static 文件夹已为空"
+> }
+> 
+> ```
+>
+> 失败返回
+>
+> ```json
+> {
+>   "code": 500,
+>   "error": "清空 static 文件夹失败"
+> }
+> 
+> ```
+>
 > 

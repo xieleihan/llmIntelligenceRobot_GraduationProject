@@ -31,7 +31,7 @@ router.post('/save-txt', async (ctx) => {
             .trim();
 
         // 2. 确保 static 目录存在
-        const staticDir = path.join(__dirname, "../../public/static");
+        const staticDir = path.join(__dirname, "../../../../public/static");
         if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
         // 3. 生成 TXT 文件

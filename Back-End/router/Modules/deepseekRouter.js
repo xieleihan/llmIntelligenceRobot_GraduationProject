@@ -8,14 +8,6 @@ const { prompt, thinkPrompt } = require('../../utils/Tools/prompt'); // 导入pr
 // const { PromptTemplate } = require("@langchain/core/prompts");
 const { githubTool } = require("../../utils/Tools/Modules/githubTool"); // 导入Github工具
 const { axiosPost } = require('../../api/index'); // 导入axiosGet函数
-const fs = require('fs'); // 导入fs模块
-const path = require('path'); // 导入path模块
-const puppeteer = require("puppeteer"); // 导入puppeteer模块
-const { marked } = require("marked"); // 导入marked模块
-const { JSDOM } = require("jsdom"); // 导入jsdom模块
-const { create } = require('xmlbuilder2'); // 导入xmlbuilder2模块
-const {htmlDocx} = require("html-docx-js"); // 导入html-docx-js模块(已弃用,2016)
-const { asBlob } = require("html-docx-js-typescript"); // 导入html-docx-js-typescript模块(2021)
 const setFileInfo = require('../../model/Modules/setFileInfo'); // 导入setFileInfo函数
 
 const router = new Router(
@@ -29,7 +21,6 @@ const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY; // 定义深度求索API�
 const DEEPSEEK_API_BASE_URL = process.env.DEEPSEEK_API_BASE_URL; // 定义深度求索API基础URL
 const MOONSHOT_API_KEY = process.env.MOONSHOT_API_KEY; // 定义Moonshot API密钥
 const MOONSHOT_API_BASE_URL = process.env.MOONSHOT_API_BASE_URL; // 定义Moonshot API基础URL
-const server_port = process.env.SERVER_PORT; // 定义POST
 
 const deepseek = new OpenAI(
     {

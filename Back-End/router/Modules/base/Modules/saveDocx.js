@@ -44,7 +44,7 @@ router.post('/save-docx', async (ctx) => {
         const docxBuffer = await asBlob(htmlContent);
 
         // 保存到 static 目录
-        const staticDir = path.join(__dirname, "../../public/static");
+        const staticDir = path.join(__dirname, "../../../../public/static");
         if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
         const wordPath = path.join(staticDir, `${filename}.docx`);

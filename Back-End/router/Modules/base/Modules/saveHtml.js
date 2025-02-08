@@ -41,7 +41,7 @@ router.post('/save-html', async (ctx) => {
         </html>`;
 
         // 保存到 static 目录
-        const staticDir = path.join(__dirname, "../../public/static");
+        const staticDir = path.join(__dirname, "../../../../public/static");
         if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true });
 
         const htmlPath = path.join(staticDir, `${filename}.html`);

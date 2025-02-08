@@ -121,7 +121,10 @@ function inputEnter(event: KeyboardEvent) {
 
 const randomNumber = ref(getRandomNumber(1, 5))
 // 动态加载背景图片路径
-const bg = new URL(`../assets/images/${randomNumber.value}.jpg`, import.meta.url).href
+// 静态图
+// const bg = new URL(`../assets/images/${randomNumber.value}.jpg`, import.meta.url).href
+// 动态图
+const bg = new URL(`../assets/images/${randomNumber.value}.gif`, import.meta.url).href
 
 // 定义变量
 const inputUsername = ref('')

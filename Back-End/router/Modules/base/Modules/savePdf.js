@@ -23,7 +23,7 @@ router.post('/save-pdf', async (ctx) => {
         ctx.body = { code: 400, message: "参数错误, 文件名和内容不能为空" };
         return;
     }
-    const staticDir = path.join(__dirname, '../../public/static');
+    const staticDir = path.join(__dirname, '../../../../public/static');
     const pdfPath = path.join(staticDir, `${filename}.pdf`);
 
     try {
