@@ -19,6 +19,9 @@ interface OutletContextType {
     handleDataFromChild: (data: boolean) => void;
 }
 
+// 导入接口
+import { userinfo } from '../api/request';
+
 function Register() {
 
     // 定义React变量
@@ -87,17 +90,45 @@ function Register() {
             email_code: verifyEmailCode,
             svgCode: verifySvgCode
         })
-            .then((response) => {
+            .then(async (response) => {
                 const str = JSON.stringify(response)
                 const obj = JSON.parse(str)
                 if (obj.code === 200) {
-                    Toast.show({
-                        content: '注册成功',
-                        duration: 2000
+
+                    // 写入用户信息
+                    await userinfo({
+                        username: username,
+                        isDelete: 0
+                    }).then((response) => {
+                        const strUserinfo = JSON.stringify(response)
+                        const objUserinfo = JSON.parse(strUserinfo)
+                        if (objUserinfo.code === 200) {
+                            console.log('用户信息写入成功')
+                            Toast.show({
+                                content: '注册成功',
+                                duration: 2000
+                            })
+                            setTimeout(() => {
+                                navigate('/login')
+                            }, 2000)
+                        } else {
+                            console.log('用户信息写入失败')
+                            Toast.show({
+                                content: obj.message,
+                                duration: 2000
+                            })
+                            return;
+                        }
+                    }).catch((error) => {
+                        console.log('用户信息写入失败')
+                        Toast.show({
+                            content: error.response.data.error,
+                            duration: 2000
+                        })
+                        return;
                     })
-                    setTimeout(() => {
-                        navigate('/login')
-                    }, 2000)
+
+                    
                 } else {
                     Toast.show({
                         content: obj.message,

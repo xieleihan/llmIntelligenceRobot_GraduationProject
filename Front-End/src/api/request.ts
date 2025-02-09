@@ -59,3 +59,12 @@ export const setFileInfo = function (data: any) {
 export const getFileUrl = function (fileType: string,data:any) {
     return post(`/protected/save-${fileType}`, data);
 }
+
+/**
+ * 用户信息接口
+ * @param {object} data 
+ * @returns 
+ */
+export const userinfo = function (data: any) {
+    return post('/protected/userinfo', data);
+}

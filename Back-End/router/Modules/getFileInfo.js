@@ -46,16 +46,11 @@ router.post('/getFileInfo', async (ctx) => {
 // 插入数据
 router.post('/insertFileInfo', async (ctx) => {
     // 获取请求头中cookies中的AUTO_TOKEN
-    const token = ctx.headers['authorization'];
-
-    // 解析token
-    const decoded = jwt.verify(token, SECRET_KEY);
-
+    const {username}  = ctx.request.body;
     // uuid
     const uuid = uuidv4();
 
     // 获取用户名
-    const username = decoded.username;
     if (username === '' || username === undefined) {
         ctx.status = 400;
         ctx.body = { code: 400, message: '用户名不为空或者需要重新登录' };

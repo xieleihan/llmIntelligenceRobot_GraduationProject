@@ -22,14 +22,17 @@ import { Outlet, useNavigate, useOutletContext } from "react-router-dom"
 import { get, post } from '../api/index'
 
 // 使用React Redux
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../store/index';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch,RootState } from '../store/index';
 import { setUsername } from '../store/userStore';
 
 // Define the type for the context
 interface OutletContextType {
     handleDataFromChild: (data: boolean) => void;
 }
+
+// 导入请求
+import { userinfo } from '../api/request';
 
 function Login() {
     // 定义React变量
@@ -53,6 +56,9 @@ function Login() {
 
     // 初始化Redux
     const dispatch = useDispatch<AppDispatch>();
+
+    const ipInfo = useSelector((state: RootState) => state.general.ipInfo); // 获取IP信息
+    const addressInfo = useSelector((state: RootState) => state.general.addressInfo); // 获取地址信息
 
     // 生命周期
     useEffect(() => {
@@ -104,7 +110,7 @@ function Login() {
                 userpassword: password,
                 verifySvgCode: verifySvgCode
             })
-                .then((response) => {
+                .then(async (response) => {
                     const str = JSON.stringify(response)
                     const obj = JSON.parse(str)
                     if (obj.code === 200) {
@@ -126,10 +132,38 @@ function Login() {
                         sessionStorage.setItem('username', decodedObj.username)
 
                         dispatch(setUsername(decodedObj.username))
+                        
+                        // console.log(ipInfo, addressInfo)
 
-                        setTimeout(() => {
-                            navigate('/home')
-                        }, 2500);
+                        // 发起更新用户ip请求
+                        await userinfo({
+                            username: decodedObj.username,
+                            userip: ipInfo,
+                            isDelete: 0
+                        }).then((res) => {
+                            console.log('用户信息更新成功:', res);
+                        }).catch(() => {
+                            Toast.show({
+                                content: '用户ip更新失败',
+                                duration: 2000
+                            })
+                        })
+
+                        // 发起更新用户address请求
+                        await userinfo({
+                            username: decodedObj.username,
+                            useraddress: addressInfo,
+                            isDelete: 0
+                        }).then((res) => {
+                            console.log('用户信息更新成功:', res);
+                        }).catch(() => {
+                            Toast.show({
+                                content: '用户地理信息更新失败',
+                                duration: 2000
+                            })
+                        })
+
+                        navigate('/home')
                     } else {
                         Toast.show({
                             content: response.data.message,

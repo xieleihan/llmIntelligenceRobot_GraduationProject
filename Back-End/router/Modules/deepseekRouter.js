@@ -8,7 +8,7 @@ const { prompt, thinkPrompt } = require('../../utils/Tools/prompt'); // 导入pr
 // const { PromptTemplate } = require("@langchain/core/prompts");
 const { githubTool } = require("../../utils/Tools/Modules/githubTool"); // 导入Github工具
 const { axiosPost } = require('../../api/index'); // 导入axiosGet函数
-const setFileInfo = require('../../model/Modules/setFileInfo'); // 导入setFileInfo函数
+const {setFileInfo} = require('../../model/Modules/setFileInfo'); // 导入setFileInfo函数
 
 const router = new Router(
     {
@@ -21,13 +21,17 @@ const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY; // 定义深度求索API�
 const DEEPSEEK_API_BASE_URL = process.env.DEEPSEEK_API_BASE_URL; // 定义深度求索API基础URL
 const MOONSHOT_API_KEY = process.env.MOONSHOT_API_KEY; // 定义Moonshot API密钥
 const MOONSHOT_API_BASE_URL = process.env.MOONSHOT_API_BASE_URL; // 定义Moonshot API基础URL
+const DASHSCOPE_API_KEY = process.env.DASHSCOPE_API_KEY; // 定义Dashscope API密钥
+const DASHSCOPE_BASE_URL = process.env.DASHSCOPE_BASE_URL; // 定义Dashscope API基础URL
 
 const deepseek = new OpenAI(
     {
-        apiKey: DEEPSEEK_API_KEY,
-        baseURL: DEEPSEEK_API_BASE_URL,
+        // apiKey: DEEPSEEK_API_KEY,
+        // baseURL: DEEPSEEK_API_BASE_URL,
         tempurature: 0,
-        maxTokens: 2000,
+        maxTokens: 20000,
+        apiKey: DASHSCOPE_API_KEY,
+        baseURL: DASHSCOPE_BASE_URL,
     }
 ); // 创建深度求索API实例
 
@@ -48,7 +52,8 @@ const sendMessage = async function ({ question, tool }) {
             { role: "system", content: prompt },
             { role: "user", content: str }
         ],
-        model: "deepseek-chat",
+        // model: "deepseek-chat",
+        model: "qwen-max"
     });
     console.log("API Response:", completion.choices[0].message.content);
     return completion.choices[0].message.content;
@@ -140,20 +145,28 @@ router.post('/devdeepseek', async (ctx) => {
         try {
             let message = '';
             let tool = '';
-
+            console.log(question)
             // 使用正则把question中[ ] 的内容提取出来
             const reg = /\[(.+?)\]/g;
-            const res = reg.exec(question);
-            const username = res[0];
-
+            const res = question.match(reg);
+            console.log("res", res)
+            let username
             const decoded = jwt.verify(token, SECRET_KEY);
+            if (res === null) { 
+                username = decoded.username;
+            } else {
+                username = res[0]
+            }
+            console.log("2222",username)
             const response = await axiosPost('/public/get-github-repo-activity', { username: username });
             tool = response.data.repoActivity;
             try {
                 message = await sendMessage({ question, tool });
-
+                console.log("-----")
+                console.log("------",setFileInfo, question, message, username)
                 // 把内容存入数据库
-                setFileInfo(decoded.username, question, message);
+                setFileInfo(question, message, username);
+                console.log("-----")
             } catch {
                 ctx.status = 500;
                 ctx.body = { message: '无法发送消息', code: 500 };
@@ -182,6 +195,7 @@ router.post('/devdeepseek', async (ctx) => {
             tool = response.data.repos;
             try {
                 message = await sendMessage({ question, tool });
+                setFileInfo(question, message, decoded.username);
                 ctx.body = {
                     code: 200,
                     msg: message,
@@ -211,6 +225,7 @@ router.post('/devdeepseek', async (ctx) => {
             tool = response.data.repos;
             try {
                 message = await sendMessage({ question, tool });
+                setFileInfo(question, message, decoded.username);
                 ctx.body = {
                     code: 200,
                     msg: message,

@@ -3,7 +3,7 @@ import TopLeftIcon from '../assets/icon/top-left.svg';
 import Avater from '../assets/images/avater.png';
 
 // 导入React
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 // 导入组件
 import FunctionboxCom from './Modules/FunctionboxCom';
@@ -17,9 +17,15 @@ import { Button,Dialog,Toast } from 'antd-mobile';
 // 导入js-cookie
 import Cookies from 'js-cookie';
 
+// 导入请求
+import {userinfo} from '../api/request';
+
 function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean, handleToggleClickTwo: (clickBool: boolean) => void }) {
     // 定义React变量
     const [isComOpen, setIsComOpen] = useState(isOpen); // 点击状态
+    const [avater, setAvater] = useState(Avater); // 头像
+    const [username, setUsername] = useState('');// 用户名
+    const [userdesc, setUserdesc] = useState('');// 用户描述
 
     const handleClick = () => {
         const newState = !isComOpen; // 计算最新状态
@@ -35,6 +41,18 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
         const cookies = Cookies.get();
         Object.keys(cookies).forEach(cookieName => Cookies.remove(cookieName, { path: '/' }));
     };
+
+    // 将sessionStrong中的username提取出来
+    useEffect(() => {
+        userinfo({
+            username: sessionStorage.getItem('username'),
+            isDelete: 0
+        }).then((res) => {
+            setAvater(res.data[0].useravater);
+            setUsername(res.data[0].username);
+            setUserdesc(res.data[0].userdesc);
+        })
+    },[])
 
     return (
         <>
@@ -60,10 +78,10 @@ function MultifunctionalCom({ isOpen, handleToggleClickTwo }: { isOpen: boolean,
                             }
                         }
                     >
-                        <img className='avater' src={Avater} alt="" />
+                        <img className='avater' src={avater} alt="" />
                         <div className="rightBox">
-                            <div className="name">南秋SouthAki</div>
-                            <div className="desc">一个人一生只会经历一次夏天剩下都是和它作比较.</div>
+                            <div className="name">{username}</div>
+                            <div className="desc">{ userdesc }</div>
                         </div>
                     </div>
                     <div className="functionBox">

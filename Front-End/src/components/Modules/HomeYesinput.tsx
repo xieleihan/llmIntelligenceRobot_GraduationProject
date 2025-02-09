@@ -17,16 +17,26 @@ import SystemIcon from '../../assets/icon/peacock_flat.png';
 // 导入Markdown渲染器
 import MarkdownRenderer from './base/MarkdownRenderer';
 
+// 导入请求
+import {userinfo} from '../../api/request';
+
 function HomeYesinput(dataArray: any) {
     // 定义React变量
     const [nowTime, setNowTime] = useState(''); // 当前时间
     const messageBoxRef = useRef<HTMLDivElement>(null); // 滚动容器的引用
+    const [avater, setAvater] = useState(Avatar); // 头像
 
     // 当组件渲染的时候的时间
     useEffect(() => {
         const date: string = parseTime(new Date().getTime(), '{h}:{i}:{s}') || '';
         // console.log("当前时间", date);
         setNowTime(date);
+        userinfo({
+            username: sessionStorage.getItem('username'),
+            isDelete: 0
+        }).then((res) => {
+            setAvater(res.data[0].useravater);
+        })
     }, []);
 
     // console.log("传递的",dataArray)
@@ -55,7 +65,7 @@ function HomeYesinput(dataArray: any) {
                                     }>
                                         <img
                                             className='typeimg'
-                                            src={item.type === 'user' ? Avatar : SystemIcon}
+                                            src={item.type === 'user' ? avater : SystemIcon}
                                             alt={item.type}
                                             style={
                                                 item.type === 'user' ? { marginLeft: '.3rem' } : { marginRight: '.3rem' }

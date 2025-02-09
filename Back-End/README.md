@@ -613,7 +613,7 @@ config.headers['Authorization'] = `token ${github_token}`;
 >
 > 方法:`POST`
 >
-> 传入三个参数,其中一个是自动传入
+> 传入三个参数,其中一个是自动传入(现在必须多加一个username)
 >
 > 只需传入`filename`,`content`就行
 >

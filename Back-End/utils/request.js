@@ -7,7 +7,7 @@ const github_token = process.env.GITHUB_TOKEN;
 
 // 创建axios实例
 const service = axios.create({
-    timeout: 500000 // 请求超时时间
+    timeout: 5000000 // 请求超时时间
 });
 
 // request拦截器
@@ -20,7 +20,7 @@ service.interceptors.request.use(
     },
     error => {
         // 请求错误处理
-        console.log('请求错误', error);
+        // console.log('请求错误', error);
         return Promise.reject(error);
     }
 );

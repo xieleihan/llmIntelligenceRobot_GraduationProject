@@ -166,10 +166,10 @@
                     border-bottom: 1px dotted #ccc;
                     transition: all .5s;
                     padding: 0 .2rem;
-                    &:hover{
-                        background-color: $hoverInput;
-                        color: white;
-                    }
+                    // &:hover{
+                    //     background-color: $hoverInput;
+                    //     color: white;
+                    // }
                     .item-left{
                         display: flex;
                         align-items: center;

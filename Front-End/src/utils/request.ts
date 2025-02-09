@@ -15,7 +15,7 @@ const getCookie = (name: string): string | null => {
 // 创建axios实例
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_API, // api的base_url
-  timeout: 50000, // 请求超时时间
+  timeout: 500000, // 请求超时时间
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
   },
