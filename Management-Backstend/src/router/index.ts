@@ -110,6 +110,15 @@ const routes: any = [
                     icon: logo,
                     requiresAuth: true
                 }
+            },
+            {
+                path: 'filesMangement',
+                component: () => import('../views/Modules/System/FilesManagement.vue'), // 文件管理
+                meta: {
+                    breadcrumb: '文件管理',
+                    icon: logo,
+                    requiresAuth: true
+                }
             }
         ]
     }
