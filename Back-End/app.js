@@ -81,6 +81,8 @@ app.use(utilsIndex.savePdf.routes()); // 保存PDF路由
 app.use(utilsIndex.saveXml.routes()); // 保存XML路由
 app.use(utilsIndex.saveDocx.routes()); // 保存DOCX路由
 app.use(utilsIndex.getSaveNumber.routes()); // 统计文件数量路由
+app.use(utilsIndex.xmlToHtml.routes()); // XML转HTML路由
+app.use(utilsIndex.jsonToHtml.routes()); // JSON转HTML路由
 
 // Telegram导出的bot,运行
 TelegramRouter.launch().then(() => {

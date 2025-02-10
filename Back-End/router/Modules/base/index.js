@@ -11,6 +11,8 @@ const saveTxt = require('./Modules/saveTxt');
 const getSaveNumber = require('./Modules/getSaveNumber');
 
 // 将对应的文件转回HTML格式的模块
+const xmlToHtml = require('./Modules/xmlToHtml');
+const jsonToHtml = require('./Modules/jsonToHtml');
 
 // 导出全部引入的模块
 module.exports = {
@@ -21,5 +23,7 @@ module.exports = {
     saveJson,
     saveDocx,
     saveTxt,
-    getSaveNumber
+    getSaveNumber,
+    xmlToHtml,
+    jsonToHtml
 }

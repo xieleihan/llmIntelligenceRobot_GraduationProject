@@ -807,4 +807,58 @@ config.headers['Authorization'] = `token ${github_token}`;
 > }
 > ```
 >
-> 
+
+### 文件内容转回html
+
+前缀:`/protected`
+
+> #### 获取文件名下的文件内容
+>
+> 接口:`/get-file-content`
+>
+> 方法:`POST`
+>
+> 参数:`filename`
+>
+> 成功返回
+>
+> ```json
+> {
+>     "code": 200,
+>     "data": 字符串
+> }
+> ```
+>
+> 失败返回
+>
+> ```json
+> {
+>     "code": 404,
+>     "message": 
+> }
+> ```
+>
+> #### xml转为html
+>
+> 接口:`/xml-to-html`
+>
+> 方法:`POST`
+>
+> 参数:`xml`(必须),是一个字符串,由上面的方式获取的内容
+>
+> ```json
+> {
+>     "result": "<div class=\"xml-content\"><div class=\"document\"><div class=\"xml-content\"><p><strong>body:</strong> <?xml version=\"1.0\"?>\n<document>\n  <body>\n    <_>\n      <h1>\n        <_>这是内容</_>\n      </h1>\n    </_>\n  </body>\n</document></p></div></div></div>",
+>     "code": 200
+> }
+> ```
+>
+> #### json转为html
+>
+> 接口:`/json-to-html`
+>
+> 方法:`POST`
+>
+> 参数:`jsonString`
+>
+> 返回跟上面一样
