@@ -44,3 +44,10 @@ export const chinaDataList = function () {
 export const getServerStatus = function () {
     return get('/private/get-server-state');
 }
+
+/**
+ * 获取static文件下的不同类型的文件数量
+ */
+export const getCountFileType = function () {
+    return get('/protected/file-stats');
+}
