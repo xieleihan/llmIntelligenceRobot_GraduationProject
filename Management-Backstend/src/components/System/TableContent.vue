@@ -3,41 +3,83 @@
         <table
             v-if="data.length > 0"
             :align="align"
+            class="table"
             :rules="rules"
         >
-            <thead>
-                <tr>
+            <thead class="thead">
+                <tr class="tr">
                     <th
                         v-for="(key, index) in tableKeys"
                         :key="index"
+                        class="th"
                     >
-                        <span v-if="key === 'fileName'">文件名</span>
-                        <span v-else-if="key === 'extension'">扩展名</span>
-                        <span v-else-if="key === 'createdTime'">创建时间</span>
-                        <span v-else-if="key === 'openUrl'">访问地址</span>
+                        <div
+                            :style="{
+                                width: '100%',
+                                height: '0.3rem'
+                            }"
+                            v-if="key === 'fileName'"
+                        >文件名</div>
+                        <div
+                            :style="{
+                                width: '100%',
+                                height: '0.3rem'
+                            }"
+                            v-else-if="key === 'extension'"
+                        >扩展名</div>
+                        <div
+                            :style="{
+                                width: '100%',
+                                height: '0.3rem'
+                            }"
+                            v-else-if="key === 'createdTime'"
+                        >创建时间</div>
+                        <div
+                            :style="{
+                                width: '100%',
+                                height: '0.3rem'
+                            }"
+                            v-else-if="key === 'openUrl'"
+                        >访问地址</div>
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="tbody">
                 <tr
                     v-for="(item, rowIndex) in data"
                     :key="rowIndex"
+                    class="tr"
                 >
                     <td
+                        class="td"
                         v-for="([key, value], colIndex) in getEntries(item)"
                         :key="colIndex"
+                        :style="{
+                            width: `calc(100% / ${tableKeys.length})`,
+                            height: '0.3rem'
+                        }"
+                        @click="getIndexContent(rowIndex)"
                     >
                         <a
                             v-if="key === 'openUrl'"
                             :href="String(value)"
                             target="_blank"
-                        >打开文件</a>
-                        <span v-else>{{ key === 'createdTime' ? formatTime(value as string) : value }}</span>
+                            class="word"
+                        ><el-icon>
+                                <Download />
+                            </el-icon>下载文件</a>
+                        <div
+                            class="word"
+                            v-else
+                        >{{ key === 'createdTime' ? formatTime(value as string) : value }}</div>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <p v-else>暂无数据</p>
+        <p
+            class="center"
+            v-else
+        >暂无数据</p>
     </div>
 </template>
 
@@ -47,7 +89,8 @@ import { defineProps, computed } from 'vue';
 const props = defineProps<{
     align: string,
     rules: string,
-    data: object[]
+    data: object[],
+    border: string
 }>();
 
 // 计算表头字段
@@ -64,11 +107,74 @@ const formatTime = (time: string) => {
 const getEntries = (item: any) => {
     return typeof item === 'object' && item !== null ? Object.entries(item) : [];
 };
+
+// 获取当前行的内容
+const getIndexContent = (index: number) => {
+    console.log(index);
+    // 对应行
+    console.log(props.data[index]);
+};
 </script>
 
 <style scoped lang="scss">
 .tableContent{
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .table{
+        
+        height: 100%;
+        width: 100%;
+        border: none;
+        .thead{
+            width: 100%;
+            height: 0.3rem;
+            display: block;
+            border: none;
+            border-bottom: .01rem solid #000;
+            .tr{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                line-height: .3rem;
+                .th{
+                    display: block;
+                    height: 0.3rem;
+                    width: calc(100% / 4);
+                }
+            }
+        }
+        .tbody{
+            height: calc(100% - .3rem);
+            width: 100%;
+            overflow: auto;
+            display: block;
+            .tr{
+                &:hover{
+                    background-color: #ccc;
+                }
+                .td{
+                    border: none;
+                }
+            }
+            // 隐藏滚动条
+            &::-webkit-scrollbar{
+                display: none;
+            }
+        }
+    }
+    .word{
+        max-width: 1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+    }
+    .td{
+        text-align: center;
+    }
 }
 </style>

@@ -63,6 +63,7 @@ router.get("/file-stats", async (ctx) => {
     };
 });
 
+// 删除某个文件
 router.post("/delete-file", async (ctx) => {
     const { filename } = ctx.request.body;
 
@@ -91,6 +92,7 @@ router.post("/delete-file", async (ctx) => {
     }
 });
 
+// 清空 static 文件夹
 router.post("/clear-static", async (ctx) => {
     const staticDir = path.join(__dirname, "../../../../public/static"); // 文件路径
 
@@ -124,5 +126,39 @@ router.post("/clear-static", async (ctx) => {
         };
     }
 })
+
+// 获取文件名下的文件内容,使用html返回
+router.post('/get-file-content', async (ctx) => {
+    const { filename } = ctx.request.body;
+
+    if (!filename) {
+        ctx.status = 400;
+        ctx.body = { code: 400, message: "参数错误, 文件名不能为空" };
+        return;
+    }
+
+    const staticDir = path.join(__dirname, "../../../../public/static"); // 文件路径
+
+    try {
+        const filePath = path.join(staticDir, filename);
+        if (fs.existsSync(filePath
+        )) {
+            const fileContent = fs.readFileSync(filePath, 'utf8');
+
+            ctx.body = {
+                code: 200,
+                data: fileContent,
+            };
+        }
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            ctx.status = 404;
+            ctx.body = { code: 404, message: "文件不存在" };
+        } else {
+            ctx.status = 500;
+            ctx.body = { code: 500, message: "读取文件失败" };
+        }
+    }
+});
 
 module.exports = router; // 导出路由

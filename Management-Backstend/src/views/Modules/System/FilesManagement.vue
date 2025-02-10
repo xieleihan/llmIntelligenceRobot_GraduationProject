@@ -9,13 +9,27 @@
         </div>
         <div class="right">
             <div class="right-top">
-                <div class="descTitle">文件列表</div>
+                <div class="descTitle">
+                    文件列表
+                    <el-button type="danger">删除全部文件</el-button>
+                </div>
                 <section class="content">
-                    <TableContent align="center" rules="rows" :data="tableArray" />
+                    <TableContent
+                        align="center"
+                        rules="none"
+                        :data="tableArray"
+                        border="0.01rem solid #ccc"
+                    />
                 </section>
             </div>
             <div class="right-bottom">
-                <div class="descTitle">文件内容详情</div>
+                <div class="descTitle">
+                    文件内容详情
+                    <div class="buttonBox">
+                        <el-button>编辑文件</el-button>
+                        <el-button type="danger">删除文件</el-button>
+                    </div>
+                </div>
                 <section class="content">
                     <LookeditContent />
                 </section>
@@ -123,6 +137,7 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
+@import '../../../style/base.scss';
 .filesMangaement{
     width: 100%;
     height: 100%;
@@ -136,19 +151,36 @@ onMounted(async () => {
     .right{
         border-left: 0.01rem solid #ccc;
         padding: .1rem;
+        overflow-y: scroll;
         .right-top,
         .right-bottom{
             width: 100%;
             height: 50%;
-            .descTitle{
+            ::v-deep(.descTitle){
                 font-weight: bold;
                 font-size: .1rem;
                 line-height: .1rem;
+                margin-bottom: .05rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .buttonBox{
+                    width: 1.4rem;
+                }
+                .el-button{
+                    font-size: .1rem;
+                    padding: .03rem .08rem;
+                    height: 100%;
+                    border: 0.01rem solid #ccc;
+                    margin: 0 .05rem;
+                }
             }
             .content{
                 width: 100%;
-                height: calc(100% - .1rem);
-                overflow-y: auto;
+                height: calc(100% - .3rem);
+                border: .01rem solid #ccc;
+                border-radius: 0.1rem;
+                overflow: hidden;
             }
         }
         
