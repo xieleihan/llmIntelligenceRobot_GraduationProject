@@ -108,14 +108,6 @@ process.on('SIGINT', async () => {
     process.exit(0);
 });
 
-// 监听端口
-app.listen(process.env.SERVER_PORT, () => {
-    console.log('---------------Start info---------------');
-    console.log(`Server is running at http://localhost:${process.env.SERVER_PORT}`); // 运行提示
-    console.log('----------------------------------------');
-    console.log("发件邮箱信息:", process.env.EMAIL," 授权码:", process.env.EMAIL_PASSWORD); // 邮箱信息
-});
-
 // 将http服务器与WebSocket服务器绑定
 // 捕获升级请求
 app.on('upgrade', (request, socket, head) => {
@@ -130,4 +122,35 @@ app.on('upgrade', (request, socket, head) => {
         socket.destroy();
         console.error('WebSocket服务器升级失败:', error);
     }
+});
+
+let logs = []; // 用于存储日志
+// 备份原始 console.log
+const originalLog = console.log;
+const originalError = console.error;
+
+// 拦截 console.log 并存储日志
+console.log = (...args) => {
+    const message = `[LOG] ${new Date().toISOString()} - ${args.join(" ")}`;
+    logs.push(message);
+    originalLog.apply(console, args); // 仍然打印到终端
+};
+
+// 拦截 console.error 并存储日志
+console.error = (...args) => {
+    const message = `[ERROR] ${new Date().toISOString()} - ${args.join(" ")}`;
+    logs.push(message);
+    originalError.apply(console, args);
+};
+
+router.get("/logs", async (ctx) => {
+    ctx.body = logs.slice(-50); // 只返回最近 50 条日志，避免数据过大
+});
+
+// 监听端口
+app.listen(process.env.SERVER_PORT, () => {
+    console.log('---------------Start info---------------');
+    console.log(`Server is running at http://localhost:${process.env.SERVER_PORT}`); // 运行提示
+    console.log('----------------------------------------');
+    console.log("发件邮箱信息:", process.env.EMAIL," 授权码:", process.env.EMAIL_PASSWORD); // 邮箱信息
 });

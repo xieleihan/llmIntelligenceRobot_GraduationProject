@@ -1,5 +1,9 @@
 import { getOut, post,get } from './index';
 
+export const getLog = function () {
+    return get('/logs');
+}
+
 /**
  * 发送消息给Deepseek
  * @param data 
