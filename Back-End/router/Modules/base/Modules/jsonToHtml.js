@@ -28,10 +28,10 @@ router.post("/json-to-html", async (ctx) => {
             return;
         }
 
-        // **解析 JSON 字符串**
+        // 解析JSON 字符串
         const jsonData = JSON.parse(jsonString);
 
-        // **转换为 HTML**
+        // 转换为HTML
         const htmlResult = jsonToHtml(jsonData);
 
         ctx.body = { result: htmlResult, code: 200 };
