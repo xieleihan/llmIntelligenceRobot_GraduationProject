@@ -2,19 +2,11 @@
     <div class="homeAside">
         <el-row>
             <el-col :span="24">
-                <el-menu
-                    default-active="2"
-                    class="el-menu-vertical-demo"
-                    unique-opened
-                    @open="handleOpen"
-                    @close="handleClose"
-                >
+                <el-menu default-active="2" class="el-menu-vertical-demo" unique-opened @open="handleOpen"
+                    @close="handleClose">
                     <el-sub-menu index="1">
                         <template #title>
-                            <router-link
-                                class="homeSystem"
-                                to="/home"
-                            >系统</router-link>
+                            <router-link class="homeSystem" to="/home">系统</router-link>
                         </template>
                         <el-menu-item index="1-1">
                             <router-link to="/home/systemInfo">系统总览</router-link>
@@ -57,17 +49,15 @@
                             <router-link to="/home/about">项目介绍</router-link>
                         </el-menu-item>
                     </el-sub-menu>
-                    <el-menu-item
-                        class="website"
-                        index="4"
-                    >
-                        <a
-                            class="homeSystem"
-                            :href="userUrl"
-                            target="_blank"
-                        ><el-icon>
+                    <el-menu-item class="website" index="4">
+                        <a class="homeSystem" :href="userUrl" target="_blank"><el-icon>
                                 <Compass />
                             </el-icon>用户端官网</a>
+                    </el-menu-item>
+                    <el-menu-item class="website" index="4">
+                        <a class="homeSystem" :href="docUrl" target="_blank"><el-icon>
+                                <Document />
+                            </el-icon>宣传页</a>
                     </el-menu-item>
                 </el-menu>
             </el-col>
@@ -78,6 +68,7 @@
 <script setup lang="ts">
 import {ref} from 'vue';
 const userUrl = ref(import.meta.env.VITE_USER_URL);
+const docUrl = ref(import.meta.env.VITE_BASE_API);
 
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)
