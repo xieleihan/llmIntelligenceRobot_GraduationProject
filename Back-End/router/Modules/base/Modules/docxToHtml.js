@@ -3,9 +3,9 @@ const Router = require('@koa/router'); // 导入Koa路由
 const mammoth = require("mammoth"); // 导入mammoth
 const fs = require("fs"); // 导入fs
 const path = require('path'); // 导入path
-// const mammoth = require("mammoth"); // 导入mammoth
-const wordToHtml = require('word-to-html');
-const docx4js = require("docx4js");
+const marked = require("marked"); // 导入marked
+// const Word2Html = require('word-to-html');
+// const docx4js = require("docx4js");
 
 const router = new Router(
     {
@@ -17,12 +17,15 @@ const staticDir = path.join(__dirname, "../../../../public/static");
 
 async function docxToHtml(docxPath) {
     try {
-        const doc = await docx4js.load(fs.readFileSync(docxPath));
-        console.log(doc);
-        const htmlResult = doc.toHtml();
-        // const docxBuffer = await fs.readFileSync(docxPath); // 读取 DOCX 文件
-        // const result = await mammoth.convertToHtml({ buffer: docxBuffer });
-        // const htmlResult = await wordToHtml.convert(docxBuffer);
+        
+        const docxBuffer = await fs.readFileSync(docxPath); // 读取 DOCX 文件
+        console.log("1",docxBuffer);
+        
+        const md = await mammoth.convertToMarkdown({ buffer: docxBuffer });
+        console.log("2",md);
+
+        const htmlResult = await marked(md.value); // Markdown 转 HTML
+
         console.log(htmlResult);
         return htmlResult.value; // 返回 HTML
     } catch (error) {

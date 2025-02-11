@@ -824,8 +824,8 @@ config.headers['Authorization'] = `token ${github_token}`;
 >
 > ```json
 > {
->     "code": 200,
->     "data": 字符串
+> "code": 200,
+> "data": 字符串
 > }
 > ```
 >
@@ -833,8 +833,8 @@ config.headers['Authorization'] = `token ${github_token}`;
 >
 > ```json
 > {
->     "code": 404,
->     "message": 
+> "code": 404,
+> "message": 
 > }
 > ```
 >
@@ -848,8 +848,8 @@ config.headers['Authorization'] = `token ${github_token}`;
 >
 > ```json
 > {
->     "result": "<div class=\"xml-content\"><div class=\"document\"><div class=\"xml-content\"><p><strong>body:</strong> <?xml version=\"1.0\"?>\n<document>\n  <body>\n    <_>\n      <h1>\n        <_>这是内容</_>\n      </h1>\n    </_>\n  </body>\n</document></p></div></div></div>",
->     "code": 200
+> "result": "<div class=\"xml-content\"><div class=\"document\"><div class=\"xml-content\"><p><strong>body:</strong> <?xml version=\"1.0\"?>\n<document>\n  <body>\n    <_>\n      <h1>\n        <_>这是内容</_>\n      </h1>\n    </_>\n  </body>\n</document></p></div></div></div>",
+> "code": 200
 > }
 > ```
 >
@@ -860,5 +860,37 @@ config.headers['Authorization'] = `token ${github_token}`;
 > 方法:`POST`
 >
 > 参数:`jsonString`
+>
+> 返回跟上面一样
+>
+> #### docx暂不支持
+>
+> #### txt转html
+>
+> 接口:`txt-to-html`
+>
+> 方法:`POST`
+>
+> 参数:`txt`
+>
+> 返回跟上面一样
+>
+> #### markdown转html
+>
+> 接口:`/md-to-html`
+>
+> 方法:`POST`
+>
+> 参数:`md`
+>
+> 返回跟上面一样
+>
+> #### pdf转html
+>
+> 接口:`/pdf-to-html`
+>
+> 方法:`POST`
+>
+> 参数:`pdfName`,文件名不是内容
 >
 > 返回跟上面一样

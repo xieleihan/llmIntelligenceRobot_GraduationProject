@@ -84,6 +84,9 @@ app.use(utilsIndex.getSaveNumber.routes()); // 统计文件数量路由
 app.use(utilsIndex.xmlToHtml.routes()); // XML转HTML路由
 app.use(utilsIndex.jsonToHtml.routes()); // JSON转HTML路由
 app.use(utilsIndex.docxToHtml.routes()); // DOCX转HTML路由
+app.use(utilsIndex.txtToHtml.routes()); // TXT转HTML路由
+app.use(utilsIndex.mdToHtml.routes()); // Markdown转HTML路由
+app.use(utilsIndex.pdfToHtml.routes()); // PDF转HTML路由
 
 // Telegram导出的bot,运行
 TelegramRouter.launch().then(() => {

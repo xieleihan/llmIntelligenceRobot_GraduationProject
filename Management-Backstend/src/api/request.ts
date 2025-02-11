@@ -51,3 +51,66 @@ export const getServerStatus = function () {
 export const getCountFileType = function () {
     return get('/protected/file-stats');
 }
+
+/**
+ * 返回文件名下的文件内容
+ * @param {String} filename 
+ * @returns {String} res.data
+ */
+export const getFileContent = function (filename:string) {
+    return post('/protected/get-file-content', {filename});
+}
+
+/**
+ * xml转html
+ * @param {String} xml
+ * @returns {String} res.result
+ */
+export const xmlToHtml = function (xml: string) {
+    return post('/protected/xml-to-html', {xml});
+}
+
+/**
+ * json转html
+ * @param {String} jsonString
+ * @returns {String} res.result
+ */
+export const jsonToHtml = function (jsonString: string) {
+    return post('/protected/json-to-html', {jsonString});
+}
+
+/**
+ * txt转html
+ * @param {String} txt
+ * @returns {String} res.result
+ */
+export const txtToHtml = function (txt: string) {
+    return post('/protected/txt-to-html', {txt});
+}
+
+/**
+ * markdown转html
+ * @param {String} md
+ * @returns {String} res.result
+ */
+export const markdownToHtml = function (md: string) {
+    return post('/protected/md-to-html', {md});
+}
+
+/**
+ * pdf转html
+ * @param {String} pdfName 这个地方是文件名不是内容
+ * @returns {String} res.result
+ */
+export const pdfToHtml = function (pdfName: string) { 
+    return post('/protected/pdf-to-html', { pdfName });
+}
+
+/**
+ * docx转html 暂时废弃,别调用
+ * @param {String} docxName 这个地方是文件名不是内容
+ * @returns {String} res.result
+ */
+export const docxToHtml = function (docxName: string) { 
+    return post('/protected/docx-to-html', { docxName });
+}

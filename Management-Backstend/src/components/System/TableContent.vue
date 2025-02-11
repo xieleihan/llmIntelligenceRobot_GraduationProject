@@ -84,7 +84,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { defineProps, computed, defineEmits } from 'vue';
+import { get } from '../../api';
 
 const props = defineProps<{
     align: string,
@@ -108,11 +109,16 @@ const getEntries = (item: any) => {
     return typeof item === 'object' && item !== null ? Object.entries(item) : [];
 };
 
+// 使用defineEmits()定义一个emits对象，用于触发事件
+const emits = defineEmits(['getIndexContent']);
+
 // 获取当前行的内容
 const getIndexContent = (index: number) => {
-    console.log(index);
-    // 对应行
-    console.log(props.data[index]);
+    // console.log(index);
+    // 对应行信息
+    // console.log(props.data[index]);
+    // 触发事件
+    emits('getIndexContent', props.data[index]);
 };
 </script>
 
