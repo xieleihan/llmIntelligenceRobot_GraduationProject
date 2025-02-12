@@ -109,7 +109,27 @@ const routes: any = [
                     breadcrumb: '用户日志',
                     icon: logo,
                     requiresAuth: true
-                }
+                },
+                children: [
+                    {
+                        path: 'userFeedback',
+                        component: () => import('../components/User/Modules/UserFeedback.vue'), // 用户反馈
+                        meta: {
+                            breadcrumb: '用户反馈',
+                            icon: logo,
+                            requiresAuth: true
+                        }
+                    },
+                    {
+                        path: 'userAnalysis',
+                        component: () => import('../components/User/Modules/UserAnalysis.vue'), // 用户分析
+                        meta: {
+                            breadcrumb: '用户分析',
+                            icon: logo,
+                            requiresAuth: true
+                        }
+                    }
+                ]
             },
             {
                 path: 'filesMangement',
