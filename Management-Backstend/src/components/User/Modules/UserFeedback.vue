@@ -1,22 +1,13 @@
 <template>
     <div class="userFeedback">
         <div class="left">
-            <div
-                class="item"
-                v-for="(item, index) in userMsg"
-                :key="item.uuid"
-                @click="setContentMsg(item)"
-            >
+            <div class="item" v-for="(item, index) in userMsg" :key="item.uuid" @click="setContentMsg(item)">
                 <div class="lleft">
                     <div class="avater">
                         <el-icon v-if="item.avater === ''">
                             <UserFilled />
                         </el-icon>
-                        <img
-                            v-else="item.avater !==''"
-                            :src="item.avater"
-                            alt=""
-                        >
+                        <img v-else="item.avater !==''" :src="item.avater" alt="">
                     </div>
                 </div>
                 <div class="lright">
@@ -31,22 +22,17 @@
                 <div class="toptop">
                     <div class="top-left">
                         <div class="avater">
-                            <el-icon v-if="avater === ''">
+                            <el-icon v-if="avater === '' && contentMsg && !contentMsg.avater">
                                 <UserFilled />
                             </el-icon>
-                            <img
-                                v-else
-                                :src=avater
-                                alt=""
-                            >
+                            <img v-else-if="contentMsg" :src="contentMsg.avater" alt="">
                         </div>
-                        <div class="username">系统信息</div>
+                        <div class="username" v-if="contentMsg && !contentMsg.username">系统信息</div>
+                        <div class="username" v-if="contentMsg && contentMsg.username">{{ contentMsg.username }}</div>
                         <div class="label">
-                            <el-tag
-                                type="primary"
-                                size="small"
-                            >Tag 1</el-tag>
-
+                            <el-tag v-if="contentMsg && contentMsg.id === 3" type="success" size="small">P2 -低优先级</el-tag>
+                            <el-tag v-if="contentMsg && contentMsg.id === 2" type="warning" size="small">P1 -升级优先度</el-tag>
+                            <el-tag v-if="contentMsg && contentMsg.id === 1" type="danger" size="small">P0 -紧急修复反馈</el-tag>
                         </div>
                     </div>
                     <div class="top-right">
@@ -56,7 +42,7 @@
                     </div>
                 </div>
                 <section class="content">
-                    <div v-if="!contentMsg" class="noArrayData">
+                    <div v-show="!contentMsg" class="noArrayData">
                         <p class="noData">
                             <el-icon>
                                 <SuccessFilled />
@@ -64,16 +50,11 @@
                             你暂时没有新的消息
                         </p>
                     </div>
-                    <ContentMsg v-else="contentMsg" />
+                    <ContentMsg v-if="contentMsg" :contentMsg="contentMsg" />
                 </section>
             </div>
             <div class="bottom">
-                <textarea
-                    class="textarea"
-                    name=""
-                    id=""
-                    placeholder="请输入回复内容"
-                ></textarea>
+                <textarea class="textarea" name="" id="" placeholder="请输入回复内容"></textarea>
                 <div class="box">
                     <el-button type="primary">发送</el-button>
                 </div>
@@ -105,7 +86,7 @@ const contentMsg = ref<UserMessage | null>(null); // 内容信息
 onMounted(() => {
     userMsg.value = [
         {
-            "id": 1,
+            "id": 3,
             "avater": 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
             "username": "张三",
             "time": "10:10:10",
@@ -356,7 +337,7 @@ function setContentMsg(item: UserMessage) {
                         }
                         .el-tag{
                             height: 70%;
-                            width: .3rem;
+                            width: fit-content;
                             font-size: .1rem;
                             border-radius: .05rem;
                         }
@@ -366,7 +347,7 @@ function setContentMsg(item: UserMessage) {
 
             .content{
                 width: 100%;
-                height: calc(100% - 10%);
+                height: calc(100% - 5%);
                 .noArrayData{
                     width: 100%;
                     height: 100%;
