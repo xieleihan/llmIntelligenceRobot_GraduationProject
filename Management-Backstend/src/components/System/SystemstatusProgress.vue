@@ -16,13 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, defineEmits } from 'vue';
+
+// 使用defineEmits定义事件
+const emit = defineEmits(['getIndexContent']);
 
 // 定义Vue变量
 const cpuUsage = ref(0);
 const cpuType = ref('')
 const memoryUsage = ref(0);
 const memoryType = ref('')
+const object = ref({});
 
 // 导入网络请求
 import { getServerStatus } from '../../api/request';
@@ -40,6 +44,7 @@ function typeCheck(status: number): string {
 function getStatus() {
     getServerStatus().then(res => {
         console.log(res);
+        object.value = res;
         // @ts-ignore
         cpuUsage.value = Number(res.cpu.total.split('%')[0]);
         cpuType.value = typeCheck(cpuUsage.value);
@@ -49,11 +54,19 @@ function getStatus() {
     });
 }
 let intervalId: any;
-onMounted(() => {
-    getStatus();
-    intervalId = setInterval(() => {
-        getStatus();
-    }, 50000);
+
+const clickChild = async () => {
+    // console.log('clickChild');
+    let param = await object.value;
+    emit('getIndexContent', param);
+}
+
+onMounted(async () => {
+    await getStatus();
+    intervalId = setInterval(async () => {
+        await getStatus();
+        await clickChild();
+    }, 10000);
 });
 
 onUnmounted(() => {

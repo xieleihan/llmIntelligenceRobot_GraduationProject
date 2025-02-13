@@ -29,3 +29,5 @@ export const register = function(data:any){
 export const login = function(data:any){
   return post('/public/login',data,'')
 }
+
+// 

@@ -24,7 +24,7 @@
 import { ref } from 'vue';
 
 // 定义Vue变量
-const baseUrl = ref('chat.openai.com/v1');
+const baseUrl = ref('api.deepseek.com/v1');
 const api_key = ref('')
 const enable = ref(false)
 </script>

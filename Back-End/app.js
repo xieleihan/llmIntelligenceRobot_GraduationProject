@@ -144,7 +144,7 @@ console.error = (...args) => {
 };
 
 router.get("/logs", async (ctx) => {
-    ctx.body = logs.slice(-50); // 只返回最近 50 条日志，避免数据过大
+    ctx.body = logs.slice(-200); // 只返回最近 50 条日志，避免数据过大
 });
 
 // 监听端口

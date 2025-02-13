@@ -9,14 +9,14 @@
         </div>
         <div class="vue">
             <div class="vue-top">
-                <img class="icon" src="/vite.svg" alt="">
-                <img class="icon" src="/vue.svg" alt="">
-                <img class="icon"
+                <img @click="goToPages('https://cn.vite.dev/')" class="icon" src="/vite.svg" alt="">
+                <img @click="goToPages('https://cn.vuejs.org/')" class="icon" src="/vue.svg" alt="">
+                <img @click="goToPages('https://www.typescriptlang.org/zh/')" class="icon"
                     src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
                     alt="">
-                <img alt="" src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+                <img @click="goToPages('https://sass-lang.com/')" alt="" src="https://fastly.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
                     class="icon">
-                <img alt="" src="https://element-plus.org/images/element-plus-logo.svg" class="icon">
+                <img @click="goToPages('https://element-plus.org/')" alt="" src="https://element-plus.org/images/element-plus-logo.svg" class="icon">
             </div>
             <div class="vue-bottom">
                 基于Vue3.0+Vite2.0+TS4.0+Element-Plus的后台管理
@@ -34,6 +34,10 @@ const randomNumber = ref(getRandomNumber(1, 5))
 
 // 定义Vue变量
 const bg = new URL(`../../assets/images/homeBg/bg_${randomNumber.value}.png`, import.meta.url).href;
+
+function goToPages(url:string) {
+    window.open(url, '_blank');
+}
 
 </script>
 

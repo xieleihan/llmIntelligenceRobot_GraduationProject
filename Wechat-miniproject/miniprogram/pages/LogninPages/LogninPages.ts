@@ -145,9 +145,12 @@ Page({
         wx.showToast({
           title:"登录成功",
           duration: 2000,
-          icon: 'error'
+          icon: 'success'
         })
         // 定时器,到时间点跳转页面
+        wx.switchTab({
+          url:"/pages/home/home"
+        })
       }else{
         wx.showToast({
           title: response.data.message,
