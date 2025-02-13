@@ -1,13 +1,22 @@
 <template>
     <div class="userFeedback">
         <div class="left">
-            <div class="item" v-for="(item, index) in userMsg" :key="item.uuid" @click="setContentMsg(item)">
+            <div
+                class="item"
+                v-for="(item) in userMsg"
+                :key="item.uuid"
+                @click="setContentMsg(item)"
+            >
                 <div class="lleft">
                     <div class="avater">
                         <el-icon v-if="item.avater === ''">
                             <UserFilled />
                         </el-icon>
-                        <img v-else="item.avater !==''" :src="item.avater" alt="">
+                        <img
+                            v-else="item.avater !==''"
+                            :src="item.avater"
+                            alt=""
+                        >
                     </div>
                 </div>
                 <div class="lright">
@@ -25,14 +34,36 @@
                             <el-icon v-if="avater === '' && contentMsg && !contentMsg.avater">
                                 <UserFilled />
                             </el-icon>
-                            <img v-else-if="contentMsg" :src="contentMsg.avater" alt="">
+                            <img
+                                v-else-if="contentMsg"
+                                :src="contentMsg.avater"
+                                alt=""
+                            >
                         </div>
-                        <div class="username" v-if="contentMsg && !contentMsg.username">系统信息</div>
-                        <div class="username" v-if="contentMsg && contentMsg.username">{{ contentMsg.username }}</div>
+                        <div
+                            class="username"
+                            v-if="contentMsg && !contentMsg.username"
+                        >系统信息</div>
+                        <div
+                            class="username"
+                            v-if="contentMsg && contentMsg.username"
+                        >{{ contentMsg.username }}</div>
                         <div class="label">
-                            <el-tag v-if="contentMsg && contentMsg.id === 3" type="success" size="small">P2 -低优先级</el-tag>
-                            <el-tag v-if="contentMsg && contentMsg.id === 2" type="warning" size="small">P1 -升级优先度</el-tag>
-                            <el-tag v-if="contentMsg && contentMsg.id === 1" type="danger" size="small">P0 -紧急修复反馈</el-tag>
+                            <el-tag
+                                v-if="contentMsg && contentMsg.id === 3"
+                                type="success"
+                                size="small"
+                            >P2 -低优先级</el-tag>
+                            <el-tag
+                                v-if="contentMsg && contentMsg.id === 2"
+                                type="warning"
+                                size="small"
+                            >P1 -升级优先度</el-tag>
+                            <el-tag
+                                v-if="contentMsg && contentMsg.id === 1"
+                                type="danger"
+                                size="small"
+                            >P0 -紧急修复反馈</el-tag>
                         </div>
                     </div>
                     <div class="top-right">
@@ -42,7 +73,10 @@
                     </div>
                 </div>
                 <section class="content">
-                    <div v-show="!contentMsg" class="noArrayData">
+                    <div
+                        v-show="!contentMsg"
+                        class="noArrayData"
+                    >
                         <p class="noData">
                             <el-icon>
                                 <SuccessFilled />
@@ -50,13 +84,27 @@
                             你暂时没有新的消息
                         </p>
                     </div>
-                    <ContentMsg v-if="contentMsg" :contentMsg="contentMsg" />
+                    <ContentMsg
+                        v-if="contentMsg"
+                        :contentMsg="contentMsg"
+                    />
                 </section>
             </div>
             <div class="bottom">
-                <textarea class="textarea" name="" id="" placeholder="请输入回复内容"></textarea>
+                <textarea
+                    @input="setValue"
+                    maxlength="200"
+                    class="textarea"
+                    name=""
+                    id=""
+                    placeholder="请输入回复内容"
+                ></textarea>
                 <div class="box">
-                    <el-button type="primary">发送</el-button>
+                    <span v-if="contentMsg">字符限制:<span>{{ inputValue.length }}</span>/200</span>
+                    <el-button
+                        v-if="contentMsg"
+                        type="primary"
+                    >发送</el-button>
                 </div>
             </div>
         </div>
@@ -82,6 +130,7 @@ interface UserMessage {
 const avater = ref('/src/assets/images/avater.jpg'); // 头像
 const userMsg = ref<UserMessage[]>([]); // 用户信息
 const contentMsg = ref<UserMessage | null>(null); // 内容信息
+const inputValue = ref(''); // 输入的内容
 
 onMounted(() => {
     userMsg.value = [
@@ -168,9 +217,16 @@ onMounted(() => {
     ]
 })
 
+// 设置内容组件的内容
 function setContentMsg(item: UserMessage) {
     contentMsg.value = item;
-    console.log(contentMsg.value)
+    // console.log(contentMsg.value)
+}
+
+// 设置输入的内容
+function setValue(e: any) {
+    inputValue.value = e.target.value;
+    // console.log(inputValue.value)
 }
 </script>
 
@@ -382,7 +438,9 @@ function setContentMsg(item: UserMessage) {
                 width: 100%;
                 height: calc(100% - 67%);
                 display: flex;
-                justify-content: flex-end;
+                justify-content: space-between;
+                align-items: center;
+
                 // padding-right: .5rem;
             }
         }
