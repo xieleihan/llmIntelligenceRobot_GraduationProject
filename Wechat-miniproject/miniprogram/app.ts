@@ -1,4 +1,6 @@
 // app.ts
+import { getUserIp } from './api/Modules/general';
+
 App({
   globalData: {
     megArrayList:[
@@ -13,7 +15,9 @@ App({
     ], // 信息列表
   },
   onLaunch() {
-    
+    getUserIp().then((res:any)=>{
+      console.log(res)
+    })
   },
   watch(key:any, callback:any) {
     Object.defineProperty(this.globalData, key, {
