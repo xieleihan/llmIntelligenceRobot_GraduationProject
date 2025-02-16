@@ -27,6 +27,7 @@ export const register = function(data:any){
  * 登录
  */
 export const login = function(data:any){
+  console.log("这是data的值",data)
   return post('/public/login',data,'')
 }
 

@@ -13,10 +13,11 @@ App({
       //   content: "这是内容这是内容这是内容这是内容"
       // },
     ], // 信息列表
+    ipinfo:null
   },
   onLaunch() {
     getUserIp().then((res:any)=>{
-      console.log(res)
+      this.globalData.ipinfo = res
     })
   },
   watch(key:any, callback:any) {
