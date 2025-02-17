@@ -340,26 +340,135 @@ router.post('/langchain', async (ctx) => {
 
 // 给Telegram使用的模型调用方法
 router.post('/telebot', async (ctx) => {
-    const { question } = ctx.request.body;
+    const { question,username } = ctx.request.body;
     
-    try {
-        let message = '';
+    // try {
+    //     let message = '';
+    //     try {
+    //         // message = await moonshotFunc({ question });
+    //         message = await sendMessage({ question });// 深度求索
+    //     } catch {
+    //         ctx.status = 500;
+    //         ctx.body = { message: '无法发送消息', code: 500 };
+    //         return;
+    //     } // 调用sendMessage函数
+    //     ctx.body = {
+    //         code: 200,
+    //         msg: message,
+    //         type: 'system'
+    //     };
+    // } catch (err) {
+    //     ctx.status = 403;
+    //     ctx.body = { message: '无效的 Token', code: 403 };
+    // }
+
+    if (question.includes('GitHub') || question.includes('github') || question.includes('Git') || question.includes('git') || question.includes('gitHub') || question.includes('GITHUB') || question.includes('GITHUB') || question.includes('Github')) {
         try {
-            // message = await moonshotFunc({ question });
-            message = await sendMessage({ question });// 深度求索
-        } catch {
-            ctx.status = 500;
-            ctx.body = { message: '无法发送消息', code: 500 };
-            return;
-        } // 调用sendMessage函数
-        ctx.body = {
-            code: 200,
-            msg: message,
-            type: 'system'
-        };
-    } catch (err) {
-        ctx.status = 403;
-        ctx.body = { message: '无效的 Token', code: 403 };
+            let message = '';
+            let tool = '';
+            console.log(question)
+            // 使用正则把question中[ ] 的内容提取出来
+            const reg = /\[(.+?)\]/g;
+            const res = question.match(reg);
+            console.log("res", res)
+            console.log("2222", username)
+            const response = await axiosPost('/public/get-github-repo-activity', { username: username });
+            tool = response.data.repoActivity;
+            try {
+                message = await sendMessage({ question, tool });
+                console.log("-----")
+                console.log("------", setFileInfo, question, message, username)
+                // 把内容存入数据库
+                setFileInfo(question, message, username);
+                console.log("-----")
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用githubTool.callbacks函数
+            ctx.body = {
+                code: 200,
+                msg: message,
+                
+                type: 'system'
+            };
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
+    } else if (question.includes('关注')) {
+        try {
+            let message = '';
+            let tool = '';
+            const response = await axiosPost('/public/get-github-starred-repos', { username: username });
+            console.log(response)
+            tool = response.data.repos;
+            try {
+                message = await sendMessage({ question, tool });
+                setFileInfo(question, message, username);
+                ctx.body = {
+                    code: 200,
+                    msg: message,
+                    type: 'system'
+                };
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用githubTool.callbacks函数
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
+
+    } else if (question.includes('自己')) {
+        try {
+            let message = '';
+            let tool = '';
+            const response = await axiosPost('/public/get-github-repos', { username: username });
+            console.log(response)
+            tool = response.data.repos;
+            try {
+                message = await sendMessage({ question, tool });
+                setFileInfo(question, message, username);
+                ctx.body = {
+                    code: 200,
+                    msg: message,
+                    type: 'system'
+                };
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用githubTool.callbacks函数
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
+    }
+    else {
+        try {
+            let message = '';
+            let tool = ''
+            try {
+                message = await sendMessage({ question, tool }); // 调用sendMessage函数
+                // message = await langchainSeedMessage({ question }); // 调用langchainSendMessage函数
+                console.log("message:", message);
+            } catch {
+                ctx.status = 500;
+                ctx.body = { message: '无法发送消息', code: 500 };
+                return;
+            } // 调用sendMessage函数
+            ctx.body = {
+                code: 200,
+                msg: message,
+                type: 'system'
+            };
+
+        } catch (err) {
+            ctx.status = 403;
+            ctx.body = { message: '无效的 Token', code: 403 };
+        }
     }
 })
 

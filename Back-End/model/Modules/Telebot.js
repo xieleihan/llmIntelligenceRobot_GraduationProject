@@ -5,9 +5,10 @@ const { axiosPost } = require('../../api/index');
  * @param {string} question 
  * @returns text
  */
-const getMoonshotMessage = async (question) => {
+const getMoonshotMessage = async (question,username) => {
     const res = await axiosPost('/protected/telebot', {
         question,
+        username
     });
     console.log("res",res)
     return res.data.msg;

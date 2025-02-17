@@ -112,6 +112,7 @@ Page({
 
   sendMsg(){
     const app = getApp();
+    console.log(app)
     app.globalData.megArrayList.push({
       type: 'user',
       content: this.data.inputMessage

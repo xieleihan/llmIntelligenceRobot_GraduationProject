@@ -32,11 +32,12 @@ bot.command('exit', async (ctx) => {
 
 // 捕获用户发送的文本信息
 bot.on('text', async (ctx) => {
+    const user = ctx.from;
     const userMessage = ctx.message.text; // 获取用户的信息
     const userId = ctx.from.id; // 获取用户的Id
 
     try {
-        const response = await getMoonshotMessage(userMessage);
+        const response = await getMoonshotMessage(userMessage,user.username);
         console.log('response:', response);
 
         const reply = response ? response : '抱歉，我不知道如何回答这个问题😅';

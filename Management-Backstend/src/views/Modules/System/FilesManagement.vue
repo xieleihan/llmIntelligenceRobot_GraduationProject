@@ -11,7 +11,10 @@
             <div class="right-top">
                 <div class="descTitle">
                     文件列表
-                    <el-button type="danger">删除全部文件</el-button>
+                    <div class="box">
+                        <input class="inputFileName" type="text" placeholder="输入搜索文件名">
+                        <el-button type="danger">删除全部文件</el-button>
+                    </div>
                 </div>
                 <section class="content">
                     <TableContent
@@ -255,6 +258,16 @@ onMounted(async () => {
         border-left: 0.01rem solid #ccc;
         padding: .1rem;
         overflow-y: scroll;
+
+        .right-top{
+            .descTitle{
+                .inputFileName{
+                    border: .01rem solid #ccc;
+                    padding: .03rem;
+                }
+            }
+        }
+
         .right-top,
         .right-bottom{
             width: 100%;

@@ -6,6 +6,11 @@ const WebSocket = require('ws'); // 导入WebSocket模块
 const wss = new WebSocket.Server({ noServer: true });
 const jwt = require('jsonwebtoken'); // 导入 jsonwebtoken 模块
 const { serverState } = require('../../model/index'); // 导入服务端状态获取函数
+const { exec } = require('child_process');//使用 Node.js 的 child_process 模块 来执行命令行 ping 命令。
+const util = require('util');
+
+// 将 exec 封装为返回 Promise 的函数
+const execPromise = util.promisify(exec);
 
 const SECRET_KEY = process.env.SECRET_KEY; // 定义密钥
 
@@ -14,6 +19,40 @@ const router = new Router(
         prefix: '/private',
     }
 );
+
+// 定义用于ping Telegram服务器的Get接口
+router.get('/ping-telegram', async (ctx) => {
+    const telegramServer = 'telegram.org'; // 定义Telegram的服务器地址
+    const command = `ping ${telegramServer}`; // Windows 系统的 ping 命令
+
+    try {
+        // 使用 execPromise 执行 ping 命令
+        const { stdout, stderr } = await execPromise(command);
+
+        // 输出 ping 命令的结果
+        if (stdout.includes('time=')) {
+            ctx.status = 200;
+            ctx.body = {
+                message: 'Telegram 服务器正常',
+                code: 200,
+            };
+        } else {
+            ctx.status = 500;
+            ctx.body = {
+                message: 'Telegram 服务器不可用',
+                code: 500,
+            };
+        }
+    } catch (error) {
+        // 处理错误
+        console.error(error);
+        ctx.status = 500;
+        ctx.body = {
+            message: '服务器错误',
+            code: 500,
+        };
+    }
+});
 
 router.get('/get-server-state', async (ctx) => {
     const authHeader = ctx.headers['authorization']; // 获取请求头中的authorization

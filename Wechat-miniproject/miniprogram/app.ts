@@ -3,16 +3,7 @@ import { getUserIp } from './api/Modules/general';
 
 App({
   globalData: {
-    megArrayList:[
-      // {
-      //   type:"user",
-      //   content: "这是内容这是内容这内容这是是内容这是内容"
-      // },
-      // {
-      //   type:"system",
-      //   content: "这是内容这是内容这是内容这是内容"
-      // },
-    ], // 信息列表
+    megArrayList:[], // 信息列表
     ipinfo:null
   },
   onLaunch() {
