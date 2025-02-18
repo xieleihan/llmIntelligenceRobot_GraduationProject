@@ -5,7 +5,8 @@
     "pages/RegisterPages/RegisterPages",
     "pages/home/home",
     "pages/about/about",
-    "pages/userinfo/userinfo"
+    "pages/userinfo/userinfo",
+    "pages/DocumentPages/DocumentPages"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -14,6 +14,11 @@ Component({
   data: {
     list:[
       {
+        "text":"情报文档",
+        "icon":"/assets/icon/document.svg",
+        "path":"/pages/DocumentPages/DocumentPages"
+      },
+      {
         "text":"订单详情",
         "icon":"/assets/icon/list.svg"
       },
@@ -32,6 +37,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    goToPages(event:any){
+      const path = event.currentTarget.dataset.path;
+      console.log(path)
+      wx.navigateTo({
+        url: path
+      })
+    }
   }
 })

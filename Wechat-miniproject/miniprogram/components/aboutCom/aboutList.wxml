@@ -10,7 +10,7 @@
     </view>
   </view> -->
 
-  <view class="listItem" wx:for="{{list}}">
+  <view class="listItem" wx:for="{{list}}" wx:key="index" data-path="{{item.path}}" bind:tap="goToPages">
     <view class="left">
       <image class="icon" src="{{item.icon}}" mode=""/>
       <view class="text">{{item.text}}</view>
