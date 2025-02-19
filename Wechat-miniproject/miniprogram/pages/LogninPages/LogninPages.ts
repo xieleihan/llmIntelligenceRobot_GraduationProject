@@ -141,7 +141,9 @@ Page({
     }).then((response)=>{
       const str = JSON.stringify(response);
       const obj = JSON.parse(str);
+      const app = getApp();
       if(obj.code === 200){
+        app.globalData.usernamme = obj.user.username
         wx.showToast({
           title:"登录成功",
           duration: 2000,

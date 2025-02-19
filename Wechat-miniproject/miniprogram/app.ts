@@ -4,7 +4,8 @@ import { getUserIp } from './api/Modules/general';
 App({
   globalData: {
     megArrayList:[], // 信息列表
-    ipinfo:null
+    ipinfo:null, // ip信息
+    username:null, // 用户信息
   },
   onLaunch() {
     getUserIp().then((res:any)=>{

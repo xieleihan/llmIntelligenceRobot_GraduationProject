@@ -1,3 +1,19 @@
 <!--pages/DocumentPages/DocumentPages.wxml-->
 <view class="documentPages">
+  <view class="item">
+    <view class="left">
+      <view class="title"><span>文件名:</span>这是标题</view>
+      <view class="descBox">
+        <view class="select">请选择</view>
+        <view class="fileType">暂无选择</view>
+      </view>
+    </view>
+    <view class="right">
+      <view class="downloadBox">
+        <view class="icon">
+          <image class="img" src="/assets/icon/catalog-download.svg" mode=""/>
+        </view>
+      </view>
+    </view>  
+  </view>
 </view>
