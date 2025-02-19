@@ -57,6 +57,7 @@
     "swagger-jsdoc": "^6.2.8",
     "telegraf": "^4.16.3",
     "uuid": "^11.0.5",
+    "web-push": "^3.6.7",
     "wechat": "^2.1.0",
     "word-to-html": "^3.0.3",
     "ws": "^8.18.0",

@@ -53,7 +53,7 @@ app.use(cors({
 }));
 
 // 导入功能路由模块
-const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter, superAdminRouter, TelegramRouter, getFileInfoRouter,userinfoRouter } = require('./router/index');
+const { userRouter, createSvgCodeRouter, emailApiRouter, testGet, deepseekRouter, githubRouter, getServerStateRouter, superAdminRouter, TelegramRouter, getFileInfoRouter,userinfoRouter,webpushRouter } = require('./router/index');
 const utilsIndex = require('./router/Modules/base/index');
 
 // 使用路由

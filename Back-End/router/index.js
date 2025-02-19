@@ -10,6 +10,7 @@ const TelegramRouter = require('./Modules/TelerafRouter');
 const getFileInfoRouter = require('./Modules/getFileInfo');
 const utilsIndex = require('./Modules/base/index');
 const userinfoRouter = require('./Modules/userinfo');
+const webpushRouter = require('./Modules/webpushRouter');
 
 // 导出全部引入的模块
 module.exports = {
@@ -24,5 +25,6 @@ module.exports = {
     TelegramRouter,
     getFileInfoRouter,
     utilsIndex,
-    userinfoRouter
+    userinfoRouter,
+    webpushRouter
 };
