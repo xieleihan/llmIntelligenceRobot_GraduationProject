@@ -5,8 +5,8 @@ self.addEventListener('push', function (event: any) {
 
     const options = {
         body: payload,
-        icon: '/icons/icon-192x192.png',
-        badge: '/icons/badge-72x72.png'
+        icon: '../assets/icon/peoplequality.svg',
+        badge: ''
     };
 
     event.waitUntil(
