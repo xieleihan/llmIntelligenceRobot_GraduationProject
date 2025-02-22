@@ -894,3 +894,9 @@ config.headers['Authorization'] = `token ${github_token}`;
 > 参数:`pdfName`,文件名不是内容
 >
 > 返回跟上面一样
+
+### web push
+
+> 前缀:`/protected`
+
+> 推送通知
