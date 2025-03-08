@@ -75,7 +75,7 @@ create table userinfo(
     username VARCHAR(50) NOT NULL ,-- 用户名
     usergithub varchar(100), -- 用户的Github
     userip varchar(100), -- 用户的Ip信息
-    registerTime datetime, -- 注册时间
+    registerTime varchar(1000), -- 注册时间
     uuid text -- 唯一标识符
 );
 select * from userinfo;
@@ -105,3 +105,13 @@ create table db_verifyImage_code(
     code_id text
 );
 select * from db_verifyImage_code;
+
+drop table if exists `db_fileinfo`;
+create table db_fileinfo(
+	id int auto_increment primary key,
+    username varchar(100) not null, -- 用户名
+    filename text not null, -- 文件名
+    content text not null -- 文件的内容
+);
+select * from db_fileinfo;
+INSERT INTO `llmrobotmysql`.`db_fileinfo` (`username`, `filename`, `content`) VALUES ('xieleihan', '9181be12-c909-4ea1-94b2-5558534606e0', '# Hello Markdown\\n\\nThis is a **test** file.')
